@@ -15,7 +15,15 @@ class CreateTagSurveysLocationsTable extends Migration
     {
         Schema::create('tag_surveys_locations', function (Blueprint $table) {
             $table->bigIncrements('surveys_locations_id');
+            $table->unsignedBigInteger('surveys_id');
+            $table->unsignedBigInteger('locations_id');
             $table->timestamps();
+            $table->foreign('surveys_id')
+            ->references('surveys_id')
+            ->on('surveys');
+            $table->foreign('locations_id')
+            ->references('locations_id')
+            ->on('locations');
         });
     }
 

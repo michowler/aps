@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateIinterestsTable extends Migration
+class CreateInterestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateIinterestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('Iinterests', function (Blueprint $table) {
+        Schema::create('interests', function (Blueprint $table) {
             $table->bigIncrements('interests_id');
             $table->string('interests_name');
             $table->timestamps();

@@ -15,8 +15,19 @@ class CreateTagUsersInterestsTable extends Migration
     {
         Schema::create('tag_users_interests', function (Blueprint $table) {
             $table->bigIncrements('users_interest_id');
+            $table->unsignedBigInteger('users_id');
+            $table->unsignedBigInteger('interests_id');
             $table->timestamps();
+            $table->foreign('interests_id')
+            ->references('interests_id')
+            ->on('interests');
+            $table->foreign('users_id')
+            ->references('users_id')
+            ->on('users');
+            
         });
+
+
     }
 
     /**

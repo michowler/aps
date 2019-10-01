@@ -15,8 +15,9 @@ class CreateTagUsersRolesTable extends Migration
     {
         Schema::create('tag_users_roles', function (Blueprint $table) {
             $table->bigIncrements('users_roles_id');
+            $table->unsignedBigInteger('roles_id');
             $table->timestamps();
-            $table->foreign('users_roles_id')
+            $table->foreign('roles_id')
                 ->references('roles_id')
                 ->on('roles');
         });

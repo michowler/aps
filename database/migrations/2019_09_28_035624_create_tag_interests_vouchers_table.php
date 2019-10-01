@@ -15,8 +15,15 @@ class CreateTagInterestsVouchersTable extends Migration
     {
         Schema::create('tag_interests_vouchers', function (Blueprint $table) {
             $table->bigIncrements('interest_vouchers_id');
-            
+            $table->unsignedBigInteger('interests_id');
+            $table->unsignedBigInteger('vouchers_id');
             $table->timestamps();
+            $table -> foreign('interests_id') 
+            -> references('interests_id') 
+            -> on ('interests');
+            $table -> foreign('vouchers_id') 
+            -> references('vouchers_id') 
+            -> on ('vouchers');
         });
     }
 

@@ -15,7 +15,15 @@ class CreateTagInterestSurveysTable extends Migration
     {
         Schema::create('tag_interest_surveys', function (Blueprint $table) {
             $table->bigIncrements('interest_surveys_id');
+            $table->unsignedBigInteger('surveys_id');
+            $table->unsignedBigInteger('interests_id');
             $table->timestamps();
+            $table->foreign('interests_id')
+            ->references('interests_id')
+            ->on('interests');
+            $table->foreign('surveys_id')
+            ->references('surveys_id')
+            ->on('surveys');
         });
     }
 
