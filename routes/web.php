@@ -12,8 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('login');
+    return view('adminProfile');
 });
+
+Route::resource('vouchers','VoucherController');
 
 Auth::routes();
 
