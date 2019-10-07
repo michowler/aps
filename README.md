@@ -1,4 +1,4 @@
-# APSE (Final year project by Michelle Ler 2019)
+# APSE (Final year project 2019)
 
 ## Configurations
 - PHP ^7
