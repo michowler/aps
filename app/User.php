@@ -9,11 +9,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable;
-
-    public function roles()
-    {
-      return $this->belongsToMany(Role::class);
-    }
+    protected $primaryKey = 'users_id';
     
     /**
      * The attributes that are mass assignable.
@@ -41,6 +37,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function roles()
+    {
+      return $this->belongsToMany(Role::class);
+    }
 
 
 }
