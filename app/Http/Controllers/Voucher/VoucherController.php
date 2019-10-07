@@ -16,6 +16,7 @@ class VoucherController extends Controller
     public function index()
     {
         //
+        return view('voucher.index');
     }
 
     /**
@@ -26,6 +27,7 @@ class VoucherController extends Controller
     public function create()
     {
         //
+        return view('voucher.create');
     }
 
     /**
@@ -48,6 +50,7 @@ class VoucherController extends Controller
     public function show(Voucher $voucher)
     {
         //
+        return view('voucher.show');
     }
 
     /**

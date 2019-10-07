@@ -22,10 +22,12 @@ Auth::routes(['reset' => false]);
 
 Route::get('/', 'HomeController@index');
 
+Route::get('/my-vouchers', 'Voucher\VoucherController@index');
+Route::get('/voucher/{id}', 'Voucher\VoucherController@show');
+Route::post('/voucher/create', 'Voucher\VoucherController@create');
 
-// Route::get('/', function () {
-//     return view('adminProfile');
-// });
+
+
 
 
 
