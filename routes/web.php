@@ -11,16 +11,22 @@
 |
 */
 
-Route::get('/', function () {
-    return view('adminProfile');
-});
-
-Route::resource('vouchers','VoucherController');
-
 Auth::routes();
+Auth::routes(['verify' => false]);
+Auth::routes(['reset' => false]);
+// Auth::routes(['register' => false]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/registration/merchant', function () {
+//     return view('auth/merchantRegistration');
+// })->name('registration');
 
-Auth::routes();
+Route::get('/', 'HomeController@index');
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+// Route::get('/', function () {
+//     return view('adminProfile');
+// });
+
+
+
+

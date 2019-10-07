@@ -36,4 +36,24 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    // public function authenticated(Request $request)
+    // {
+    //     // Logic that determines where to send the user
+    //     if($request->user()->hasRole(merchant)){
+    //     return redirect(‘/user);
+    //     }
+
+    //     if($request->user()->hasRole(respondent)){
+    //     return redirect(‘/user/home’);
+    //     }
+
+    //     if($request->user()->hasRole(owner)){
+    //     return redirect(‘/user/home’);
+    //     }
+
+    //     if($request->user()->hasRole(‘admin’)){
+    //     return redirect(‘/admin/home’);
+    //     }
+    // }
 }
