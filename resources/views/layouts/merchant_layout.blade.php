@@ -54,13 +54,13 @@
 
         </li>
         <li class="active">
-         <a href="myVoucher.html">
+         <a href="{{route('myVouchers')}}">
            <i class="pe-7s-info"></i>
            <p>My Vouchers</p>
          </a>
        </li>
        <li >
-         <a href="generateVoucher.html">
+         <a href="{{route('generate')}}">
            <i class="pe-7s-plus"></i>
            <p>Create</p>
          </a>
@@ -72,7 +72,7 @@
                                </a>
                              </li> -->
                              <li>
-                               <a href="redeemVoucher.html">
+                               <a href="{{route('myVouchers')}}">
                                  <i class="pe-7s-check"></i>
                                  <p>Redeem</p>
                                </a>
