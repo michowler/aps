@@ -16,7 +16,8 @@ class VoucherController extends Controller
     public function index()
     {
         //
-        return view('voucher.index');
+        $vouchers = Voucher::all();
+        return view('voucher.index', ['vouchers' => $vouchers]);        
     }
 
     /**
@@ -39,6 +40,15 @@ class VoucherController extends Controller
     public function store(Request $request)
     {
         //
+        $voucher = new Voucher;
+        
+        $voucher->title = request('title');
+        $voucher->publisher = request('terms');
+        $voucher->outlet = request('outlet');
+        $voucher->valid_date = request('valid_date');
+        $voucher->expiry_date = request('expiry_date');
+        $voucher->image = request()->file('image')->store('public/images');
+        $voucher->save();
     }
 
     /**

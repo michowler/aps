@@ -15,9 +15,13 @@ class CreateTagRespondentsAnswersTable extends Migration
     {
         Schema::create('tag_respondents_answers', function (Blueprint $table) {
             $table->bigIncrements('respondents_answers_id');
+            $table->unsignedBigInteger('respondents_id');
             $table->unsignedBigInteger('answers_id');
             $table->timestamps();
-             $table->foreign('answers_id')
+            $table->foreign('respondents_id')
+                  ->references('respondents_id')
+                  ->on('respondents');
+            $table->foreign('answers_id')
                   ->references('answers_id')
                   ->on('answers');
         });

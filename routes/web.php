@@ -34,6 +34,7 @@ Route::get('/', 'HomeController@index');
 Route::get('/vouchers', 'Voucher\VoucherController@index')->name('myVouchers');
 Route::get('/vouchers/{id}', 'Voucher\VoucherController@show')->name('showVoucher');
 Route::get('/vouchers/create', 'Voucher\VoucherController@create')->name('generate');
+Route::post('/vouchers', 'Voucher\VoucherController@store');
 Route::get('/vouchers/{id}/demo', 'Voucher\VoucherController@demo')->name('demo');
 Route::get('/voucher/{id}/redeem', 'Voucher\VoucherController@redeem')->name('redeem');
 
