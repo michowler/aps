@@ -39,7 +39,12 @@ class VoucherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //this part is just for testing. after test, this part must e commented
+        // echo "<pre>";
+        // var_dump($_REQUEST);
+        // die();
+
+        //end of comment
         $voucher = new Voucher;
         
         $voucher->title = request('title');
@@ -60,6 +65,7 @@ class VoucherController extends Controller
     public function show(Voucher $voucher)
     {
         //
+        die("Stop here by MM in show");
         return view('voucher.show');
     }
 

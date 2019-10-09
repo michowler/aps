@@ -14,7 +14,7 @@
                               <div class="row">
                                   <div class="col-md-4">
                                       <div class="form-group text-center">
-                                          <img src="assets/img/subway_voucher.png" style="width:240px;height:70;">
+                                          <img src="{{asset('assets')}}/img/subway_voucher.png" style="width:240px;height:70;">
                                           
                                       </div>
                                   </div>
@@ -42,7 +42,7 @@
                                           </div>
                                       </div>  
                                       <div class="col-md-4">
-                                          <img src="assets/img/demo-qr.png" class="img-thumbnail" alt="Cinque Terre">
+                                          <img src="{{asset('assets')}}/img/demo-qr.png" class="img-thumbnail" alt="Cinque Terre">
                                       </div>                                  
                                   </div>
 
