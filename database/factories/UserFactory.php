@@ -25,3 +25,23 @@ $factory->define(User::class, function (Faker $faker) {
         'remember_token' => Str::random(10),
     ];
 });
+
+$factory->define(Voucher::class, function (Faker $faker) {
+    return [
+        'title' => $faker->name,
+        'terms' => $faker->terms,
+        'outlet' => $faker->name,
+        'expiry_date' => now(),
+        'remember_token' => Str::random(10),
+    ];
+            //  $table->bigIncrements('vouchers_id');            
+            // $table->unsignedBigInteger('merchants_id');
+            // $table->unsignedBigInteger('vouchers_types_id');
+            // $table->string('vouchers_type');
+            // $table->string('title');
+            // $table->string('terms');
+            // $table->string('outlet');
+            // $table->date('valid_date');
+            // $table->date('expiry_date');
+            // $table->date('vouchers_created_at');
+});

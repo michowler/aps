@@ -15,14 +15,14 @@ class CreateTagOwnerPackagesTable extends Migration
     {
         Schema::create('tag_owner_packages', function (Blueprint $table) {
             $table->bigIncrements('owner_packages_id');
-            $table->unsignedBigInteger('respondents_id');
+            $table->unsignedBigInteger('users_id');
             $table->unsignedBigInteger('surveys_id');
             $table->integer('no_respondent');
             $table->integer('no_surveys');
             $table->timestamps();
-            $table->foreign('respondents_id')
-            ->references('respondents_id')
-            ->on('respondents');
+            $table->foreign('users_id')
+            ->references('users_id')
+            ->on('users');
             $table->foreign('surveys_id')
             ->references('surveys_id')
             ->on('surveys');
