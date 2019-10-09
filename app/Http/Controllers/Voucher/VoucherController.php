@@ -113,7 +113,6 @@ class VoucherController extends Controller
     public function demo(Voucher $voucher)
     {
         //
-        die("Stop here by MM in demo");
         return view('voucher.demo');
     }
 }

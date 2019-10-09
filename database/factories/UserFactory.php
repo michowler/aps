@@ -28,6 +28,7 @@ $factory->define(User::class, function (Faker $faker) {
 
 $factory->define(Voucher::class, function (Faker $faker) {
     return [
+    	'vouchers_id' => $faker->name,
         'title' => $faker->name,
         'terms' => $faker->terms,
         'outlet' => $faker->name,

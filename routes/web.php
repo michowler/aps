@@ -24,13 +24,15 @@
 // <a href="{{route('welcome')}}">Home</a>
 // <a href="{{route('about')}}">About</a>
 
+
+// Michelle 
 Auth::routes();
 Auth::routes(['verify' => false]);
 Auth::routes(['reset' => false]);
 // Auth::routes(['register' => false]);
 
-Route::get('/', 'HomeController@index');
-
+// Michelle 
+Route::get('/', 'Voucher\VoucherController@index');
 Route::get('/vouchers', 'Voucher\VoucherController@index')->name('myVouchers');
 Route::get('/vouchers/create', 'Voucher\VoucherController@create')->name('generate');
 Route::get('/vouchers/show/{id}', 'Voucher\VoucherController@show')->name('showVoucher');
@@ -38,7 +40,10 @@ Route::post('/vouchers', 'Voucher\VoucherController@store');
 Route::get('/vouchers/demo/{id}', 'Voucher\VoucherController@demo')->name('demo');
 Route::get('/voucher/redeem/{id}', 'Voucher\VoucherController@redeem')->name('redeem');
 
+// Ying Ying 
 
+
+// Alice
 
 
 
