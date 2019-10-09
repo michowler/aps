@@ -12,8 +12,9 @@
         <div class="content">
           <form>
             <div class="row">
-              <div class="col-md-12">                                         
+              <div class="col-md-12">    
 
+              
                 <table class="table table-hover">
                   <thead>
                     <th>ID</th>
@@ -23,51 +24,22 @@
                     <th></th>                                                  
                   </thead>
                   <tbody>
+                  
+                  @foreach($vouchers as $voucher)
                     <tr>
-                      <td>1</td>
-                      <td><a href="viewVoucher.html" style="color:black;">Subway 50% Off For All Drink Items</a></td>
-                      <td>1 October 2019</td>
+                      <td>{{ $vouchers->vouchers_id }}</td>
+                      <td><a href="viewVoucher.html" style="color:black;">{{ $vouchers->title }}</a></td>
+                      <td>{{ $vouchers->expiry_date }}</td>
                       <td>Valid</td>
                       <td><button class="btn btn-danger">delete</button><td>
 
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>Tesco 50% Off Electronices</td>
-                        <td>4 December 2019</td>
-                        <td>Valid</td>
-                        <td><button class="btn btn-danger">delete</button>
-                        </tr>
-                        <tr>
-                          <td>3</td>
-                          <td>Sage Rodriguez</td>
-                          <td>27 March 2020</td>
-                          <td>Valid</td>
-                          <td><button class="btn btn-danger">delete</button>
-                          </tr>
-                          <tr>
-                            <td>4</td>
-                            <td>Philip Chaney</td>
-                            <td>30 March 2019</td>
-                            <td>Invalid</td>
-                            <td><button class="btn btn-danger">delete</button>
-                            </tr>
-                            <tr>
-                              <td>5</td>
-                              <td>Doris Greene</td>
-                              <td>14 January 2020</td>
-                              <td>Valid</td>
-                              <td><button class="btn btn-danger">delete</button>
-                              </tr>
-                              <tr>
-                                <td>6</td>
-                                <td>Mason Porter</td>
-                                <td>12 May 2019</td>
-                                <td>Invalid</td>
-                                <td><button class="btn btn-danger">delete</button>
-                                </tr>
+                    </tr>
+                    @endforeach
+                      
                               </tbody>
                             </table>
+
+
                             <nav aria-label="Page navigation example " style="text-align:center;">
                               <ul class="pagination">
                                 <li class="page-item"><a class="page-link" href="#">Previous</a></li>
