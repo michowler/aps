@@ -10,7 +10,7 @@
               <div class="content">
                   <div class="author">
                        <a href="#">
-                      <img class="avatar border-gray" src="assets/img/subway.png" alt="..."/>
+                      <img class="avatar border-gray" src="{{asset('assets')}}/img/subway.png" alt="..."/>
 
                         <h4 class="title">SUBWAY SDN BHD<br />
                            <label for="image">

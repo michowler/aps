@@ -32,11 +32,12 @@ Auth::routes(['reset' => false]);
 Route::get('/', 'HomeController@index');
 
 Route::get('/vouchers', 'Voucher\VoucherController@index')->name('myVouchers');
-Route::get('/vouchers/{id}', 'Voucher\VoucherController@show')->name('showVoucher');
 Route::get('/vouchers/create', 'Voucher\VoucherController@create')->name('generate');
+Route::get('/vouchers/show/{id}', 'Voucher\VoucherController@show')->name('showVoucher');
 Route::post('/vouchers', 'Voucher\VoucherController@store');
-Route::get('/vouchers/{id}/demo', 'Voucher\VoucherController@demo')->name('demo');
-Route::get('/voucher/{id}/redeem', 'Voucher\VoucherController@redeem')->name('redeem');
+Route::get('/vouchers/demo/{id}', 'Voucher\VoucherController@demo')->name('demo');
+Route::get('/voucher/redeem/{id}', 'Voucher\VoucherController@redeem')->name('redeem');
+
 
 
 
