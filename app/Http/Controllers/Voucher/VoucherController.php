@@ -86,4 +86,17 @@ class VoucherController extends Controller
     {
         //
     }
+
+    public function redeem(Voucher $voucher)
+    {
+        //
+        return view('voucher.redeem');
+
+    }
+
+    public function demo(Voucher $voucher)
+    {
+        //
+        return view('voucher.demo');
+    }
 }

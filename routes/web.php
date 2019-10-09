@@ -11,20 +11,33 @@
 |
 */
 
+//=====Example:
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('welcome');
+// Route::get('/about', 'PagesController@about')->name('about');
+// Now you can use it in any page to refer them. like in contact page
+
+// <html>
+// ..
+// ....
+// <a href="{{route('welcome')}}">Home</a>
+// <a href="{{route('about')}}">About</a>
+
 Auth::routes();
 Auth::routes(['verify' => false]);
 Auth::routes(['reset' => false]);
 // Auth::routes(['register' => false]);
 
-// Route::get('/registration/merchant', function () {
-//     return view('auth/merchantRegistration');
-// })->name('registration');
-
 Route::get('/', 'HomeController@index');
 
-Route::get('/my-vouchers', 'Voucher\VoucherController@index');
-Route::get('/voucher/{id}', 'Voucher\VoucherController@show');
-Route::post('/voucher/create', 'Voucher\VoucherController@create');
+Route::get('/vouchers', 'Voucher\VoucherController@index')->name('myVouchers');
+Route::get('/vouchers/{id}', 'Voucher\VoucherController@show')->name('showVoucher');
+Route::get('/vouchers/create', 'Voucher\VoucherController@create')->name('generate');
+Route::get('/vouchers/{id}/demo', 'Voucher\VoucherController@demo')->name('demo');
+Route::get('/voucher/{id}/redeem', 'Voucher\VoucherController@redeem')->name('redeem');
+
+
 
 
 
