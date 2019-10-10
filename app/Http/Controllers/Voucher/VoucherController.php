@@ -61,23 +61,23 @@ class VoucherController extends Controller
 		// var_dump($_REQUEST);
 		// die();
 
-		var_dump(\Auth::user()->users_id);
+		// var_dump(\Auth::user()->users_id);
 
 		// var_dump(request('terms'));
 		// var_dump(request('expiry_date'));        
 		// var_dump(request('vouchers_types_id')); 
 
-		//end of comment
-		// $voucher = new Voucher;       
+		$voucher = new Voucher; 
+		
 
-		// $voucher->merchants_id = \Auth::user()->users_id;
-		// $voucher->title = request('title');
-		// $voucher->terms = request('terms');
-		// $voucher->outlet = request('outlet');        
-		// $voucher->expiry_date = request('expiry_date');
-		// $voucher->vouchers_types_id = request('vouchers_types_id');
-		// // $voucher->image = request()->file('image')->store('public/images');
-		// $voucher->save();
+		$voucher->merchants_id = \Auth::user()->users_id;
+		$voucher->title = request('title');
+		$voucher->terms = request('terms');
+		$voucher->outlet = request('outlet');        
+		$voucher->expiry_date = request('expiry_date');		
+		$voucher->vouchers_types_id = request('vouchers_types_id');		
+		// $voucher->image = request()->file('image')->store('public/images');
+		$voucher->save();
 	}
 
 	/**
