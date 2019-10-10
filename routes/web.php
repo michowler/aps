@@ -25,22 +25,45 @@
 // <a href="{{route('about')}}">About</a>
 
 
-// Michelle 
+// Michelle , Alice
 Auth::routes();
 Auth::routes(['verify' => false]);
 Auth::routes(['reset' => false]);
 // Auth::routes(['register' => false]);
 
+
 // Michelle 
-Route::get('/', 'Voucher\VoucherController@index');
 Route::get('/vouchers', 'Voucher\VoucherController@index')->name('myVouchers');
 Route::get('/vouchers/create', 'Voucher\VoucherController@create')->name('generate');
+Route::post('/vouchers', 'Voucher\VoucherController@store')->name('storeVoucher');
 Route::get('/vouchers/show/{id}', 'Voucher\VoucherController@show')->name('showVoucher');
-Route::post('/vouchers', 'Voucher\VoucherController@store');
 Route::get('/vouchers/demo/{id}', 'Voucher\VoucherController@demo')->name('demo');
 Route::get('/voucher/redeem/{id}', 'Voucher\VoucherController@redeem')->name('redeem');
+Route::get('/', function () {
+    if(Auth::check()) {
+        return redirect()->route('myVouchers');
+    }
+    return view('auth.login');
+})->name('home');
+
+// Route::group(['middleware' => 'web'], function () {
+//     // Moving here will ensure that sessions, csrf, etc. is included in all these routes
+//     Route::group(['prefix'=>'guest',  'middleware' => 'guest'], function(){
+//         Route::post('/vouchers', 'Voucher\VoucherController@store')->name('storeVoucher');
+//     });
+// });
+
+
+
 
 // Ying Ying 
+
+
+
+
+
+
+
 
 
 // Alice

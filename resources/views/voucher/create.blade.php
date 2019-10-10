@@ -43,7 +43,8 @@
                    <h4 class="title">Create your customisable voucher</h4>
                </div>
                   <div class="content">
-                      <form>
+                      <form method="POST" action="{{ route('storeVoucher') }}">
+                         @csrf
                           <div class="row">
 
                               <div class="col-md-5">
@@ -73,8 +74,8 @@
                           <div class="row">
                               <div class="col-md-12">
                                   <div class="form-group">
-                                      <label>Title</label>
-                                      <input type="text" class="form-control" placeholder="Voucher title" value="">
+                                      <label>{{ __('Title') }}</label>
+                                      <input name="title" type="text" class="form-control" placeholder="Voucher title" value="">
                                   </div>
                               </div>
                           </div>
@@ -82,8 +83,8 @@
                           <div class="row">
                               <div class="col-md-12">
                                   <div class="form-group">
-                                      <label>Terms & Conditions </label>
-                                      <textarea rows="5" class="form-control" placeholder="Please enter the T&C for the voucher" value="tnc"></textarea>
+                                      <label>{{ __('Terms & Conditions') }} </label>
+                                      <textarea name="terms" rows="5" class="form-control" placeholder="Please enter the T&C for the voucher" value="terms"></textarea>
                                   </div>
                               </div>
                           </div>
@@ -91,8 +92,8 @@
                           <div class="row">
                               <div class="col-md-12">
                                   <div class="form-group">
-                                      <label>Redeem Outlet</label>
-                                      <input type="text" class="form-control" placeholder="Outlet description" value="">
+                                      <label>{{ __('Branch Outlet') }}</label>
+                                      <input name="outlet" type="text" class="form-control" placeholder="Outlet description" value="outlet">
                                   </div>
                               </div>
                           </div>
@@ -101,19 +102,19 @@
                               <div class="col-md-6">
                                   <div class="form-group">
                                       <label class="control-label" for="date">Expiry Date</label>
-                                      <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="date"/>
+                                      <input name="expiry_date" class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="date"/>
                                   </div>
                               </div>
                               <div class="col-md-6">
                                   <div class="form-group">       
                                         <label class="control-label" for="date">Voucher Type</label>                                       
-                                        <select class="form-control">
-                                           <option>-</option>
-                                           <option>Cash</option>
-                                           <option>Rebate</option>
-                                           <option>Gift</option>   
-                                           <option>Free</option>                                                   
-                                           <option>Deals</option>
+                                        <select name="vouchers_types_id" class="form-control">
+                                           <option value="0">-</option>
+                                           <option value="1">Cash</option>
+                                           <option value="2">Rebate</option>
+                                           <option value="3">Gift</option>   
+                                           <option value="4">Free</option>                                 
+                                           <option value="5">Deals</option>
                                         </select>
                                   </div>
                               </div>                                    
@@ -205,8 +206,7 @@
 
                           <!-- <button type="submit" class="btn btn-info btn-fill pull-right">Generate Voucher</button> -->
                           <a class="btn btn-info btn-fill pull-right"  style="margin: 0 0 0 10px" href="demoVoucher.html">Demo</a>
-                          <a class="btn btn-info btn-fill pull-right" onclick="demo.showNotification('top','right', 
-                          'Error: Please fill in all fields.')">Submit</a>
+                          <button type="submit" class="btn btn-info btn-fill pull-right">{{ __('Submit') }}</button>
                           
                           
                           <div class="clearfix"></div>
