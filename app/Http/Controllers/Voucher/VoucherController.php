@@ -69,7 +69,7 @@ class VoucherController extends Controller
 
 		$voucher = new Voucher; 
 		
-
+		// $usersId = \Auth::user()->users_id;
 		$voucher->merchants_id = \Auth::user()->users_id;
 		$voucher->title = request('title');
 		$voucher->terms = request('terms');
@@ -78,6 +78,7 @@ class VoucherController extends Controller
 		$voucher->vouchers_types_id = request('vouchers_types_id');		
 		// $voucher->image = request()->file('image')->store('public/images');
 		$voucher->save();
+		return redirect()->route('myVouchers');
 	}
 
 	/**
@@ -88,9 +89,10 @@ class VoucherController extends Controller
 	 */
 	public function show(Voucher $voucher)
 	{
-		//
-		die("Stop here by MM in show");
-		return view('voucher.show');
+		//take(5)->get();
+		$voucher = Voucher::orderBy('vouchers_id', 'desc')->first();
+		//return DB::table('files')->latest('upload_time')->first();
+		return view('voucher.show', ['voucher' => $voucher]);        
 	}
 
 	/**

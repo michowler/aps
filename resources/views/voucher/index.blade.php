@@ -27,9 +27,9 @@
                   
                   @foreach($vouchers as $voucher)
                     <tr>
-                      <td>{{ $vouchers->vouchers_id }}</td>
-                      <td><a href="viewVoucher.html" style="color:black;">{{ $vouchers->title }}</a></td>
-                      <td>{{ $vouchers->expiry_date }}</td>
+                      <td>{{ $voucher->vouchers_id }}</td>
+                      <td><a href="{{ route('showVoucher',['vouchers_id' => $voucher->vouchers_id]) }}" style="color:black;">{{ $voucher->title }}</a></td>
+                      <td>{{ $voucher->expiry_date }}</td>
                       <td>Valid</td>
                       <td><button class="btn btn-danger">delete</button><td>
 

@@ -20,7 +20,7 @@
             </div>
             <div class="col-md-8">
               <div class="form-group text-center">
-                <h2><b>50% OFF FOR ALL DRINK ITEMS</b></h2>
+                <h2><b>{{ $voucher->title }}</b></h2>
 
               </div>
             </div>
@@ -32,13 +32,10 @@
             <div class="col-md-8">
               <div class="form-group" style="margin-top:30px; margin-left:20px">
                 <p><b>Terms & Conditions:</b></p>
-                <p>1. This voucher allows the holder to receive 50% off any drinks.</p>
-                <p>2.This voucher is non-refundable and cannot be exchanged for cash in part or full and is valid for a single transaction only.</p>
-                <p>3. This voucher is valid up to the stipulated expiry date and no 
-                extension of date shall be given.</p>
-                <p>4. You can redeem this voucher only at the specific Subway outlets.</p>
-                <p>5. Not applicable for online Purchase.</p>
-                <label>REDEEM OUTLET: All subway outlets accepted except in Johor Bahru</label>
+                <p>
+                  {{ $voucher->terms }}
+                </p>
+                <label>REDEEM OUTLET: {{ $voucher->outlet }}</label>
 
               </div>
 
@@ -54,7 +51,7 @@
             </div>
             <div class="col-md-4">
              <div class="form-group text-center">
-               <label>EXPIRY DATE: 28th June 2019</label>
+               <label>EXPIRY DATE: {{ $voucher->expiry_date }}</label>
 
              </div>
            </div>

@@ -31,14 +31,13 @@ Auth::routes(['verify' => false]);
 Auth::routes(['reset' => false]);
 // Auth::routes(['register' => false]);
 
-
 // Michelle 
 Route::get('/vouchers', 'Voucher\VoucherController@index')->name('myVouchers');
 Route::get('/vouchers/create', 'Voucher\VoucherController@create')->name('generate');
 Route::post('/vouchers', 'Voucher\VoucherController@store')->name('storeVoucher');
-Route::get('/vouchers/show/{id}', 'Voucher\VoucherController@show')->name('showVoucher');
-Route::get('/vouchers/demo/{id}', 'Voucher\VoucherController@demo')->name('demo');
-Route::get('/voucher/redeem/{id}', 'Voucher\VoucherController@redeem')->name('redeem');
+Route::get('/vouchers/show/{vouchers_id}', 'Voucher\VoucherController@show')->name('showVoucher');
+Route::get('/vouchers/demo/{vouchers_id}', 'Voucher\VoucherController@demo')->name('demo');
+Route::get('/voucher/redeem/{vouchers_id}', 'Voucher\VoucherController@redeem')->name('redeem');
 Route::get('/', function () {
     if(Auth::check()) {
         return redirect()->route('myVouchers');
