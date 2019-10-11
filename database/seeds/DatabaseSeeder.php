@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        //https://github.com/fzaninotto/Faker#fakerproviderdatetime
         $this->call(VoucherTypeTableSeeder::class);
         $this->call(UserTableSeeder::class);
          // factory(App\User::class, 10)->create()->each(function ($user) {

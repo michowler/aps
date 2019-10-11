@@ -83,7 +83,7 @@ class VoucherController extends Controller
 		$voucher->vouchers_types_id = request('vouchers_types_id');		
 		// $voucher->image = request()->file('image')->store('public/images');
 		$voucher->save();
-		return redirect()->route('myVouchers');
+		return redirect()->route('myVouchers')->with('success','Voucher created successfully.');
 	}
 
 	/**
