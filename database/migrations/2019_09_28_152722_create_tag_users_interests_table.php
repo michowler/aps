@@ -20,10 +20,10 @@ class CreateTagUsersInterestsTable extends Migration
             $table->timestamps();
             $table->foreign('interests_id')
             ->references('interests_id')
-            ->on('interests');
+            ->on('interests')->onDelete('cascade');
             $table->foreign('users_id')
             ->references('users_id')
-            ->on('users');
+            ->on('users')->onDelete('cascade');
             
         });
 

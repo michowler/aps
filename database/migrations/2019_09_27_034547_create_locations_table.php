@@ -22,7 +22,7 @@ class CreateLocationsTable extends Migration
             $table->timestamps();
             $table -> foreign('users_id') 
             -> references('users_id') 
-            -> on ('users');
+            -> on ('users')->onDelete('cascade');
         });
     }
 

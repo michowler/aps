@@ -20,10 +20,10 @@ class CreateTagInterestSurveysTable extends Migration
             $table->timestamps();
             $table->foreign('interests_id')
             ->references('interests_id')
-            ->on('interests');
+            ->on('interests')->onDelete('cascade');
             $table->foreign('surveys_id')
             ->references('surveys_id')
-            ->on('surveys');
+            ->on('surveys')->onDelete('cascade');
         });
     }
 

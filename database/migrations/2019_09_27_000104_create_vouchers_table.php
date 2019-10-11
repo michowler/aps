@@ -24,10 +24,10 @@ class CreateVouchersTable extends Migration
             $table->timestamps();
             $table -> foreign('merchants_id') 
             -> references('merchants_id') 
-            -> on ('merchants');
+            -> on ('merchants')->onDelete('cascade');
             $table -> foreign('vouchers_types_id') 
             -> references('vouchers_types_id') 
-            -> on ('vouchers_types');
+            -> on ('vouchers_types')->onDelete('cascade');
         });
     }
 
