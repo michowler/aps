@@ -45,9 +45,9 @@ class User extends Authenticatable
     }
 
     public function merchants()
-    {
+    { 
       // return $this->belongsToMany(User::class);
-      return $this->hasMany(User::class, 'users_id');
+      return $this->hasMany(Merchant::class);
     }
 
 

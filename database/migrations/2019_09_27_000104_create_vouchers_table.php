@@ -15,22 +15,19 @@ class CreateVouchersTable extends Migration
     {
         Schema::create('vouchers', function (Blueprint $table) {
             $table->bigIncrements('vouchers_id');            
-            $table->unsignedBigInteger('merchants_id');
-            $table->unsignedBigInteger('vouchers_types_id');
-            $table->string('vouchers_type');
+            $table->unsignedBigInteger('merchants_id')->nullable();
+            $table->unsignedBigInteger('vouchers_types_id')->nullable();     
             $table->string('title');
             $table->string('terms');
-            $table->string('outlet');
-            $table->date('valid_date');
-            $table->date('expiry_date');
-            $table->date('vouchers_created_at');
+            $table->string('outlet');            
+            $table->date('expiry_date');            
             $table->timestamps();
             $table -> foreign('merchants_id') 
             -> references('merchants_id') 
-            -> on ('merchants')->onDelete('cascade');
+            -> on ('merchants');
             $table -> foreign('vouchers_types_id') 
             -> references('vouchers_types_id') 
-            -> on ('vouchers_types')->onDelete('cascade');
+            -> on ('vouchers_types');
         });
     }
 
