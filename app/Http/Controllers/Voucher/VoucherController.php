@@ -6,6 +6,9 @@ use App\Voucher;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
+
 
 class VoucherController extends Controller
 {
@@ -32,9 +35,11 @@ class VoucherController extends Controller
 	 */
 	public function index()
 	{
-		//
-		$vouchers = Voucher::all();
-		return view('voucher.index', ['vouchers' => $vouchers]);        
+		// $vouchers = DB::table('vouchers')->paginate(15);
+		$vouchers = Voucher::Paginate(10);
+		$vouchers->withPath('/vouchers');
+		return view('voucher.index', ['vouchers' => $vouchers]);  
+
 	}
 
 	/**
@@ -68,8 +73,8 @@ class VoucherController extends Controller
 		// var_dump(request('vouchers_types_id')); 
 
 		$voucher = new Voucher; 
-		
-		// $usersId = \Auth::user()->users_id;
+		// $interest = new Interest; 
+				
 		$voucher->merchants_id = \Auth::user()->users_id;
 		$voucher->title = request('title');
 		$voucher->terms = request('terms');
