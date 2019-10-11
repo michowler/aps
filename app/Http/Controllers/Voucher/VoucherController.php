@@ -87,11 +87,12 @@ class VoucherController extends Controller
 	 * @param  \App\Voucher  $voucher
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show(Voucher $voucher)
-	{
-		//take(5)->get();
-		$voucher = Voucher::orderBy('vouchers_id', 'desc')->first();
-		//return DB::table('files')->latest('upload_time')->first();
+	public function show(Voucher $voucher, $vouchers_id, Request $request)
+	{		
+		// $voucher = Voucher::orderBy('vouchers_id', 'desc')->first();
+		//return DB::table('files')->latest('upload_time')->first()/take(5)->get();					
+
+		$voucher = Voucher::where('vouchers_id', '=', $request->vouchers_id)->firstOrFail();
 		return view('voucher.show', ['voucher' => $voucher]);        
 	}
 
