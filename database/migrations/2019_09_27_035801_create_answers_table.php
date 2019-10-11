@@ -21,10 +21,10 @@ class CreateAnswersTable extends Migration
             $table->timestamps();
             $table -> foreign('questions_id') 
             -> references('questions_id') 
-            -> on ('questions');
+            -> on ('questions')->onDelete('cascade');
             $table -> foreign('respondents_surveys_id') 
             -> references('respondents_surveys_id') 
-            -> on ('tag_respondents_surveys');
+            -> on ('tag_respondents_surveys')->onDelete('cascade');
         });
     }
 

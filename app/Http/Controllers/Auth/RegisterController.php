@@ -68,12 +68,6 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
         
         $user->notify(new UserRegisteredSuccessfully($user));
         return redirect()->back()->with('message', 'Successfully created a new account!');

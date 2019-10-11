@@ -20,10 +20,10 @@ class CreateTagInterestsVouchersTable extends Migration
             $table->timestamps();
             $table -> foreign('interests_id') 
             -> references('interests_id') 
-            -> on ('interests');
+            -> on ('interests')->onDelete('cascade');
             $table -> foreign('vouchers_id') 
             -> references('vouchers_id') 
-            -> on ('vouchers');
+            -> on ('vouchers')->onDelete('cascade');
         });
     }
 

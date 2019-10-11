@@ -23,10 +23,10 @@ class CreateTagRespondentsSurveysTable extends Migration
             -> unsigned() 
             -> index()
             -> references('respondents_id') 
-            -> on ('respondents');
+            -> on ('respondents')->onDelete('cascade');
              $table -> foreign('surveys_id') 
             -> references('surveys_id') 
-            -> on ('surveys');  
+            -> on ('surveys')->onDelete('cascade');
         });
     }
 

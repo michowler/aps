@@ -20,10 +20,10 @@ class CreateTagRespondentsAnswersTable extends Migration
             $table->timestamps();
             $table->foreign('respondents_id')
                   ->references('respondents_id')
-                  ->on('respondents');
+                  ->on('respondents')->onDelete('cascade');
             $table->foreign('answers_id')
                   ->references('answers_id')
-                  ->on('answers');
+                  ->on('answers')->onDelete('cascade');
         });
     }
 

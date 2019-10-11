@@ -22,10 +22,10 @@ class CreateTagOwnerPackagesTable extends Migration
             $table->timestamps();
             $table->foreign('users_id')
             ->references('users_id')
-            ->on('users');
+            ->on('users')->onDelete('cascade');
             $table->foreign('surveys_id')
             ->references('surveys_id')
-            ->on('surveys');
+            ->on('surveys')->onDelete('cascade');
         });
       }
 
