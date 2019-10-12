@@ -129,7 +129,7 @@ class VoucherController extends Controller
   
         $voucher->update($request->all());
   
-        return redirect()->route('voucher.index')->with('success','Voucher updated successfully');
+        return redirect()->route('myVouchers')->with('success','Voucher updated successfully');
 	}
 
 	/**
@@ -138,10 +138,11 @@ class VoucherController extends Controller
 	 * @param  \App\Voucher  $voucher
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy(Voucher $voucher)
+	public function destroy(Voucher $voucher, $vouchers_id)
 	{
+		$voucher = Voucher::find(request('vouchers_id'));
 		$voucher->delete();		
-		return redirect()->route('voucher.index')->with('success','Voucher deleted successfully');
+		return redirect()->route('myVouchers')->with('success','Voucher deleted successfully');
 		
 	}
 

@@ -3,6 +3,8 @@
  * Functions used in Setup configuration forms
  */
 
+
+
 // show this window in top frame
 if (top !== self) {
     window.top.location.href = location;

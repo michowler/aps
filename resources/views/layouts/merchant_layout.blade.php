@@ -53,7 +53,7 @@
           <p>VOUCHERS</p>
 
         </li>
-        <li class="active">
+        <li>
          <a href="{{route('myVouchers')}}">
            <i class="pe-7s-info"></i>
            <p>My vouchers</p>
