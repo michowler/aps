@@ -1,8 +1,7 @@
 @extends('layouts.merchant_layout')
-
 @section('navbar-brand', 'Show Voucher')
-
 @section('content')
+@include('partials.delete-modal')
 <div class="container-fluid">
   <div class="col-md-12">
     <div class="card">
@@ -60,8 +59,12 @@
          </div>
 
 
-
-         <button type="submit" class="btn btn-danger btn-fill pull-right" style="margin-left:10px;">Delete</button>
+       <!--   {!! Form::model($voucher, ['method' => 'destroy', 'route' => ['deleteVoucher', $voucher->vouchers_id], 'class' =>'form-inline form-delete']) !!}
+         {!! Form::hidden('vouchers_id', $voucher->vouchers_id) !!}
+         {!! Form::submit(trans('Delete'), ['class' => 'btn btn-danger btn-fill pull-right', 'name' => 'delete_modal', 'style' => 'margin-left:8px']) !!}
+         {!! Form::close() !!} -->
+        
+         <button type="button" data-toggle="modal" data-target="#deleteVoucherModal" type="submit" class="btn btn-danger btn-fill pull-right" style="margin-left:10px;">Delete <i class="fa fa-trash"></i></button>
          <button type="submit" class="btn btn-info btn-fill pull-right">Enable</button>
 
          <div class="clearfix"></div>
@@ -76,8 +79,11 @@
 </div>
 </div>
 
-
-
-
 </div>
+<script type="text/javascript">
+     function formSubmit()
+     {
+         $("#deleteVoucherForm").submit();
+     }
+</script>
 @endsection

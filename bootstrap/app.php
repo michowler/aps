@@ -41,6 +41,11 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+$app->singleton(
+    Collective\Html\HtmlServiceProvider::class,
+    App\Console\Kernel::class
+);
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application
