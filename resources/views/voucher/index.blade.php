@@ -1,5 +1,7 @@
 @extends('layouts.merchant_layout')
 
+@section('navbar-brand', 'My Vouchers')
+
 @section('content')
 <div class="container-fluid">
   <div class="row">

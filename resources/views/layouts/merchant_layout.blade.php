@@ -56,7 +56,7 @@
         <li class="active">
          <a href="{{route('myVouchers')}}">
            <i class="pe-7s-info"></i>
-           <p>My Vouchers</p>
+           <p>My vouchers</p>
          </a>
        </li>
        <li >
@@ -117,7 +117,7 @@
                                   <span class="icon-bar"></span>
                                   <span class="icon-bar"></span>
                                 </button>
-                                <a class="navbar-brand" href="#">My Vouchers</a>
+                                <a class="navbar-brand" href="#">@yield('navbar-brand')</a>
                               </div>
                               <div class="collapse navbar-collapse">
                                 <ul class="nav navbar-nav navbar-left">
@@ -175,6 +175,7 @@
 
 
                     <div class="content">
+                      @include('flash-message')
                       @yield('content') 
                     </div>
 

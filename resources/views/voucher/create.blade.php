@@ -1,5 +1,7 @@
 @extends('layouts.merchant_layout')
 
+@section('navbar-brand', 'Create Vouchers')
+
 @section('content')
 		<div class="container-fluid">
 			<div class="col-md-3">

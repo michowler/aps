@@ -18,7 +18,7 @@ class CreateMerchantsTable extends Migration
             $table->unsignedBigInteger('users_id');
             $table->string('merchants_address');
             $table->string('merchants_phone',45);
-            $table->string('merchants_email');
+            $table->string('merchants_email');        
             $table->timestamps();
             $table->foreign('users_id')
             ->references('users_id')
