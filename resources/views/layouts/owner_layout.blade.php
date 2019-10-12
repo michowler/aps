@@ -30,6 +30,12 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="{{asset('assets')}}/css/pe-icon-7-stroke.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     
 
 </head>
@@ -63,7 +69,7 @@
                 </li>
                 <li class="active">
 
-                     <a href="mySurvey.html">
+                     <a href="/">
                         <i class="pe-7s-note2"></i>
                         <p>My Surveys</p>
                     </a>
@@ -75,32 +81,9 @@
                         <p>User Profile</p>
                     </a>
                 </li>
-               <!--  <li>
-                    <a href="typography.html">
-                        <i class="pe-7s-news-paper"></i>
-                        <p>Typography</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="icons.html">
-                        <i class="pe-7s-science"></i>
-                        <p>Icons</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="maps.html">
-                        <i class="pe-7s-map-marker"></i>
-                        <p>Maps</p>
-                    </a>
-                </li>
- -->              <!--   <li>
-                    <a href="notifications.html">
-                        <i class="pe-7s-bell"></i>
-                        <p>Notifications</p>
-                    </a>
-                </li> -->
+           
 				<li class="active-pro">
-                    <a href="upgrade.html">
+                    <a href="/upgrade">
                         <i class="pe-7s-rocket"></i>
                         <p>Upgrade to PRO</p>
                     </a>
@@ -119,7 +102,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Survey List</a>
+                    <a class="navbar-brand" href="#">Upgrade</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-left">
@@ -220,6 +203,23 @@
 
 	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 	<script src="{{asset('assets')}}/js/demo.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            demo.initChartist();
+
+            // $.notify({
+            //     icon: 'pe-7s-gift',
+            //     message: "Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for every web developer."
+
+            // },{
+            //     type: 'info',
+            //     timer: 4000
+            // });
+
+        });
+    </script>
 
 
 </html>

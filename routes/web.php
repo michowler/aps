@@ -41,6 +41,10 @@ Route::get('/vouchers/demo/{id}', 'Voucher\VoucherController@demo')->name('demo'
 Route::get('/voucher/redeem/{id}', 'Voucher\VoucherController@redeem')->name('redeem');
 
 // Ying Ying 
+Route::get('/upgrade', 'plan\planController@index');
+Route::get('/create','plan\planController@checkout');
+Route::get('/','Survey\SurveyController@surveyList');
+Route::get('/chart','Survey\SurveyController@showChart');
 
 
 // Alice
