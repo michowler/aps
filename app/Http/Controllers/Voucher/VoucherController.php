@@ -109,7 +109,7 @@ class VoucherController extends Controller
 	 */
 	public function edit(Voucher $voucher)
 	{
-		//
+		return view('voucher.edit',compact('voucher'));
 	}
 
 	/**
@@ -121,7 +121,15 @@ class VoucherController extends Controller
 	 */
 	public function update(Request $request, Voucher $voucher)
 	{
-		//
+		 $request->validate([
+            'title' => 'required',
+            'terms' => 'required',
+            'outlet' => 'required',
+        ]);
+  
+        $voucher->update($request->all());
+  
+        return redirect()->route('voucher.index')->with('success','Voucher updated successfully');
 	}
 
 	/**
@@ -132,7 +140,9 @@ class VoucherController extends Controller
 	 */
 	public function destroy(Voucher $voucher)
 	{
-		//
+		$voucher->delete();		
+		return redirect()->route('voucher.index')->with('success','Voucher deleted successfully');
+		
 	}
 
 	public function redeem(Voucher $voucher)

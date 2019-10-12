@@ -35,6 +35,7 @@ Auth::routes(['reset' => false]);
 Route::get('/vouchers', 'Voucher\VoucherController@index')->name('myVouchers');
 Route::get('/vouchers/create', 'Voucher\VoucherController@create')->name('generate');
 Route::post('/vouchers', 'Voucher\VoucherController@store')->name('storeVoucher');
+Route::post('/vouchers/{vouchers_id}', 'Voucher\VoucherController@destroy')->name('deleteVoucher');
 Route::get('/vouchers/show/{vouchers_id}', 'Voucher\VoucherController@show')->name('showVoucher');
 Route::get('/vouchers/demo/{vouchers_id}', 'Voucher\VoucherController@demo')->name('demo');
 Route::get('/voucher/redeem/{vouchers_id}', 'Voucher\VoucherController@redeem')->name('redeem');
