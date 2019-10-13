@@ -2,14 +2,14 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
+use App\Merchant;
 use Faker\Generator as Faker;
 
 $factory->define(Merchant::class, function (Faker $faker) {
     return [            	    	
-    	'users_id' => $faker->numberBetween(1,3),
+    	'users_id' => $faker->randomDigit,             
         'merchants_address' => $faker->city,
-        'merchants_phone' => $faker->phone,
+        'merchants_phone' => $faker->phoneNumber,
         'merchants_email' => $faker->unique()->safeEmail,               
     ];
 });

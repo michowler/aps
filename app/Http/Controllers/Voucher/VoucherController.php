@@ -48,8 +48,7 @@ class VoucherController extends Controller
 	 * @return \Illuminate\Http\Response
 	 */
 	public function create()
-	{
-		//
+	{		
 		return view('voucher.create');
 	}
 
@@ -73,7 +72,7 @@ class VoucherController extends Controller
 		// var_dump(request('vouchers_types_id')); 
 
 		$voucher = new Voucher; 
-		// $interest = new Interest; 
+		$tag_interests_vouchers = new intVoucher;		
 				
 		$voucher->merchants_id = \Auth::user()->users_id;
 		$voucher->title = request('title');
