@@ -72,7 +72,7 @@ class VoucherController extends Controller
 		// var_dump(request('vouchers_types_id')); 
 
 		$voucher = new Voucher; 
-		$tag_interests_vouchers = new intVoucher;		
+		// $tag_interests_vouchers = new intVoucher;		
 				
 		$voucher->merchants_id = \Auth::user()->users_id;
 		$voucher->title = request('title');
@@ -147,8 +147,9 @@ class VoucherController extends Controller
 
 	public function redeem(Voucher $voucher)
 	{
-		//
-		return view('voucher.redeem');
+		$vouchers = Voucher::Paginate(10);
+		$vouchers->withPath('/vouchers/redeem'); //get only vouchers that are valid
+		return view('voucher.redeem', ['vouchers' => $vouchers]);  		
 
 	}
 

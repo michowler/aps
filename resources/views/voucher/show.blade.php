@@ -41,8 +41,16 @@
               </div>
 
             </div>  
-            <div class="col-md-4">
-              <img src="assets/img/demo-qr.png" class="img-thumbnail" alt="Cinque Terre">
+            <div class="col-md-4 text-center">
+             <div>                                
+                 {!! QrCode::size(250)->generate( route('redeem',['vouchers_id' => $voucher->vouchers_id]) ); !!}                                   
+             </div>
+             <div class="form-group">
+               <label>EXPIRY DATE: {{ $voucher->expiry_date }}</label>
+
+             </div>
+                 
+
             </div>                                  
           </div>
 
@@ -51,10 +59,7 @@
 
             </div>
             <div class="col-md-4">
-             <div class="form-group text-center">
-               <label>EXPIRY DATE: {{ $voucher->expiry_date }}</label>
-
-             </div>
+             
            </div>
          </div>
 
