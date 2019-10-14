@@ -45,6 +45,7 @@ Route::get('/upgrade', 'plan\planController@index');
 Route::get('/create','plan\planController@checkout');
 Route::get('/','Survey\SurveyController@surveyList');
 Route::get('/chart','Survey\SurveyController@showChart');
+Route::post('store','plan\planController@store');
 
 
 // Alice
