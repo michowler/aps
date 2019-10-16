@@ -44,6 +44,7 @@ Route::get('/vouchers/show/{vouchers_id}', 'Voucher\VoucherController@show')->na
 Route::get('/vouchers/demo/{vouchers_id}', 'Voucher\VoucherController@demo')->name('demo');
 Route::get('/vouchers/redeem', 'Voucher\VoucherController@redeem')->name('redeem');
 Route::post('/vouchers/redeem/{vouchers_id}', 'Voucher\VoucherController@redeem')->name('redeemVoucher');
+
 Route::get('/', function () {
 	if(Auth::check()) {
 		return redirect()->route('myVouchers');
@@ -65,11 +66,11 @@ Route::get('/', function () {
 
 
 // Ying Ying 
-Route::get('/upgrade', 'plan\planController@index');
-Route::get('/create','plan\planController@checkout');
-Route::get('/','Survey\SurveyController@surveyList');
-Route::get('/chart','Survey\SurveyController@showChart');
-Route::post('store','plan\planController@store');
+// Route::get('/upgrade', 'plan\planController@index');
+// Route::get('/create','plan\planController@checkout');
+// Route::get('/','Survey\SurveyController@surveyList');
+// Route::get('/chart','Survey\SurveyController@showChart');
+// Route::post('store','plan\planController@store');
 
 
 

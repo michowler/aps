@@ -17,6 +17,7 @@ class CreateTagInterestSurveysTable extends Migration
             $table->bigIncrements('interest_surveys_id');
             $table->unsignedBigInteger('surveys_id');
             $table->unsignedBigInteger('interests_id');
+            $table->string('status');
             $table->timestamps();
             $table->foreign('interests_id')
             ->references('interests_id')

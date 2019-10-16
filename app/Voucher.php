@@ -15,8 +15,10 @@ class Voucher extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'terms', 'outlet', 'vouchers_types_id', 'merchants_id',
+        'title', 'terms', 'outlet', 'vouchers_types_id', 'merchants_id', 'logo'
     ];
+
+
 
     /**
      * The attributes that should be cast to native types.

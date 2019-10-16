@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTagUsersInterestsTable extends Migration
+class CreateTagRespondentsInterestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateTagUsersInterestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tag_users_interests', function (Blueprint $table) {
-            $table->bigIncrements('users_interest_id');
+        Schema::create('tag_respondents_interests', function (Blueprint $table) {
+            $table->bigIncrements('respondents_interest_id');
             $table->unsignedBigInteger('users_id');
             $table->unsignedBigInteger('interests_id');
+            $table->string('status');
             $table->timestamps();
             $table->foreign('interests_id')
             ->references('interests_id')
