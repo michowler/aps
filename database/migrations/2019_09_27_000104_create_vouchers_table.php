@@ -22,6 +22,7 @@ class CreateVouchersTable extends Migration
             $table->string('terms');                     
             $table->date('expiry_date');            
             $table->string('logo');
+            $table->string('qr_code');
             $table->timestamps();
             $table -> foreign('merchants_id') 
             -> references('merchants_id') 
