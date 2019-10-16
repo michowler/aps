@@ -16,11 +16,12 @@ class CreateVouchersTable extends Migration
         Schema::create('vouchers', function (Blueprint $table) {
             $table->bigIncrements('vouchers_id');            
             $table->unsignedBigInteger('merchants_id')->nullable();
-            $table->unsignedBigInteger('vouchers_types_id')->nullable();     
+            $table->unsignedBigInteger('vouchers_types_id')->nullable();   
+            $table->string('stores_vouchers_id');     
             $table->string('title');
-            $table->string('terms');
-            $table->string('outlet');            
+            $table->string('terms');                     
             $table->date('expiry_date');            
+            $table->string('logo');
             $table->timestamps();
             $table -> foreign('merchants_id') 
             -> references('merchants_id') 

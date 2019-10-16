@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Voucher;
 
 use App\Voucher;
+use Validator; 
+use Storage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -20,13 +22,13 @@ class VoucherController extends Controller
 	*
 	* @return void
 	*/
-    public function __construct()
-    {
-	    $this->middleware(function ($request, $next) {
+	public function __construct()
+	{
+		$this->middleware(function ($request, $next) {
 			$this->user = Auth::user();
 			return $next($request);
-	    });
-    }
+		});
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -72,15 +74,27 @@ class VoucherController extends Controller
 		// var_dump(request('vouchers_types_id')); 
 
 		$voucher = new Voucher; 
-		$tag_interests_vouchers = new intVoucher;		
-				
+		// $tag_interests_vouchers = new intVoucher;		
+
+		$validator = Validator::make($request->all(), [ // <---
+			'title' => 'required|max:255',
+			'outlet' => 'required',
+			'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+			'terms' => 'required',
+			'expiry_date' => 'required'
+		]);
+
 		$voucher->merchants_id = \Auth::user()->users_id;
+		$voucher->logo = request()->file('logo')->store('images');	
 		$voucher->title = request('title');
 		$voucher->terms = request('terms');
 		$voucher->outlet = request('outlet');        
 		$voucher->expiry_date = request('expiry_date');		
 		$voucher->vouchers_types_id = request('vouchers_types_id');		
-		// $voucher->image = request()->file('image')->store('public/images');
+		
+		if ($validator->fails()) {
+			return redirect('voucher.create')->withErrors($validator)->withInput();
+		}
 		$voucher->save();
 		return redirect()->route('myVouchers')->with('success','Voucher created successfully.');
 	}
@@ -97,7 +111,8 @@ class VoucherController extends Controller
 		//return DB::table('files')->latest('upload_time')->first()/take(5)->get();					
 
 		$voucher = Voucher::where('vouchers_id', '=', $request->vouchers_id)->firstOrFail();
-		return view('voucher.show', ['voucher' => $voucher]);        
+		$logoFile = Storage::disk('public')->get("{$voucher->logo}");
+		return view('voucher.show', ['voucher' => $voucher], ['logoFile' => $logoFile]);        
 	}
 
 	/**
@@ -120,15 +135,15 @@ class VoucherController extends Controller
 	 */
 	public function update(Request $request, Voucher $voucher)
 	{
-		 $request->validate([
-            'title' => 'required',
-            'terms' => 'required',
-            'outlet' => 'required',
-        ]);
-  
-        $voucher->update($request->all());
-  
-        return redirect()->route('myVouchers')->with('success','Voucher updated successfully');
+		$request->validate([
+			'title' => 'required',
+			'terms' => 'required',
+			'outlet' => 'required',
+		]);
+
+		$voucher->update($request->all());
+
+		return redirect()->route('myVouchers')->with('success','Voucher updated successfully');
 	}
 
 	/**
@@ -147,8 +162,9 @@ class VoucherController extends Controller
 
 	public function redeem(Voucher $voucher)
 	{
-		//
-		return view('voucher.redeem');
+		$vouchers = Voucher::Paginate(10);
+		$vouchers->withPath('/vouchers/redeem'); //get only vouchers that are valid
+		return view('voucher.redeem', ['vouchers' => $vouchers]);  		
 
 	}
 

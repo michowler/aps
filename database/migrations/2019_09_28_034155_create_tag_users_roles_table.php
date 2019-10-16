@@ -17,6 +17,7 @@ class CreateTagUsersRolesTable extends Migration
             $table->bigIncrements('users_roles_id');
             $table->unsignedBigInteger('users_id');
             $table->unsignedBigInteger('roles_id');
+            $table->string('status');
             $table->timestamps();
              $table->foreign('users_id')
                 ->references('users_id')

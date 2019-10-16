@@ -71,7 +71,7 @@
                                </a>
                              </li> -->
                              <li>
-                               <a href="{{route('myVouchers')}}">
+                               <a href="{{route('redeem')}}">
                                  <i class="pe-7s-check"></i>
                                  <p>Redeem</p>
                                </a>

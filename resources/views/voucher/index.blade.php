@@ -33,7 +33,7 @@
                       <td><a href="{{ route('showVoucher',['vouchers_id' => $voucher->vouchers_id]) }}" style="color:black;">{{ $voucher->title }}</a></td>
                       <td>{{ $voucher->expiry_date }}</td>
                       <td>Valid</td>
-                      <td><button class="btn btn-danger">delete</button><td>
+                      <!-- <td><button class="btn btn-danger">delete</button><td> -->
 
                     </tr>
                     @endforeach

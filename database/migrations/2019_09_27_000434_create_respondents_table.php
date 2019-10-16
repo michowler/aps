@@ -17,8 +17,7 @@ class CreateRespondentsTable extends Migration
             $table->bigIncrements('respondents_id');
             $table->unsignedBigInteger('users_id');
             $table->unsignedBigInteger('vouchers_id');
-            $table->date('survey_completed_date');
-            $table->date('voucher_redemption_date');
+            $table->date('survey_completed_date');            
             $table->timestamps();
             $table -> foreign('users_id') 
             -> references('users_id') 

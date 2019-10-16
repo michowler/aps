@@ -13,17 +13,17 @@ class CreateTagRespondentsAnswersTable extends Migration
      */
     public function up()
     {
-        Schema::create('tag_respondents_answers', function (Blueprint $table) {
-            $table->bigIncrements('respondents_answers_id');
+        Schema::create('tag_respondents_options', function (Blueprint $table) {
+            $table->bigIncrements('respondents_options_id');
             $table->unsignedBigInteger('respondents_id');
-            $table->unsignedBigInteger('answers_id');
+            $table->unsignedBigInteger('options_id');
             $table->timestamps();
             $table->foreign('respondents_id')
                   ->references('respondents_id')
                   ->on('respondents')->onDelete('cascade');
-            $table->foreign('answers_id')
-                  ->references('answers_id')
-                  ->on('answers')->onDelete('cascade');
+            $table->foreign('options_id')
+                  ->references('options_id')
+                  ->on('options')->onDelete('cascade');
         });
     }
 

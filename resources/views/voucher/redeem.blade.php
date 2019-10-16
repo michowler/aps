@@ -1,12 +1,12 @@
 @extends('layouts.merchant_layout')
-
+@section('navbar-brand', 'Redeem Vouchers')
 @section('content')
 <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Voucher ID: 2348</h4>
+                                <h4 class="title">Active Vouchers</h4>
                             </div>
                             <div class="content">
                                 <form>
@@ -17,43 +17,23 @@
                                               <tbody>
                                                 <tr>
                                                   <th scope="row">Voucher</th>
-                                                  <td>50% off all drink items</td>
+                                                  <th>Title</th>
+                                                  <th>Expiry Date</th>
+                                                  <th>Status</th>
+                                                  <th>Action</th>
                                                   
                                                 </tr>
-                                                <tr>
-                                                  <th scope="row">Terms & Conditions</th>
-                                                  <td>
-                                                     <p>1. This voucher allows the holder to receive 50% off any drinks.</p>
-                                              <p>2.This voucher is non-refundable and cannot be exchanged for cash in part or full and is valid for a single transaction only.</p>
-                                              <p>3. This voucher is valid up to the stipulated expiry date and no 
-      extension of date shall be given.</p>
-                                              <p>4. You can redeem this voucher only at the specific Subway outlets.</p>
-                                              <p>5. Not applicable for online Purchase.</p>
-                                                  </td>
-                                                  
-                                                </tr>
-                                                <tr>
-                                                  <th scope="row">Expiry Date</th>
-                                                  <td>28th June 2019</td>
-                                                 
-                                                </tr>
-                                                <tr>
-                                                  <th scope="row">Branch Outlet</th>
-                                                  <td colspan="2">
-                                                    <div class="form-group">       
-                                                        <select class="form-control" id="rSelect" onchange="demo.showRedeembutton();" >
-                                                             <option>-</option>
-                                                             <option>Sunway Pyramid</option>
-                                                             <option>Taylor's Lakeside Campus</option>
-                                                             <option>1 Utama</option>   
-                                                             <option>Paradigm Mall</option>
-                                                             <option>Suria KLCC</option>
-                                                             <option>Tesco Kepong Village Mall</option>                                                           
-                                                        </select>
-                                                    </div>
-                                                  </td>
-                                                  
-                                                </tr>
+                                                @foreach($vouchers as $voucher)
+                                                  <tr>
+                                                    <td>{{ $voucher->vouchers_id }}</td>
+                                                    <td><a href="{{ route('showVoucher',['vouchers_id' => $voucher->vouchers_id]) }}" style="color:black;">{{ $voucher->title }}</a></td>
+                                                    <td>{{ $voucher->expiry_date }}</td>
+                                                    <td>Valid</td>
+                                                    <td><button class="btn btn-danger">redeem</button><td>
+
+                                                  </tr>
+                                                  @endforeach
+                                                  {{ $vouchers->links() }}
                                               </tbody>
                                             </table>
                                           

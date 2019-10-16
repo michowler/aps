@@ -16,7 +16,7 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->bigIncrements('payments_id');
             $table->unsignedBigInteger('users_id');
-            // $table->dateTime('date');
+            $table->unsignedBigInteger('owner_packages_id');
             $table->double('amount',8,2);
             $table->string('first_name');
             $table->string('last_name');
@@ -32,6 +32,9 @@ class CreatePaymentsTable extends Migration
             $table -> foreign('users_id') 
             -> references('users_id')
             -> on ('users')->onDelete('cascade');
+            $table -> foreign('owner_packages_id') 
+            -> references('owner_packages_id')
+            -> on ('tag_owner_packages')->onDelete('cascade');
 
         });
     }

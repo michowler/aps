@@ -32,19 +32,28 @@ Auth::routes(['reset' => false]);
 // Auth::routes(['register' => false]);
 
 // Michelle 
+Route::get('qr-code', function () {
+	return QrCode::size(500)->generate('Welcome to kerneldev.com!');
+});
+
 Route::get('/vouchers', 'Voucher\VoucherController@index')->name('myVouchers');
 Route::get('/vouchers/create', 'Voucher\VoucherController@create')->name('generate');
 Route::post('/vouchers', 'Voucher\VoucherController@store')->name('storeVoucher');
 Route::post('/vouchers/show/{vouchers_id}', 'Voucher\VoucherController@destroy')->name('deleteVoucher');
 Route::get('/vouchers/show/{vouchers_id}', 'Voucher\VoucherController@show')->name('showVoucher');
 Route::get('/vouchers/demo/{vouchers_id}', 'Voucher\VoucherController@demo')->name('demo');
-Route::get('/voucher/redeem/{vouchers_id}', 'Voucher\VoucherController@redeem')->name('redeem');
+Route::get('/vouchers/redeem', 'Voucher\VoucherController@redeem')->name('redeem');
+Route::post('/vouchers/redeem/{vouchers_id}', 'Voucher\VoucherController@redeem')->name('redeemVoucher');
+
 Route::get('/', function () {
-    if(Auth::check()) {
-        return redirect()->route('myVouchers');
-    }
-    return view('auth.login');
+	if(Auth::check()) {
+		return redirect()->route('myVouchers');
+	}
+	return view('auth.login');
 })->name('home');
+
+
+
 
 // Route::group(['middleware' => 'web'], function () {
 //     // Moving here will ensure that sessions, csrf, etc. is included in all these routes
@@ -57,11 +66,11 @@ Route::get('/', function () {
 
 
 // Ying Ying 
-Route::get('/upgrade', 'plan\planController@index');
-Route::get('/create','plan\planController@checkout');
-Route::get('/','Survey\SurveyController@surveyList');
-Route::get('/chart','Survey\SurveyController@showChart');
-Route::post('store','plan\planController@store');
+// Route::get('/upgrade', 'plan\planController@index');
+// Route::get('/create','plan\planController@checkout');
+// Route::get('/','Survey\SurveyController@surveyList');
+// Route::get('/chart','Survey\SurveyController@showChart');
+// Route::post('store','plan\planController@store');
 
 
 

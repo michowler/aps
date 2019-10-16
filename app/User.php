@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'profile_image'
     ];
 
     /**
@@ -38,6 +38,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function getImageAttribute()
+    {
+       return $this->profile_image;
+    }
+
     public function roles()
     {
       // return $this->belongsToMany(User::class);
@@ -49,6 +54,7 @@ class User extends Authenticatable
       // return $this->belongsToMany(User::class);
       return $this->hasMany(Merchant::class);
     }
+
 
 
 }

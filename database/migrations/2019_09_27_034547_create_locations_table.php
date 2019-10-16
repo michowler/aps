@@ -19,6 +19,7 @@ class CreateLocationsTable extends Migration
             $table->string('locations_name',45);
             $table->double('longitude',6,6);
             $table->double('latitude',6,6);
+            $table->string('status');
             $table->timestamps();
             $table -> foreign('users_id') 
             -> references('users_id') 

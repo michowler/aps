@@ -15,9 +15,17 @@ class CreateSurveysTable extends Migration
     {
         Schema::create('surveys', function (Blueprint $table) {
             $table->bigIncrements('surveys_id');
+            $table->bigIncrements('vouchers_id');
             $table->string('surveys_title');
             $table->string('surveys_description');
+            $table->string('status');
             $table->timestamps();
+            $table -> foreign('owner_packages_id') 
+            -> references('owner_packages_id') 
+            -> on ('owner_packages')->onDelete('cascade');
+             $table -> foreign('vouchers_id') 
+            -> references('vouchers_id') 
+            -> on ('vouchers')->onDelete('cascade');
         });
     }
 
