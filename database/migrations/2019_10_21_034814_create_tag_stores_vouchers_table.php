@@ -15,8 +15,8 @@ class CreateTagStoresVouchersTable extends Migration
     {
         Schema::create('tag_stores_vouchers', function (Blueprint $table) {
             $table->bigIncrements('stores_vouchers_id');  
-            $table->bigIncrements('stores_id');  
-            $table->bigIncrements('vouchers_id'); 
+            $table->unsignedBigInteger('stores_id');  
+            $table->unsignedBigInteger('vouchers_id'); 
             $table->string('status');               
             $table->timestamps();
             $table->foreign('vouchers_id')
