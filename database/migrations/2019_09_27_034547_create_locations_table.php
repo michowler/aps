@@ -18,7 +18,8 @@ class CreateLocationsTable extends Migration
             $table->unsignedBigInteger('users_id');
             $table->string('locations_name',45);
             $table->double('longitude',6,6);
-            $table->double('latitude',6,6);
+            $table->double('latitude',6,6);            
+            $table->string('created_by',100);
             $table->string('status');
             $table->timestamps();
             $table -> foreign('users_id') 

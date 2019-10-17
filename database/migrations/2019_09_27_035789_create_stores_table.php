@@ -15,10 +15,11 @@ class CreateStoresTable extends Migration
     {
         Schema::create('stores', function (Blueprint $table) {
             $table->bigIncrements('stores_id');  
-            $table->bigIncrements('merchants_id'); 
+            $table->unsignedBigInteger('merchants_id'); 
             $table->string('name');
             $table->string('address');
-            $table->string('city',45);                 
+            $table->string('city');   
+            $table->string('status');                 
             $table->timestamps();
             $table->foreign('merchants_id')
             ->references('merchants_id')

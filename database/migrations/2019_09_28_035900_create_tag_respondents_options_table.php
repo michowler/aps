@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTagRespondentsAnswersTable extends Migration
+class CreateTagRespondentsOptionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,12 +15,12 @@ class CreateTagRespondentsAnswersTable extends Migration
     {
         Schema::create('tag_respondents_options', function (Blueprint $table) {
             $table->bigIncrements('respondents_options_id');
-            $table->unsignedBigInteger('respondents_id');
+            $table->unsignedBigInteger('users_id');
             $table->unsignedBigInteger('options_id');
             $table->timestamps();
-            $table->foreign('respondents_id')
-                  ->references('respondents_id')
-                  ->on('respondents')->onDelete('cascade');
+            $table->foreign('users_id')
+                  ->references('users_id')
+                  ->on('users')->onDelete('cascade');
             $table->foreign('options_id')
                   ->references('options_id')
                   ->on('options')->onDelete('cascade');
@@ -34,6 +34,6 @@ class CreateTagRespondentsAnswersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tag_respondents_answers');
+        Schema::dropIfExists('tag_respondents_options');
     }
 }

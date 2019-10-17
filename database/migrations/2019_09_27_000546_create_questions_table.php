@@ -15,9 +15,9 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->bigIncrements('questions_id');
-            $table->bigIncrements('surveys_id');
-            $table->string('status');
+            $table->unsignedBigInteger('surveys_id');            
             $table->string('questions_title');
+            $table->string('status');
             $table->timestamps();
             $table->foreign('surveys_id')
             ->references('surveys_id')
