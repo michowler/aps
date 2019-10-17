@@ -17,6 +17,8 @@ class CreateTagOwnerPackagesTable extends Migration
             $table->bigIncrements('owner_packages_id');
             $table->unsignedBigInteger('users_id');
             $table->unsignedBigInteger('packages_id');        
+            $table->date('start_date');
+            $table->date('end_date');
             $table->timestamps();
             $table->foreign('users_id')
             ->references('users_id')
