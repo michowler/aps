@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Voucher;
 
 use App\Voucher;
+use App\Merchant;
+use App\Store;
+use App\VouchersType;
 use Validator; 
 use Storage;
 use Illuminate\Http\Request;
@@ -51,7 +54,9 @@ class VoucherController extends Controller
 	 */
 	public function create()
 	{		
-		return view('voucher.create');
+		//show stores available from database		
+		$stores = Store::where('merchants_id', \Auth::user()->users_id)->get();
+		return view('voucher.create', ['stores' => $stores]);
 	}
 
 	/**
@@ -81,15 +86,18 @@ class VoucherController extends Controller
 			'outlet' => 'required',
 			'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 			'terms' => 'required',
-			'expiry_date' => 'required'
+			'expiry_date' => 'required', 
+			'vouchers_types_id' => 'required'
 		]);
 
 		$voucher->merchants_id = \Auth::user()->users_id;
 		$voucher->logo = request()->file('logo')->store('images');	
 		$voucher->title = request('title');
-		$voucher->terms = request('terms');
-		$voucher->outlet = request('outlet');
-		$voucher->qr_code = QrCode::size(250)->generate( route('redeem',['vouchers_id' => $voucher->vouchers_id]);   
+		$voucher->terms = request('terms');		
+		$store = Store::where('stores_id', '=', request('stores_id'))->with('vouchers');
+		// $stores = $request->get('stores');
+		$voucher->stores()->sync( $store );
+		// $voucher->qr_code = QrCode::size(250)->generate(route('redeem',['vouchers_id' => $voucher->vouchers_id]));   
 		$voucher->expiry_date = request('expiry_date');		
 		$voucher->vouchers_types_id = request('vouchers_types_id');		
 		
@@ -106,14 +114,16 @@ class VoucherController extends Controller
 	 * @param  \App\Voucher  $voucher
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show(Voucher $voucher, $vouchers_id, Request $request)
+	public function show(Voucher $voucher, Request $request)
 	{		
 		// $voucher = Voucher::orderBy('vouchers_id', 'desc')->first();
 		//return DB::table('files')->latest('upload_time')->first()/take(5)->get();					
 
 		$voucher = Voucher::where('vouchers_id', '=', $request->vouchers_id)->firstOrFail();
-		$logoFile = Storage::disk('public')->get("{$voucher->logo}");
-		return view('voucher.show', ['voucher' => $voucher], ['logoFile' => $logoFile]);        
+		// $stores = Store::where('stores_id', $request->vouchers_id)->get();
+		// $vStore = Store::all()->where('vouchers_id', '=', $request->vouchers_id)->firstOrFail();
+		$vType = VouchersType::where('vouchers_types_id', '=', $voucher->vouchers_types_id)->first();		
+		return view('voucher.show', ['voucher' => $voucher], ['vType' => $vType]);        
 	}
 
 	/**
@@ -153,7 +163,7 @@ class VoucherController extends Controller
 	 * @param  \App\Voucher  $voucher
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy(Voucher $voucher, $vouchers_id)
+	public function destroy(Voucher $voucher)
 	{
 		$voucher = Voucher::find(request('vouchers_id'));
 		$voucher->delete();		

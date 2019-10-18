@@ -75,8 +75,15 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label>{{ __('Branch Outlet') }}</label>
-                    <input name="outlet" type="text" class="form-control" placeholder="Outlet description" value="outlet">
+                    <label>{{ __('Branch Store') }}</label>
+                     <div class="form-group">                                
+                         <select name="stores_id" class="form-control">
+                            @foreach($stores as $store)     
+                            <option value="{{$store->stores_id}}">{{$store->name}}</option>
+
+                            @endforeach   
+                        </select>                        
+                    </div>
                 </div>
             </div>
         </div>
@@ -112,6 +119,7 @@
                         <tr>
                             <td>
                                 <div class="checkbox">
+                                    
                                     <input value="1" id="checkbox1" type="checkbox">
                                     <label for="checkbox1"></label>
                                 </div>

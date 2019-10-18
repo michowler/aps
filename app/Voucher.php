@@ -18,8 +18,6 @@ class Voucher extends Model
         'title', 'terms', 'outlet', 'vouchers_types_id', 'merchants_id', 'logo', 'qr_code'
     ];
 
-
-
     /**
      * The attributes that should be cast to native types.
      *
@@ -33,10 +31,12 @@ class Voucher extends Model
     {
       return $this->belongsTo(Merchant::class, 'merchants_id');      
     }
-    
-    public function vouchers()
+
+    public function stores()
     {
-      return $this->belongsToMany(Voucher::class, 'vouchers_id');      
+      return $this->belongsToMany(Store::class, 'tag_stores_vouchers', 'stores_id', 'vouchers_id' );
     }
+
+
     
 }
