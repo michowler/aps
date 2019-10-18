@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Voucher;
 use App\Voucher;
 use App\Merchant;
 use App\Store;
+use App\VouchersType;
 use Validator; 
 use Storage;
 use Illuminate\Http\Request;
@@ -64,7 +65,7 @@ class VoucherController extends Controller
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function store(Request $request, Store $store)
+	public function store(Request $request)
 	{
 		//this part is just for testing. after test, this part must e commented
 		// echo "<pre>";
@@ -113,16 +114,16 @@ class VoucherController extends Controller
 	 * @param  \App\Voucher  $voucher
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show(Voucher $voucher, $vouchers_id, Request $request)
+	public function show(Voucher $voucher, Request $request)
 	{		
 		// $voucher = Voucher::orderBy('vouchers_id', 'desc')->first();
 		//return DB::table('files')->latest('upload_time')->first()/take(5)->get();					
 
 		$voucher = Voucher::where('vouchers_id', '=', $request->vouchers_id)->firstOrFail();
-		$vStore = Store::all()->where('vouchers_id', '=', $request->vouchers_id)->firstOrFail();
-		$vType = Voucher::where('vouchers_types_id', '=', $request->voucher->vouchers_types_id)->firstOrFail()->vouchers_type;
-		$logoFile = Storage::disk('public')->get("{$voucher->logo}");
-		return view('voucher.show', ['voucher' => $voucher], ['logoFile' => $logoFile]);        
+		// $stores = Store::where('stores_id', $request->vouchers_id)->get();
+		// $vStore = Store::all()->where('vouchers_id', '=', $request->vouchers_id)->firstOrFail();
+		$vType = VouchersType::where('vouchers_types_id', '=', $voucher->vouchers_types_id)->first();		
+		return view('voucher.show', ['voucher' => $voucher], ['vType' => $vType]);        
 	}
 
 	/**

@@ -80,6 +80,7 @@
                          <select name="stores_id" class="form-control">
                             @foreach($stores as $store)     
                             <option value="{{$store->stores_id}}">{{$store->name}}</option>
+
                             @endforeach   
                         </select>                        
                     </div>
@@ -118,6 +119,7 @@
                         <tr>
                             <td>
                                 <div class="checkbox">
+                                    
                                     <input value="1" id="checkbox1" type="checkbox">
                                     <label for="checkbox1"></label>
                                 </div>

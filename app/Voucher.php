@@ -36,5 +36,7 @@ class Voucher extends Model
     {
       return $this->belongsToMany(Store::class, 'tag_stores_vouchers', 'stores_id', 'vouchers_id' );
     }
+
+
     
 }
