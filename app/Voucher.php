@@ -34,4 +34,9 @@ class Voucher extends Model
       return $this->belongsTo(Merchant::class, 'merchants_id');      
     }
     
+    public function vouchers()
+    {
+      return $this->belongsToMany(Voucher::class, 'vouchers_id');      
+    }
+    
 }
