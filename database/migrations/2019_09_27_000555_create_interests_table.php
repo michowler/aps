@@ -14,14 +14,10 @@ class CreateInterestsTable extends Migration
     public function up()
     {
         Schema::create('interests', function (Blueprint $table) {
-            $table->bigIncrements('interests_id');
-            $table->unsignedBigInteger('users_id');
+            $table->bigIncrements('interests_id');            
             $table->string('interests_name');
             $table->string('status');
             $table->timestamps();
-            $table -> foreign('users_id') 
-            -> references('users_id') 
-            -> on ('users')->onDelete('cascade');
         });
     }
 

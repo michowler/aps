@@ -16,8 +16,7 @@ class CreateVouchersTable extends Migration
         Schema::create('vouchers', function (Blueprint $table) {
             $table->bigIncrements('vouchers_id');            
             $table->unsignedBigInteger('merchants_id')->nullable();
-            $table->unsignedBigInteger('vouchers_types_id')->nullable();   
-            $table->string('stores_vouchers_id');     
+            $table->unsignedBigInteger('vouchers_types_id')->nullable();               
             $table->string('title');
             $table->string('terms');                     
             $table->date('expiry_date');            
@@ -29,7 +28,7 @@ class CreateVouchersTable extends Migration
             -> on ('merchants')->onDelete('cascade');
             $table -> foreign('vouchers_types_id') 
             -> references('vouchers_types_id') 
-            -> on ('vouchers_types')->onDelete('cascade');
+            -> on ('vouchers_types')->onDelete('cascade');         
         });
     }
 
