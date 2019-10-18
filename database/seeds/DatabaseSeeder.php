@@ -15,13 +15,14 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserTableSeeder::class,
             VoucherTypeTableSeeder::class,
-            InterestTableSeeder::class
-            
+            InterestTableSeeder::class,
+            MerchantTableSeeder::class,
+            StoreTableSeeder::class
         ]);
         
-         factory(App\User::class, 10)->create()->each(function ($user) {
-             $user->merchants()->save(factory(App\Merchant::class)->make());
-         });        
+         // factory(App\User::class, 10)->create()->each(function ($user) {
+         //     $user->merchants()->save(factory(App\Merchant::class)->make());
+         // });        
     
     }
 }

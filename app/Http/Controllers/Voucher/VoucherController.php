@@ -88,7 +88,8 @@ class VoucherController extends Controller
 		$voucher->logo = request()->file('logo')->store('images');	
 		$voucher->title = request('title');
 		$voucher->terms = request('terms');
-		$voucher->outlet = request('outlet');        
+		$voucher->outlet = request('outlet');
+		$voucher->qr_code = QrCode::size(250)->generate( route('redeem',['vouchers_id' => $voucher->vouchers_id]) );   
 		$voucher->expiry_date = request('expiry_date');		
 		$voucher->vouchers_types_id = request('vouchers_types_id');		
 		

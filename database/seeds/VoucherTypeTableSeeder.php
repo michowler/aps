@@ -11,7 +11,7 @@ class VoucherTypeTableSeeder extends Seeder
      */
     public function run()
     {        
-    	$vouchers_type = [['vouchers_type'=> 'cash'], ['vouchers_type' => 'rebate'], ['vouchers_type' => 'gift'], ['vouchers_type' => 'free'], ['vouchers_type' => 'deals']];
+    	$vouchers_type = [['vouchers_type'=> 'cash', 'status' => 'true'], ['vouchers_type' => 'rebate', 'status' => 'true'], ['vouchers_type' => 'gift', 'status' => 'true'], ['vouchers_type' => 'free', 'status' => 'true'], ['vouchers_type' => 'deals', 'status' => 'true']];
     	\DB::table('vouchers_types')->insert($vouchers_type);
 
     }
