@@ -10,6 +10,7 @@ use App\VouchersType;
 use QrCode;
 use Validator; 
 use Storage;
+use Input;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -73,14 +74,12 @@ class VoucherController extends Controller
 		//this part is just for testing. after test, this part must e commented
 		// echo "<pre>";
 		// var_dump($_REQUEST);
-		
 
 		// var_dump(\Auth::user()->users_id);		
-		// var_dump(request('expiry_date'));        
-		// var_dump(request('vouchers_types_id')); 
+		// var_dump( $request->input('interests'));  		
+		// die();
 
-		$voucher = new Voucher; 
-		// $tag_interests_vouchers = new intVoucher;
+		$voucher = new Voucher; 		
 
 		$validator = Validator::make($request->all(), [ // <---
 			'title' => 'required|max:255',			
@@ -94,6 +93,7 @@ class VoucherController extends Controller
 		$voucher->logo = request()->file('logo')->store('images');	
 		$voucher->title = request('title');
 		$voucher->terms = request('terms');		
+		$interests = $request->input('interests');		
 		// $store = Store::where('stores_id', '=', request('stores_id'))->with('vouchers');
 		// // $stores = $request->get('stores');
 		// $voucher->stores()->sync( $store );
@@ -105,6 +105,7 @@ class VoucherController extends Controller
 			return redirect('voucher.create')->withErrors($validator)->withInput();
 		}
 		$voucher->save();
+		$voucher::findOrFail($voucher->vouchers_id)->interests()->attach($interests);	
 		return redirect()->route('myVouchers')->with('success','Voucher created successfully.');
 	}
 

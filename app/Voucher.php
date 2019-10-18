@@ -5,9 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 class Voucher extends Model
-{
-    //
+{    
     protected $primaryKey = 'vouchers_id';
+    public $incrementing = true;
 
     /**
      * The attributes that are mass assignable.
@@ -15,7 +15,7 @@ class Voucher extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'terms', 'outlet', 'vouchers_types_id', 'merchants_id', 'logo', 'qr_code'
+        'vouchers_id', 'title', 'terms', 'outlet', 'vouchers_types_id', 'merchants_id', 'logo', 'qr_code', 'interests'
     ];
 
     /**
@@ -39,7 +39,7 @@ class Voucher extends Model
 
     public function interests()
     {
-        return $this->belongsToMany('Interest');
+        return $this->belongsToMany(Interest::class, 'tag_interests_vouchers', 'vouchers_id' , 'interests_id');
     }
 
     

@@ -16,6 +16,7 @@
                                         
                     <form method="POST" enctype="multipart/form-data" action="{{ route('storeVoucher') }}">
                        @csrf
+                       
                        <h4 class="title">{{strtoupper(\Auth::user()->name)}}<br />
                            <label for="image">
                             <input id="logo" type="file" class="form-control" name="logo">
@@ -120,10 +121,10 @@
                         <tr>         
                             @foreach( $chunk_interest as $interest )                   
                             <td>
-                                <div class="checkbox">                                    
-                                    <input value="{{$interest->interests_id}}" name="vInts[]" id="checkbox1" type="checkbox">
-                                    <label for="checkbox1"></label>
-                                </div>
+                                                   
+                                    <input class="checkbox" value="{{$interest->interests_id}}" name="interests[]" id="checkbox{$interest->interests_id}" type="checkbox">
+                                    
+                                
                             </td>
                             <td>{{$interest->interests_name}}</td>                            
                             @endforeach
