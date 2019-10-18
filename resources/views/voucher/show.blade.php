@@ -36,8 +36,9 @@
               <p><b>Terms & Conditions:</b></p>
               <p>
                 {{ $voucher->terms }}
-              </p>
-              <label>REDEEM OUTLET: {{ $voucher->outlet }}</label>
+              </p>              
+              <label>REDEEM OUTLET: {{ $vStore->name }}</label>
+              
 
             </div>
 
