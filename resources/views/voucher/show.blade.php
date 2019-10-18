@@ -14,7 +14,10 @@
           <div class="row">
             <div class="col-md-4">
               <div class="form-group text-center">
-                <img class="rounded-circle" src="/storage/{{$voucher->logo}}" style="max-height: 200px;max-width: 300px" />
+                @if ($voucher->logo)
+                  <img class="rounded-circle" src="/storage/{{$voucher->logo}}" style="max-height: 200px;max-width: 300px" />
+                          
+                @endif 
              </div>
            </div>
            <div class="col-md-8">
@@ -36,7 +39,9 @@
           </div>  
           <div class="col-md-4 text-center">
            <div>                                
-             {!! QrCode::size(350)->generate( route('redeem',['vouchers_id' => $voucher->vouchers_id]) ); !!}                                   
+              @if ($voucher->qr_code)                
+                {!!QrCode::size(250)->generate(route('redeem',['vouchers_id' => $voucher->vouchers_id]))!!}
+              @endif                                    
            </div>
          </div>                                  
        </div>
@@ -49,7 +54,7 @@
           <label>VOUCHER TYPE: {{ $vType->vouchers_type }}</label><br>
           <label>EXPIRY DATE: {{ $voucher->expiry_date->format('Y-m-d') }}</label>
         </div>
-        <div class="col-md-4 text-center">
+        <div class="col-md-4 text-center" style="padding:20px;">
           <button type="button" data-toggle="modal" data-target="#deleteVoucherModal" type="submit" class="btn btn-danger btn-fill " style="margin-left:10px;">Delete <i class="fa fa-trash"></i></button>
           <button type="submit" class="btn btn-info btn-fill ">Enable</button>
 

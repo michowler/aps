@@ -13,9 +13,9 @@ class Store extends Model
 	    return $this->belongsTo(Merchant::class, 'merchants_id', 'stores_id');
 	}
 
- 	public function vouchers()
- 	{
- 	  return $this->belongsToMany(Voucher::class, 'tag_stores_vouchers', 'stores_id', 'vouchers_id' );
- 	}
+ 	// public function vouchers()
+ 	// {
+ 	//   return $this->belongsToMany(Voucher::class, 'tag_stores_vouchers', 'stores_id', 'vouchers_id' );
+ 	// }
 
 }

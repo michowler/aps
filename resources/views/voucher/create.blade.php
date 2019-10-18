@@ -116,77 +116,19 @@
             <div class="table-full-width borderless" >
                 <table class="table">
                     <tbody>
-                        <tr>
+                        @foreach($interests->chunk(3) as $chunk_interest)
+                        <tr>         
+                            @foreach( $chunk_interest as $interest )                   
                             <td>
-                                <div class="checkbox">
-                                    
-                                    <input value="1" id="checkbox1" type="checkbox">
+                                <div class="checkbox">                                    
+                                    <input value="{{$interest->interests_id}}" name="vInts[]" id="checkbox1" type="checkbox">
                                     <label for="checkbox1"></label>
                                 </div>
                             </td>
-                            <td>Food & Drinks</td>
-                            <td>
-                                <div class="checkbox">
-                                    <input value="2" id="checkbox2" type="checkbox">
-                                    <label for="checkbox2"></label>
-                                </div>
-                            </td>
-                            <td>Sports</td>
-                            <td>
-                                <div class="checkbox">
-                                    <input value="3" id="checkbox3" type="checkbox">
-                                    <label for="checkbox3"></label>
-                                </div>
-                            </td>
-                            <td>Leisure</td>                                                                                                      
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="checkbox">
-                                    <input value="4" id="checkbox4" type="checkbox" >
-                                    <label for="checkbox4"></label>
-                                </div>
-                            </td>
-                            <td>Travel</td>
-                            <td>
-                                <div class="checkbox">
-                                    <input value="5" id="checkbox5" type="checkbox">
-                                    <label for="checkbox5"></label>
-                                </div>
-                            </td>
-                            <td>Health</td>
-                            <td>
-                                <div class="checkbox">
-                                    <input value="6" id="checkbox6" type="checkbox">
-                                    <label for="checkbox6"></label>
-                                </div>
-                            </td>
-                            <td>Beauty</td>                                                                                  
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="checkbox">
-                                    <input value="7" id="checkbox7" type="checkbox">
-                                    <label for="checkbox7"></label>
-                                </div>
-                            </td>
-                            <td>Entertainment</td>
-                            <td>
-                                <div class="checkbox">
-                                    <input value="8" id="checkbox8" type="checkbox">
-                                    <label for="checkbox8"></label>
-                                </div>
-                            </td>
-                            <td>Education</td>
-                            <td>
-                                <div class="checkbox">
-                                    <input value="9" id="checkbox9" type="checkbox">
-                                    <label for="checkbox9"></label>
-                                </div>
-                            </td>
-                            <td>Lifestyle</td>
-                        </tr>
-
+                            <td>{{$interest->interests_name}}</td>                            
+                            @endforeach
+                        </tr>                        
+                        @endforeach
                     </tbody>
                 </table>
             </div>

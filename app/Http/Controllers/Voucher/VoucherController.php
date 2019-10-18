@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Voucher;
 use App\Voucher;
 use App\Merchant;
 use App\Store;
+use App\Interest;
 use App\VouchersType;
+use QrCode;
 use Validator; 
 use Storage;
 use Illuminate\Http\Request;
@@ -56,7 +58,8 @@ class VoucherController extends Controller
 	{		
 		//show stores available from database		
 		$stores = Store::where('merchants_id', \Auth::user()->users_id)->get();
-		return view('voucher.create', ['stores' => $stores]);
+		$interests = Interest::all();		
+		return view('voucher.create', ['stores' => $stores], ['interests' => $interests]);
 	}
 
 	/**
@@ -70,20 +73,17 @@ class VoucherController extends Controller
 		//this part is just for testing. after test, this part must e commented
 		// echo "<pre>";
 		// var_dump($_REQUEST);
-		// die();
+		
 
-		// var_dump(\Auth::user()->users_id);
-
-		// var_dump(request('terms'));
+		// var_dump(\Auth::user()->users_id);		
 		// var_dump(request('expiry_date'));        
 		// var_dump(request('vouchers_types_id')); 
 
 		$voucher = new Voucher; 
-		// $tag_interests_vouchers = new intVoucher;		
+		// $tag_interests_vouchers = new intVoucher;
 
 		$validator = Validator::make($request->all(), [ // <---
-			'title' => 'required|max:255',
-			'outlet' => 'required',
+			'title' => 'required|max:255',			
 			'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 			'terms' => 'required',
 			'expiry_date' => 'required', 
@@ -94,10 +94,10 @@ class VoucherController extends Controller
 		$voucher->logo = request()->file('logo')->store('images');	
 		$voucher->title = request('title');
 		$voucher->terms = request('terms');		
-		$store = Store::where('stores_id', '=', request('stores_id'))->with('vouchers');
-		// $stores = $request->get('stores');
-		$voucher->stores()->sync( $store );
-		// $voucher->qr_code = QrCode::size(250)->generate(route('redeem',['vouchers_id' => $voucher->vouchers_id]));   
+		// $store = Store::where('stores_id', '=', request('stores_id'))->with('vouchers');
+		// // $stores = $request->get('stores');
+		// $voucher->stores()->sync( $store );
+		$voucher->qr_code = QrCode::size(250)->generate(route('redeem',['vouchers_id' => $voucher->vouchers_id]));   
 		$voucher->expiry_date = request('expiry_date');		
 		$voucher->vouchers_types_id = request('vouchers_types_id');		
 		
