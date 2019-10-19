@@ -48,8 +48,8 @@
 
         <ul class="nav">
 
-         <li>
-          <p>VOUCHERS</p>
+        <li>
+          <p>MERCHANTS</p>
 
         </li>
         <li>

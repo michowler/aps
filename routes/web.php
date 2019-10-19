@@ -42,6 +42,8 @@ Route::get('/vouchers/demo', 'Voucher\VoucherController@demo')->name('demo');
 Route::get('/vouchers/redeem', 'Voucher\VoucherController@redeem')->name('redeem');
 Route::post('/vouchers/redeem/{vouchers_id}', 'Voucher\VoucherController@redeem')->name('redeemVoucher');
 
+Route::get('/users/edit/{users_id}', 'Respondent\RespondentController@edit')->name('editUser');
+
 Route::get('/', function () {
 	if(Auth::check()) {
 		return redirect()->route('myVouchers');
