@@ -32,16 +32,13 @@ Auth::routes(['reset' => false]);
 // Auth::routes(['register' => false]);
 
 // Michelle 
-Route::get('qr-code', function () {
-	return QrCode::size(500)->generate('Welcome to kerneldev.com!');
-});
 
 Route::get('/vouchers', 'Voucher\VoucherController@index')->name('myVouchers');
 Route::get('/vouchers/create', 'Voucher\VoucherController@create')->name('generate');
 Route::post('/vouchers', 'Voucher\VoucherController@store')->name('storeVoucher');
 Route::post('/vouchers/show/{vouchers_id}', 'Voucher\VoucherController@destroy')->name('deleteVoucher');
 Route::get('/vouchers/show/{vouchers_id}', 'Voucher\VoucherController@show')->name('showVoucher');
-Route::get('/vouchers/demo/{vouchers_id}', 'Voucher\VoucherController@demo')->name('demo');
+Route::get('/vouchers/demo', 'Voucher\VoucherController@demo')->name('demo');
 Route::get('/vouchers/redeem', 'Voucher\VoucherController@redeem')->name('redeem');
 Route::post('/vouchers/redeem/{vouchers_id}', 'Voucher\VoucherController@redeem')->name('redeemVoucher');
 
