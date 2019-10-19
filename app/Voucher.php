@@ -32,15 +32,17 @@ class Voucher extends Model
       return $this->belongsTo(Merchant::class, 'merchants_id');      
     }
 
-    // public function stores()
-    // {
-    //   return $this->belongsToMany(Store::class, 'tag_stores_vouchers', 'stores_id', 'vouchers_id' );
-    // }
+    public function stores()
+    {
+      return $this->belongsToMany(Store::class, 'tag_stores_vouchers', 'vouchers_id', 'stores_id' );
+    }
 
     public function interests()
     {
         return $this->belongsToMany(Interest::class, 'tag_interests_vouchers', 'vouchers_id' , 'interests_id');
     }
+
+
 
     
 }

@@ -93,10 +93,9 @@ class VoucherController extends Controller
 		$voucher->logo = request()->file('logo')->store('images');	
 		$voucher->title = request('title');
 		$voucher->terms = request('terms');		
-		$interests = $request->input('interests');		
-		// $store = Store::where('stores_id', '=', request('stores_id'))->with('vouchers');
-		// // $stores = $request->get('stores');
-		// $voucher->stores()->sync( $store );
+		$interests = $request->input('interests');				
+		$stores = $request->input('stores');
+		
 		$voucher->qr_code = QrCode::size(250)->generate(route('redeem',['vouchers_id' => $voucher->vouchers_id]));   
 		$voucher->expiry_date = request('expiry_date');		
 		$voucher->vouchers_types_id = request('vouchers_types_id');		
@@ -105,7 +104,8 @@ class VoucherController extends Controller
 			return redirect('voucher.create')->withErrors($validator)->withInput();
 		}
 		$voucher->save();
-		$voucher::findOrFail($voucher->vouchers_id)->interests()->attach($interests);	
+		$voucher::findOrFail($voucher->vouchers_id)->interests()->attach($interests);
+		$voucher::findOrFail($voucher->vouchers_id)->stores()->attach($stores,['status' => 1 ]);				
 		return redirect()->route('myVouchers')->with('success','Voucher created successfully.');
 	}
 
@@ -119,10 +119,9 @@ class VoucherController extends Controller
 	{		
 		// $voucher = Voucher::orderBy('vouchers_id', 'desc')->first();
 		//return DB::table('files')->latest('upload_time')->first()/take(5)->get();					
-
-		$voucher = Voucher::where('vouchers_id', '=', $request->vouchers_id)->firstOrFail();
-		// $stores = Store::where('stores_id', $request->vouchers_id)->get();
-		// $vStore = Store::all()->where('vouchers_id', '=', $request->vouchers_id)->firstOrFail();
+		// $store = Store::where('stores_id', '=', request('stores_id'))->with('vouchers');
+		$voucher = Voucher::where('vouchers_id', '=', $request->vouchers_id)->firstOrFail();		
+		$vouchers = Voucher::with('stores')->get();		
 		$vType = VouchersType::where('vouchers_types_id', '=', $voucher->vouchers_types_id)->first();		
 		return view('voucher.show', ['voucher' => $voucher], ['vType' => $vType]);        
 	}

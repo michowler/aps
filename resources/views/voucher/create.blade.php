@@ -16,7 +16,7 @@
                                         
                     <form method="POST" enctype="multipart/form-data" action="{{ route('storeVoucher') }}">
                        @csrf
-                       
+
                        <h4 class="title">{{strtoupper(\Auth::user()->name)}}<br />
                            <label for="image">
                             <input id="logo" type="file" class="form-control" name="logo">
@@ -77,14 +77,25 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label>{{ __('Branch Store') }}</label>
-                     <div class="form-group">                                
-                         <select name="stores_id" class="form-control">
-                            @foreach($stores as $store)     
-                            <option value="{{$store->stores_id}}">{{$store->name}}</option>
-
-                            @endforeach   
-                        </select>                        
+                     <div class="form-group">                                                        
+                        <table class="table">
+                            <tbody>
+                                @foreach($stores->chunk(3) as $chunk_store)
+                                <tr>         
+                                    @foreach( $chunk_store as $store )                   
+                                    <td>
+                                                           
+                                            <input class="checkbox" value="{{$store->stores_id}}" name="stores[]" id="checkbox{$store->stores_id}" type="checkbox">                                            
+                                        
+                                    </td>
+                                    <td>{{$store->name}}</td>                            
+                                    @endforeach
+                                </tr>                        
+                                @endforeach
+                            </tbody>
+                        </table>                   
                     </div>
+
                 </div>
             </div>
         </div>

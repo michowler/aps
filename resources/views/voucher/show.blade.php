@@ -49,7 +49,11 @@
        <div class="row">
         <div class="col-md-8">
           <label>REDEEM OUTLET: 
-          STORE NAME
+          
+            @foreach($voucher->stores as $store)            
+              {{ $store->name }},
+            @endforeach            
+          
           </label><br>
           <label>VOUCHER TYPE: {{ $vType->vouchers_type }}</label><br>
           <label>EXPIRY DATE: {{ $voucher->expiry_date->format('Y-m-d') }}</label>
@@ -63,10 +67,7 @@
       </div>
 
 
-       <!--   {!! Form::model($voucher, ['method' => 'destroy', 'route' => ['deleteVoucher', $voucher->vouchers_id], 'class' =>'form-inline form-delete']) !!}
-         {!! Form::hidden('vouchers_id', $voucher->vouchers_id) !!}
-         {!! Form::submit(trans('Delete'), ['class' => 'btn btn-danger btn-fill pull-right', 'name' => 'delete_modal', 'style' => 'margin-left:8px']) !!}
-         {!! Form::close() !!} -->
+
 
 
        </form>
