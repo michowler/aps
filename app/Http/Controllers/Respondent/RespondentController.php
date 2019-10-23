@@ -70,8 +70,10 @@ class RespondentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {        
+        $user = Auth::user();
+        $user->name = request('name');
+        return view('respondent.update', ['user' => $user]); 
     }
 
     /**
