@@ -20,6 +20,7 @@ class CreatePackagesTable extends Migration
             $table->double('package_price');
             $table->integer('no_surveys');
             $table->integer('no_respondents');
+            $table->dateTime('created_at');
             $table->timestamps();
         });
     }

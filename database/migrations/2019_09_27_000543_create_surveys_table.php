@@ -18,6 +18,7 @@ class CreateSurveysTable extends Migration
             $table->string('surveys_title');
             $table->string('surveys_description');
             $table->timestamps();
+            //foreign tag owner package table id use shortform
         });
     }
 

@@ -19,7 +19,7 @@ class CreateVouchersTable extends Migration
             $table->unsignedBigInteger('vouchers_types_id')->nullable();     
             $table->string('title');
             $table->string('terms');
-            $table->string('outlet');            
+            //$table->string('outlet');            
             $table->date('expiry_date');            
             $table->timestamps();
             $table -> foreign('merchants_id') 

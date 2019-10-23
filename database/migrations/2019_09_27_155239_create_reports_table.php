@@ -17,6 +17,7 @@ class CreateReportsTable extends Migration
             $table->bigIncrements('reports_id');
             $table->date('create_at');
             $table->timestamps();
+            //users_id,report_query
         });
     }
 

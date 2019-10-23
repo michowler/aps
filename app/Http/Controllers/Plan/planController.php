@@ -30,9 +30,6 @@ class planController extends Controller
     {
         $payments = new Payments;
 
-
-            
-            // $payments -> users_id = 1;
             $payments -> amount = '100';
             $payments -> first_name =   $request ->first_name;
             $payments -> last_name  =   $request ->last_name;
