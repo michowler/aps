@@ -80,8 +80,73 @@ Route::post('store','plan\planController@store');
 
 
 // Alice
-Route::get('index','OwnerController@index');
-Route::post('store','OwnerController@store');
+
+Route::resource('surveys', 'OwnerController');
+
+Route::post('/storeSurvey', 'OwnerController@store')->name('storeSurvey');
+
+Route::get('/mySurvey','OwnerController@mySurvey');
+
+Route::get('/createSurvey', 'OwnerController@createSurvey');
+
+Route::post('/insert','OwnerController@insert');
+
+Route::get('/createSurvey/editSurvey', 'OwnerController@createSurvey');
+
+Route::get('/dashboard', 'OwnerController@dashboard');
+
+Route::get('/userProfile', 'OwnerController@userProfile');
+
+Route::get('/userProfile/editUserProfile', 'OwnerController@userProfile');
+
+Route::get('/userProfile/saveUserProfile', 'OwnerController@userProfile');
+
+Route::get('/login','FrontController@login')->name('login');
+
+Route::get('/registerAs','FrontController@registerAs');
+
+Route::get('/resRegister','FrontController@resRegister');
+
+Route::get('/ownerRegister','FrontController@ownerRegister');
+
+Route::get('/merchantRegister','FrontController@merchantRegister');
+
+Route::get('/verify','FrontController@verify');
+
+Route::get('/forgetPassword','FrontController@forgetPassword');
+
+Route::get('/passwordNotification', 'FrontController@passwordNotification');
+
+Route::get('/subPlan','FrontController@subPlan');
+
+Route::get('/createQuestion', 'OwnerController@createQuestion');
+
+Route::get('/createQuestion/editQuestion', 'OwnerController@createQuestion');
+
+Route::get('/adminProfile','AdminController@adminProfile');
+
+Route::get('/adminProfile/editAdminProfile','AdminController@adminProfile');
+
+Route::get('/dashboardAdmin','AdminController@dashboardAdmin');
+
+Route::get('/merchantTable','AdminController@merchantTable');
+
+Route::get('/merchantTable/editMerchant','AdminController@merchantTable');
+
+Route::get('/respondentTable','AdminController@respondentTable');
+
+Route::get('/respondentTable/editRespondent','AdminController@respondentTable');
+
+Route::get('/ownerTable','AdminController@ownerTable');
+
+Route::get('/ownerTable/editOwner','AdminController@ownerTable');
+
+
+
+
+
+
+
 
 
 
