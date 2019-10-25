@@ -65,11 +65,11 @@ Route::get('/', function () {
 
 
 // Ying Ying 
-// Route::get('/upgrade', 'plan\planController@index');
-// Route::get('/create','plan\planController@checkout');
+Route::get('/upgrade', 'plan\planController@index');
+Route::get('/create','plan\planController@checkout');
 // Route::get('/','Survey\SurveyController@surveyList');
-// Route::get('/chart','Survey\SurveyController@showChart');
-// Route::post('store','plan\planController@store');
+Route::get('/chart','Survey\SurveyController@showChart');
+Route::post('store','plan\planController@store');
 
 
 
@@ -80,7 +80,8 @@ Route::get('/', function () {
 
 
 // Alice
-
+Route::get('index','OwnerController@index');
+Route::post('store','OwnerController@store');
 
 
 
