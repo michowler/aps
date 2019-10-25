@@ -42,6 +42,8 @@ Route::get('/vouchers/demo', 'Voucher\VoucherController@demo')->name('demo');
 Route::get('/vouchers/redeem', 'Voucher\VoucherController@redeem')->name('redeem');
 Route::post('/vouchers/redeem/{vouchers_id}', 'Voucher\VoucherController@redeem')->name('redeemVoucher');
 
+Route::get('/users/edit/{users_id}', 'Respondent\RespondentController@edit')->name('editUser');
+
 Route::get('/', function () {
 	if(Auth::check()) {
 		return redirect()->route('myVouchers');
@@ -63,11 +65,11 @@ Route::get('/', function () {
 
 
 // Ying Ying 
-// Route::get('/upgrade', 'plan\planController@index');
-// Route::get('/create','plan\planController@checkout');
+Route::get('/upgrade', 'plan\planController@index');
+Route::get('/create','plan\planController@checkout');
 // Route::get('/','Survey\SurveyController@surveyList');
-// Route::get('/chart','Survey\SurveyController@showChart');
-// Route::post('store','plan\planController@store');
+Route::get('/chart','Survey\SurveyController@showChart');
+Route::post('store','plan\planController@store');
 
 
 
@@ -78,7 +80,8 @@ Route::get('/', function () {
 
 
 // Alice
-
+Route::get('index','OwnerController@index');
+Route::post('store','OwnerController@store');
 
 
 
