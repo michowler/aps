@@ -15,10 +15,22 @@ class CreateSurveysTable extends Migration
     {
         Schema::create('surveys', function (Blueprint $table) {
             $table->bigIncrements('surveys_id');
+            $table->unsignedBigInteger('vouchers_id');
+            $table->unsignedBigInteger('owner_packages_id');
             $table->string('surveys_title');
             $table->string('surveys_description');
+            $table->string('status');
             $table->timestamps();
+<<<<<<< HEAD
             //foreign tag owner package table id use shortform
+=======
+            $table -> foreign('owner_packages_id') 
+            -> references('owner_packages_id') 
+            -> on ('tag_owner_packages')->onDelete('cascade');
+             $table -> foreign('vouchers_id') 
+            -> references('vouchers_id') 
+            -> on ('vouchers')->onDelete('cascade');
+>>>>>>> 89a743f621439c9de0d425095311e3ea07509ddb
         });
     }
 

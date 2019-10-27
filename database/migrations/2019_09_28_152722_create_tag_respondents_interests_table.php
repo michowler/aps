@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTagOwnerPackagesTable extends Migration
+class CreateTagRespondentsInterestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,23 @@ class CreateTagOwnerPackagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('tag_owner_packages', function (Blueprint $table) {
-            $table->bigIncrements('owner_packages_id');
+        Schema::create('tag_respondents_interests', function (Blueprint $table) {
+            $table->bigIncrements('respondents_interest_id');
             $table->unsignedBigInteger('users_id');
-            $table->unsignedBigInteger('packages_id');
-            $table->dateTime('start_date');
-            $table->dateTime('end_date');
+            $table->unsignedBigInteger('interests_id');
+            $table->string('status');
             $table->timestamps();
+            $table->foreign('interests_id')
+            ->references('interests_id')
+            ->on('interests')->onDelete('cascade');
             $table->foreign('users_id')
             ->references('users_id')
             ->on('users')->onDelete('cascade');
-            $table->foreign('packages_id')
-            ->references('packages_id')
-            ->on('packages')->onDelete('cascade');
             
         });
-      }
+
+
+    }
 
     /**
      * Reverse the migrations.
@@ -37,6 +38,6 @@ class CreateTagOwnerPackagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tag_owner_packages');
+        Schema::dropIfExists('tag_users_interests');
     }
 }

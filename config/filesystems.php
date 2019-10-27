@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DRIVER', 'local'),
+    'default' => env('FILESYSTEM_DRIVER', 'public'),
 
     /*
     |--------------------------------------------------------------------------
@@ -48,6 +48,7 @@ return [
             'root' => storage_path('app'),
         ],
 
+
         // 'public' => [
         //     'driver' => 'local',
         //     'root' => storage_path('app/public'),
@@ -56,11 +57,24 @@ return [
         // ],
         //Now images will automatically be saved in /public/uploads directory.
         
+        // 'public' => [
+        //     'driver' => 'local',
+        //     'root'   => public_path() . '/images',
+        //     'url' => env('APP_URL').'/public/images',
+        //     'visibility' => 'public',
+        // ],
         'public' => [
             'driver' => 'local',
-            'root'   => public_path() . '/uploads',
-            'url' => env('APP_URL').'/public',
+            'root' => storage_path('app/public'),
+            'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
+        ],
+
+        'qr-images' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public'),
+            'url' => env('APP_URL').'/storage',
+            //'visibility' => '',
         ],
 
         's3' => [

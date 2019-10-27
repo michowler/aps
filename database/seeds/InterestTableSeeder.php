@@ -11,7 +11,7 @@ class InterestTableSeeder extends Seeder
      */
     public function run()
     {        
-    	$interests_name = [['interests_name'=> 'Food & Drinks'], ['interests_name' => 'Sports'], ['interests_name' => 'Leisure'], ['interests_name' => 'Travel'], ['interests_name' => 'Health'],['interests_name'=> 'Beauty'],['interests_name'=> 'Entertainment'],['interests_name'=> 'Education'],['interests_name'=> 'Lifestyle']];
+    	$interests_name = [['interests_name'=> 'Food & Drinks', 'status' => 'true'], ['interests_name' => 'Sports', 'status' => 'true'], ['interests_name' => 'Leisure', 'status' => 'true'], ['interests_name' => 'Travel', 'status' => 'true'], ['interests_name' => 'Health', 'status' => 'true'],['interests_name'=> 'Beauty', 'status' => 'true'],['interests_name'=> 'Entertainment', 'status' => 'true'],['interests_name'=> 'Education', 'status' => 'true'],['interests_name'=> 'Lifestyle', 'status' => 'true']];
     	\DB::table('interests')->insert($interests_name);
 
     }
