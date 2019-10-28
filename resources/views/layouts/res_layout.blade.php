@@ -245,7 +245,7 @@ window.addEventListener('load', function () {
 
                               </a>
                               <ul class="dropdown-menu">
-                                <li><a href="{{ route('editUser', [\Auth::user()->users_id]) }}">Settings</a></li>
+                                <li><a href="{{ route('editUser', [\Auth::user()->name]) }}">Settings</a></li>
                                 <li>
                                   <a href="{{ route('logout') }}"
                                      onclick="event.preventDefault();
