@@ -32,16 +32,16 @@ Auth::routes(['reset' => false]);
 // Auth::routes(['register' => false]);
 
 // Michelle 
-
 Route::get('/vouchers', 'Voucher\VoucherController@index')->name('myVouchers');
 Route::get('/vouchers/create', 'Voucher\VoucherController@create')->name('generate');
-Route::post('/vouchers', 'Voucher\VoucherController@store')->name('storeVoucher');
+Route::post('/vouchers/store', 'Voucher\VoucherController@store')->name('storeVoucher');
 Route::post('/vouchers/show/{vouchers_id}', 'Voucher\VoucherController@destroy')->name('deleteVoucher');
 Route::get('/vouchers/show/{vouchers_id}', 'Voucher\VoucherController@show')->name('showVoucher');
 Route::get('/vouchers/demo', 'Voucher\VoucherController@demo')->name('demo');
 Route::get('/vouchers/redeem', 'Voucher\VoucherController@redeem')->name('redeem');
 Route::post('/vouchers/redeem/{vouchers_id}', 'Voucher\VoucherController@redeem')->name('redeemVoucher');
-
+Route::get('/vouchers/edit/{vouchers_id}', 'Voucher\VoucherController@edit')->name('editVoucher');
+Route::post('/vouchers/update', 'Voucher\VoucherController@update')->name('updateVoucher');
 Route::get('/{name}/profile', 'Respondent\RespondentController@edit')->name('editUser');
 
 Route::get('/', function () {
