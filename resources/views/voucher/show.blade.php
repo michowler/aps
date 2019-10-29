@@ -61,6 +61,8 @@
         <div class="col-md-4 text-center" style="padding:20px;">
           <button type="button" data-toggle="modal" data-target="#deleteVoucherModal" type="submit" class="btn btn-danger btn-fill " style="margin-left:10px;">Delete <i class="fa fa-trash"></i></button>
           <button type="submit" class="btn btn-info btn-fill ">Enable</button>
+          
+          <a href="{{ route('editVoucher',$voucher->vouchers_id)}}" class="btn btn-info btn-fill">Edit</a>          
 
           <div class="clearfix"></div>
         </div>
