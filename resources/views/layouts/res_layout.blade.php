@@ -239,9 +239,9 @@ window.addEventListener('load', function () {
                         <li class="dropdown">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <p>
-										{{\Auth::user()->name}}
-										<b class="caret"></b>
-									</p>
+										                {{\Auth::user()->name}}
+										                    <b class="caret"></b>
+									                   </p>
 
                               </a>
                               <ul class="dropdown-menu">

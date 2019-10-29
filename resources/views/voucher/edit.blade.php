@@ -11,7 +11,7 @@
            <h4 class="title">Edit your customisable voucher</h4>
        </div>
        <div class="content">
-       <form method="POST" enctype="multipart/form-data" action="{{ route('updateVoucher') }}">
+       <form method="POST" enctype="multipart/form-data" action="{{ route('updateVoucher', $voucher->vouchers_id) }}">
         @csrf
            <div class="row">
 

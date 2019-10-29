@@ -94,19 +94,19 @@ class VoucherController extends Controller
 		$voucher->title = request('title');
 		$voucher->terms = request('terms');		
 		$interests = $request->input('interests');				
-		$stores = $request->input('stores');
-		
+		$stores = $request->input('stores');		
 		$voucher->qr_code = QrCode::size(250)->generate(route('redeem',['vouchers_id' => $voucher->vouchers_id]));   
 		$voucher->expiry_date = request('expiry_date');		
 		$voucher->vouchers_types_id = request('vouchers_types_id');		
 		
 		if ($validator->fails()) {
 			return redirect('voucher.create')->withErrors($validator)->withInput();
-		}
-		$voucher->save();
-		$voucher::findOrFail($voucher->vouchers_id)->interests()->attach($interests);
-		$voucher::findOrFail($voucher->vouchers_id)->stores()->attach($stores,['status' => 1 ]);				
-		return redirect()->route('myVouchers')->with('success','Voucher created successfully.');
+		} else{
+			$voucher->save();
+			$voucher::findOrFail($voucher->vouchers_id)->interests()->attach($interests);
+			$voucher::findOrFail($voucher->vouchers_id)->stores()->attach($stores,['status' => 1 ]);				
+			return redirect()->route('myVouchers')->with('success','Voucher created successfully.');
+		}		
 	}
 
 	/**
@@ -148,8 +148,9 @@ class VoucherController extends Controller
 	 * @param  \App\Voucher  $voucher
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, Voucher $voucher)
+	public function update(Request $request)
 	{
+		$voucher = Voucher::where('vouchers_id', '=', $request->vouchers_id)->firstOrFail();
 		$request->validate([
 			'title' => 'required',
 			'terms' => 'required',
@@ -158,9 +159,9 @@ class VoucherController extends Controller
 		]);
 
 		// $voucher = Voucher::where('vouchers_id', '=', $request->vouchers_id)->firstOrFail();		
-        $voucher->title =  request('title');
+        $voucher->title = request('title');
         $voucher->terms = request('terms');
-		
+		$voucher->qr_code = QrCode::size(250)->generate(route('redeem',['vouchers_id' => $voucher->vouchers_id]));   
         $voucher->expiry_date = request('expiry_date');
         $voucher->vouchers_types_id = request('vouchers_types_id');		
 		$voucher->save();
