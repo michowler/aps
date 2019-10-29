@@ -48,10 +48,10 @@
 
        <div class="row">
         <div class="col-md-8">
-          <label>REDEEM OUTLET: 
-          
-            @foreach($voucher->stores as $store)            
-              {{ $store->name }},
+          <label>REDEEM OUTLET:
+
+            @foreach($voucher->stores as $store) 
+              {{ $store->name }} ,                   
             @endforeach            
           
           </label><br>
