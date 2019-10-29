@@ -161,7 +161,7 @@ class VoucherController extends Controller
 		// $voucher = Voucher::where('vouchers_id', '=', $request->vouchers_id)->firstOrFail();		
         $voucher->title = request('title');
         $voucher->terms = request('terms');
-		$voucher->qr_code = QrCode::size(250)->generate(route('redeem',['vouchers_id' => $voucher->vouchers_id]));   
+		$voucher->qr_code = QrCode::size(250)->generate(route('redeemVoucher', [$request->vouchers_id]));   
         $voucher->expiry_date = request('expiry_date');
         $voucher->vouchers_types_id = request('vouchers_types_id');		
 		$voucher->save();
@@ -185,12 +185,18 @@ class VoucherController extends Controller
 		
 	}
 
-	public function redeem(Voucher $voucher)
+	public function redeem_index(Voucher $voucher)
 	{
 		$vouchers = Voucher::Paginate(10);
 		$vouchers->withPath('/vouchers/redeem'); //get only vouchers that are valid
-		return view('voucher.redeem', ['vouchers' => $vouchers]);  		
+		return view('voucher.redeem_index', ['vouchers' => $vouchers]);  		
+	}
 
+	public function redeem(Voucher $voucher)
+	{
+		$voucher = Voucher::find(request('vouchers_id'));
+		$vouchers = Voucher::with('stores')->get();
+		return view('voucher.redeem', ['voucher' => $voucher], ['vouchers' => $vouchers]);        
 	}
 
 	public function demo(Voucher $voucher)

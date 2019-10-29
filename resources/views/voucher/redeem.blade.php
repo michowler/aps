@@ -1,94 +1,78 @@
 @extends('layouts.merchant_layout')
-@section('navbar-brand', 'Redeem Vouchers')
+
+@section('navbar-brand', 'Redeem Voucher')
+
 @section('content')
 <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">Active Vouchers</h4>
-                            </div>
-                            <div class="content">
-                                <form>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <table class="table table-borderless">
-                                              
-                                              <tbody>
-                                                <tr>
-                                                  <th scope="row">Voucher</th>
-                                                  <th>Title</th>
-                                                  <th>Expiry Date</th>
-                                                  <th>Status</th>
-                                                  <th>Action</th>
-                                                  
-                                                </tr>
-                                                @foreach($vouchers as $voucher)
-                                                  <tr>
-                                                    <td>{{ $voucher->vouchers_id }}</td>
-                                                    <td><a href="{{ route('showVoucher',['vouchers_id' => $voucher->vouchers_id]) }}" style="color:black;">{{ $voucher->title }}</a></td>
-                                                    <td>{{ $voucher->expiry_date }}</td>
-                                                    <td>Valid</td>
-                                                    <td><button class="btn btn-danger">redeem</button><td>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">Voucher ID: 2348</h4>
+                </div>
+                <div class="content">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-borderless">
 
-                                                  </tr>
-                                                  @endforeach
-                                                  {{ $vouchers->links() }}
-                                              </tbody>
-                                            </table>
-                                          
-                                        </div>
-                                      
-                                    </div>                                   
-                                
-                                    <div id="redeemDiv">
-                                      <!-- <button type="submit" id="redeemButton" class="btn btn-info btn-fill pull-right">Redeem</button> -->
-                                    <div/>
-                                    
-                                    
-                                    <div class="clearfix"></div>
-                                </form>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Voucher</th>
+                                            <td>{{$voucher->title}}</td>
+
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Terms & Conditions</th>
+                                            <td>
+                                                <p>{{$voucher->terms}}</p>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Expiry Date</th>
+                                            <td>{{$voucher->expiry_date->format('Y-m-d')}}</td>
+
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Branch Outlet</th>
+                                            <td colspan="2">
+                                                <div class="form-group">       
+                                                    <select class="form-control" id="rSelect" >
+                                                              
+                                                       
+                                                        @foreach($voucher->stores as $store)            
+                                                          <option>{{$store->name}}</option>                            
+                                                        @endforeach 
+                                                           
+                                                    </select>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+
                             </div>
-                        </div>
+
+                        </div>                                   
+
+                        <div id="redeemDiv">
+                            <button type="submit" id="redeemButton" class="btn btn-info btn-fill pull-right">Redeem</button>
+                        <div/>
+
+
+                            <div class="clearfix"></div>
+                        </form>
                     </div>
-                   
-
                 </div>
             </div>
+
+
         </div>
-
-<!-- 
-        <footer class="footer">
-            <div class="container-fluid">
-                <nav class="pull-left">
-                    <ul>
-                        <li>
-                            <a href="#">
-                                Home
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Company
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Portfolio
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                               Blog
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                <p class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
-                </p>
-            </div>
-        </footer> -->
-
     </div>
-    @endsection
+</div>
+
+
+
+@endsection
