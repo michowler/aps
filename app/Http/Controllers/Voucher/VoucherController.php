@@ -192,6 +192,11 @@ class VoucherController extends Controller
 		return view('voucher.redeem_index', ['vouchers' => $vouchers]);  		
 	}
 
+	public function redeem_success(Voucher $voucher)
+	{		
+		return view('voucher.redeem_success');  		
+	}
+
 	public function redeem(Voucher $voucher)
 	{
 		$voucher = Voucher::find(request('vouchers_id'));
