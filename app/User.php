@@ -38,22 +38,31 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    //Alice
+
+    public function roles()
+    {
+      return $this->hasMany(User::class, 'users_id');
+    }
+
+    //Michelle
     public function getImageAttribute()
     {
        return $this->profile_image;
     }
 
-    public function roles()
-    {
-      // return $this->belongsToMany(User::class);
-      return $this->hasMany(User::class, 'users_id');
-    }
-
     public function merchants()
     { 
-      // return $this->belongsToMany(User::class);
       return $this->hasMany(Merchant::class);
     }
+
+    public function vouchers()
+    { 
+      return $this->hasMany(Voucher::class);
+    }
+
+    //Ying Ying
+
 
 
 

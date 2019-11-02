@@ -11,10 +11,14 @@
                     <h4 class="title">Voucher ID: 2348</h4>
                 </div>
                 <div class="content">
-                    <form>
+                    <form method="POST" enctype="multipart/form-data" action="{{ route('redeemSuccess') }}">
+                     @csrf
+                        <input type="hidden" id="redeem_stat" name="voucher_redeem_status" value="1">
+                        <input type="hidden" id="redeem_date" name="voucher_redemption_date" value="{{date('Y-m-d H:i:s')}}">
                         <div class="row">
                             <div class="col-md-12">
                                 <table class="table table-borderless">
+
 
                                     <tbody>
                                         <tr>
@@ -38,11 +42,10 @@
                                             <th scope="row">Branch Outlet</th>
                                             <td colspan="2">
                                                 <div class="form-group">       
-                                                    <select class="form-control" id="rSelect" >
-                                                              
+                                                    <select name="stores_id" class="form-control" id="rSelect" >                                                              
                                                        
                                                         @foreach($voucher->stores as $store)            
-                                                          <option>{{$store->name}}</option>                            
+                                                          <option value="{{$store->stores_id}}">{{$store->name}}</option>                            
                                                         @endforeach 
                                                            
                                                     </select>

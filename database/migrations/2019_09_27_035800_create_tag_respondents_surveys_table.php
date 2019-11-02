@@ -14,13 +14,13 @@ class CreateTagRespondentsSurveysTable extends Migration
     public function up()
     {
         Schema::create('tag_respondents_surveys', function (Blueprint $table) {
-            $table->bigIncrements('respondents_surveys_id');
-            $table->unsignedBigInteger('stores_id');  
+            $table->bigIncrements('respondents_surveys_id');             
             $table->unsignedBigInteger('users_id');                            
-            $table->unsignedBigInteger('surveys_id');
+            $table->unsignedBigInteger('surveys_id');            
             $table->date('survey_completed_date');
-            $table->string('voucher_redeem_status',45);
-            $table->string('voucher_redeemption_date',45);            
+            $table->unsignedBigInteger('stores_id'); 
+            $table->smallInteger('voucher_redeem_status')->length(1)->default(0);
+            $table->date('voucher_redemption_date');            
             $table->timestamps();
             $table -> foreign('users_id') 
             -> unsigned() 

@@ -24,6 +24,14 @@
 // <a href="{{route('welcome')}}">Home</a>
 // <a href="{{route('about')}}">About</a>
 
+// Route::group(['middleware' => 'web'], function () {
+//     // Moving here will ensure that sessions, csrf, etc. is included in all these routes
+//     Route::group(['prefix'=>'guest',  'middleware' => 'guest'], function(){
+//         Route::post('/vouchers', 'Voucher\VoucherController@store')->name('storeVoucher');
+//     });
+// });
+
+
 
 // Michelle , Alice
 Auth::routes();
@@ -32,6 +40,8 @@ Auth::routes(['reset' => false]);
 // Auth::routes(['register' => false]);
 
 // Michelle 
+
+//Vouchers
 Route::get('/vouchers', 'Voucher\VoucherController@index')->name('myVouchers');
 Route::get('/vouchers/create', 'Voucher\VoucherController@create')->name('generate');
 Route::post('/vouchers/store', 'Voucher\VoucherController@store')->name('storeVoucher');
@@ -39,28 +49,23 @@ Route::post('/vouchers/show/{vouchers_id}', 'Voucher\VoucherController@destroy')
 Route::get('/vouchers/show/{vouchers_id}', 'Voucher\VoucherController@show')->name('showVoucher');
 Route::get('/vouchers/demo', 'Voucher\VoucherController@demo')->name('demo');
 Route::get('/vouchers/redeem/{vouchers_id}', 'Voucher\VoucherController@redeem')->name('redeemVoucher');
+Route::get('/vouchers/redeem/{vouchers_id}/qr-code', 'Voucher\VoucherController@redeem_qr')->name('redeemQR');
 Route::get('/vouchers/redeem', 'Voucher\VoucherController@redeem_index')->name('redeem');
 Route::get('/vouchers/edit/{vouchers_id}', 'Voucher\VoucherController@edit')->name('editVoucher');
 Route::post('/vouchers/edit/{vouchers_id}/update', 'Voucher\VoucherController@update')->name('updateVoucher');
-Route::get('/{name}/profile', 'Respondent\RespondentController@edit')->name('editUser');
 
+//Respondents
+Route::get('/{name}/profile', 'Respondent\RespondentController@edit')->name('editUser');
+// Route::post('/{name}/profile', 'Respondent\RespondentController@destroy')->name('deleteUser');
+// Route::post('/{name}/vouchers/{vouchers_id}/redeem/success', 'User\UserController@redeem_success')->name('redeemSuccess');
+
+//Auth
 Route::get('/', function () {
 	if(Auth::check()) {
 		return redirect()->route('myVouchers');
 	}
 	return view('auth.login');
 })->name('home');
-
-
-
-
-// Route::group(['middleware' => 'web'], function () {
-//     // Moving here will ensure that sessions, csrf, etc. is included in all these routes
-//     Route::group(['prefix'=>'guest',  'middleware' => 'guest'], function(){
-//         Route::post('/vouchers', 'Voucher\VoucherController@store')->name('storeVoucher');
-//     });
-// });
-
 
 
 
