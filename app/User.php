@@ -38,6 +38,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    //Alice
+
     public function roles()
     {
       return $this->hasMany(User::class, 'users_id');
@@ -58,6 +60,8 @@ class User extends Authenticatable
     { 
       return $this->hasMany(Voucher::class);
     }
+
+    //Ying Ying
 
 
 

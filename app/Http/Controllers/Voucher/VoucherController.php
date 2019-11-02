@@ -192,15 +192,8 @@ class VoucherController extends Controller
 		return view('voucher.redeem_index', ['vouchers' => $vouchers]);  		
 	}
 
-	public function redeem_success(Voucher $voucher)
+	public function redeem_success(Voucher $voucher) //should be inside respondents, post method
 	{		
-		return view('voucher.redeem_success');  		
-	}
-
-	public function redeem(Voucher $voucher)
-	{
-		$voucher = Voucher::find(request('vouchers_id'));
-		$vouchers = Voucher::with('stores')->get();
 		//update the redeem status to 1
 		//get and then save stores id in tag_suv_resp
 		//udpate the redeemed voucher date
@@ -208,9 +201,27 @@ class VoucherController extends Controller
 		$voucher->voucher_redeem_status = request('voucher_redeem_status');
 		$voucher->voucher_redemption_date = request('voucher_redemption_date');
 		
-		$voucher->save();
-		$voucher::findOrFail($voucher->vouchers_id)->stores()->attach($stores,['status' => 1 ]);				
+		$voucher::findOrFail($voucher->vouchers_id)->stores()->attach($stores,['status' => 1 ]);	
+		if ($voucher->save()){
+			 Alert::success('Success Redeem', 'Voucher redeemed successfully!');
+			return redirect()->route('redeemSuccess');	
+		}else{
+			return redirect()->route('myVouchers')->with('error','Voucher redeem unsuccessful.');
+		}				
+	}
+
+	public function redeem(Voucher $voucher)
+	{
+		$voucher = Voucher::find(request('vouchers_id'));
+		$vouchers = Voucher::with('stores')->get();					
 		return view('voucher.redeem', ['voucher' => $voucher], ['vouchers' => $vouchers]);        
+	}
+
+	public function redeem_qr(Voucher $voucher)
+	{
+		$voucher = Voucher::find(request('vouchers_id'));
+		$vouchers = Voucher::with('stores')->get();					
+		return view('voucher.redeem_qr', ['voucher' => $voucher], ['vouchers' => $vouchers]);        
 	}
 
 	public function demo(Voucher $voucher)

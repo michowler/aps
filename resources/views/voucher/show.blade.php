@@ -16,7 +16,8 @@
               <div class="form-group text-center">
                 @if ($voucher->logo)
                   <img class="rounded-circle" src="/storage/{{$voucher->logo}}" style="max-height: 200px;max-width: 300px" />
-                          
+                @else
+                   {{strtoupper(\Auth::user()->name)}}
                 @endif 
              </div>
            </div>
