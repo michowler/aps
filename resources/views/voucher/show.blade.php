@@ -1,7 +1,7 @@
 @extends('layouts.merchant_layout')
 @section('navbar-brand', "Voucher {$voucher->vouchers_id}: {$voucher->title}" )
 @section('content')
-@include('partials.delete-modal')
+@include('partials.delete-voucher-modal')
 <div class="container-fluid">
   <div class="col-md-12">
     <div class="card">

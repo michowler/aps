@@ -39,12 +39,12 @@ class Voucher extends Model
 
     public function stores()
     {
-      return $this->belongsToMany(Store::class, 'tag_stores_vouchers', 'vouchers_id', 'stores_id' );
+      return $this->belongsToMany(Store::class, 'tag_stores_vouchers', 'vouchers_id', 'stores_id' )->withTimestamps();
     }
 
     public function interests()
     {
-        return $this->belongsToMany(Interest::class, 'tag_interests_vouchers', 'vouchers_id' , 'interests_id');
+        return $this->belongsToMany(Interest::class, 'tag_interests_vouchers', 'vouchers_id' , 'interests_id')->withTimestamps();
     }
 
 

@@ -95,18 +95,14 @@ class VoucherController extends Controller
 		$voucher->terms = request('terms');		
 		$interests = $request->input('interests');				
 		$stores = $request->input('stores');		
-		//$voucher->qr_code = QrCode::size(250)->generate(route('redeemVoucher',['vouchers_id' => $voucher->vouchers_id]));   	
+		$voucher->qr_code = QrCode::size(250)->generate(route('redeemVoucher',['vouchers_id' => $voucher->vouchers_id]));   	
 		$voucher->expiry_date = request('expiry_date');		
 		$voucher->vouchers_types_id = request('vouchers_types_id');		
 		
-		if ($validator->fails()) {
-           Session::flash('error', $validator->messages()->first());
-           return redirect()->back()->withInput();
-		}
-			$voucher->save();
-			$voucher::findOrFail($voucher->vouchers_id)->interests()->attach($interests);
-			$voucher::findOrFail($voucher->vouchers_id)->stores()->attach($stores,['status' => 1 ]);				
-			return redirect()->route('myVouchers')->with('success','Voucher created successfully.');
+		$voucher->save();
+		$voucher::findOrFail($voucher->vouchers_id)->interests()->attach($interests);
+		$voucher::findOrFail($voucher->vouchers_id)->stores()->attach($stores,['status' => 1 ]);				
+		return redirect()->route('myVouchers')->with('success','Voucher created successfully.');
 			
 	}
 
