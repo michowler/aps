@@ -201,6 +201,15 @@ class VoucherController extends Controller
 	{
 		$voucher = Voucher::find(request('vouchers_id'));
 		$vouchers = Voucher::with('stores')->get();
+		//update the redeem status to 1
+		//get and then save stores id in tag_suv_resp
+		//udpate the redeemed voucher date
+		//if done then view success redeem page
+		$voucher->voucher_redeem_status = request('voucher_redeem_status');
+		$voucher->voucher_redemption_date = request('voucher_redemption_date');
+		
+		$voucher->save();
+		$voucher::findOrFail($voucher->vouchers_id)->stores()->attach($stores,['status' => 1 ]);				
 		return view('voucher.redeem', ['voucher' => $voucher], ['vouchers' => $vouchers]);        
 	}
 
