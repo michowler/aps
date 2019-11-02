@@ -43,16 +43,16 @@ Auth::routes(['reset' => false]);
 
 //Vouchers
 Route::get('/vouchers', 'Voucher\VoucherController@index')->name('myVouchers');
-Route::get('/vouchers/create', 'Voucher\VoucherController@create')->name('generate');
-Route::post('/vouchers/store', 'Voucher\VoucherController@store')->name('storeVoucher');
-Route::post('/vouchers/show/{vouchers_id}', 'Voucher\VoucherController@destroy')->name('deleteVoucher');
-Route::get('/vouchers/show/{vouchers_id}', 'Voucher\VoucherController@show')->name('showVoucher');
-Route::get('/vouchers/demo', 'Voucher\VoucherController@demo')->name('demo');
-Route::get('/vouchers/redeem/{vouchers_id}', 'Voucher\VoucherController@redeem')->name('redeemVoucher');
-Route::get('/vouchers/redeem/{vouchers_id}/qr-code', 'Voucher\VoucherController@redeem_qr')->name('redeemQR');
-Route::get('/vouchers/redeem', 'Voucher\VoucherController@redeem_index')->name('redeem');
-Route::get('/vouchers/edit/{vouchers_id}', 'Voucher\VoucherController@edit')->name('editVoucher');
-Route::post('/vouchers/edit/{vouchers_id}/update', 'Voucher\VoucherController@update')->name('updateVoucher');
+Route::get('/voucher/create', 'Voucher\VoucherController@create')->name('generate');
+Route::post('/voucher/store', 'Voucher\VoucherController@store')->name('storeVoucher');
+Route::post('/voucher/show/{vouchers_id}', 'Voucher\VoucherController@destroy')->name('deleteVoucher');
+Route::get('/voucher/show/{vouchers_id}', 'Voucher\VoucherController@show')->name('showVoucher');
+Route::get('/voucher/demo', 'Voucher\VoucherController@demo')->name('demo');
+Route::get('/voucher/redeem/{vouchers_id}', 'Voucher\VoucherController@redeem')->name('redeemVoucher');
+Route::get('/voucher/redeem/{vouchers_id}/qr-code', 'Voucher\VoucherController@redeem_qr')->name('redeemQR');
+Route::get('/voucher/redeem', 'Voucher\VoucherController@redeem_index')->name('redeem');
+Route::get('/voucher/edit/{vouchers_id}', 'Voucher\VoucherController@edit')->name('editVoucher');
+Route::post('/voucher/edit/{vouchers_id}/update', 'Voucher\VoucherController@update')->name('updateVoucher');
 
 //Respondents
 Route::get('/{name}/profile', 'Respondent\RespondentController@edit')->name('editUser');
