@@ -8,7 +8,7 @@ use App\Store;
 use App\Interest;
 use App\VouchersType;
 use QrCode;
-use Validator; 
+use Validator;
 use Storage;
 use Input;
 use Illuminate\Http\Request;
@@ -80,15 +80,15 @@ class VoucherController extends Controller
 		// die();
 
 		$voucher = new Voucher; 		
-
-		$validator = Validator::make($request->all(), [ // <---
-			'title' => 'required|max:255',			
+		$validatedData = $request->validate([
 			'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+			'title' => 'required|max:255',						
 			'terms' => 'required',
 			'expiry_date' => 'required', 
+			'interests' => 'required',
+			'stores' => 'required',
 			'vouchers_types_id' => 'required'
 		]);
-
 		$voucher->merchants_id = \Auth::user()->users_id;
 		$voucher->logo = request()->file('logo')->store('images');	
 		$voucher->title = request('title');
@@ -99,14 +99,11 @@ class VoucherController extends Controller
 		$voucher->expiry_date = request('expiry_date');		
 		$voucher->vouchers_types_id = request('vouchers_types_id');		
 		
-		if ($validator->fails()) {
-			return redirect('voucher.create')->withErrors($validator)->withInput();
-		} else{
-			$voucher->save();
-			$voucher::findOrFail($voucher->vouchers_id)->interests()->attach($interests);
-			$voucher::findOrFail($voucher->vouchers_id)->stores()->attach($stores,['status' => 1 ]);				
-			return redirect()->route('myVouchers')->with('success','Voucher created successfully.');
-		}		
+		$voucher->save();
+		$voucher::findOrFail($voucher->vouchers_id)->interests()->attach($interests);
+		$voucher::findOrFail($voucher->vouchers_id)->stores()->attach($stores,['status' => 1 ]);				
+		return redirect()->route('myVouchers')->with('success','Voucher created successfully.');
+			
 	}
 
 	/**
