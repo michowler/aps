@@ -113,7 +113,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="control-label" for="date">Expiry Date</label>
-                    <input name="expiry_date" class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="date" min="<?php echo date('Y-m-d'); ?>"/>
+                    <input name="expiry_date" class="form-control" id="date" value="<?php echo date('Y-m-d'); ?>" name="date" type="date" min="<?php echo date('Y-m-d'); ?>"/>
                 </div>
             </div>
             <div class="col-md-6">
