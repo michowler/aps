@@ -21,16 +21,16 @@
             <div class="content">
                 <div class="author">
                    <a href="#">
-                    <img class="avatar border-gray" src="storage/logos/default.jpg" alt="..."/>
+                    <img class="avatar border-gray" id="logoVoucher" src="#" alt="..."/>
                                         
                     <form method="POST" enctype="multipart/form-data" action="{{ route('storeVoucher') }}">
                        @csrf
 
                        <h4 class="title">{{strtoupper(\Auth::user()->name)}}<br />
-                           <label for="image">
-                            <input id="logo" type="file" class="form-control" name="logo">
-                            
-                        </label>
+                            <label for="image">                                
+                                <input id="logo" class="form-control" name="logo" type='file' onchange="readURL(this);" />
+                                                         
+                            </label>
                     </h4>
                 </a>
             </div>
@@ -176,3 +176,16 @@
 </div>
 </div>
 @endsection
+<script type="text/javascript">
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#logoVoucher').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
