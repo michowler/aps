@@ -39,7 +39,6 @@ class User extends Authenticatable
     ];
 
     //Alice
-
     public function roles()
     {
       return $this->hasMany(User::class, 'users_id');

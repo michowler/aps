@@ -44,9 +44,11 @@ class VoucherController extends Controller
 	public function index()
 	{
 		// $vouchers = DB::table('vouchers')->paginate(15);
+		$vList = Voucher::where('merchants_id', '=', \Auth::user()->users_id)->get();
+		$vCount = $vList->count();
 		$vouchers = Voucher::Paginate(10);
 		$vouchers->withPath('/vouchers');
-		return view('voucher.index', ['vouchers' => $vouchers]);  
+		return view('voucher.index', ['vouchers' => $vouchers], ['vCount' => $vCount ]);  
 
 	}
 
