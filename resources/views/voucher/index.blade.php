@@ -18,15 +18,17 @@
 
                 <p class="title">No. of Vouchers created: {{$vCount}}</h4>
                 <p class="title">No. of Vouchers redeemed: {{$vCount}}</h4><br>
-                <table class="table table-hover">
-                  <thead>
+                <table class="table table-borderless">
+                  
+                  <tbody>
+                  <tr>
                     <th>ID</th>
                     <th>Title</th>
                     <th>Expiry Date</th>
                     <th>Status</th>    
                     <th></th>                                                  
-                  </thead>
-                  <tbody>
+                  </tr>
+                  
                   
                   @foreach($vouchers as $voucher)
                     <tr>
