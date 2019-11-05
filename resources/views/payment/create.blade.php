@@ -1,5 +1,7 @@
 @extends('layouts.owner_layout')
 
+@section('navbar-brand', 'Check Out')
+
     <style type="text/css">
     body {
         font-family: 'Varela Round', sans-serif;
@@ -171,7 +173,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Postal Code</label>
-                                                <input type="text" name="postal_code" class="form-control" placeholder="00000">
+                                                <input type="number" name="postal_code" class="form-control" min="00000" max="99999" placeholder="00000">
                                             </div>
                                         </div>
                                     </div>
@@ -199,19 +201,19 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Credit card number</label>
-                                                <input type="text" name="card_num" class="form-control" placeholder="0000-0000-0000-0000" value="">
+                                                <input type="text" name="card_num" class="form-control" pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}" required placeholder="0000-0000-0000-0000" value="">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>Expiry Date</label>
-                                                <input type="text" name="card_expiry" class="form-control" placeholder="MM/YY" value="">
+                                                <label class="control-label" for="date">Expiry Date</label>
+                                                <input type="month" name="card_expiry" class="form-control" placeholder="MM/YY" value="">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Security Code</label>
-                                                <input type="text" name="sec_code" class="form-control" placeholder="xxx" value="">
+                                                <input type="password" name="sec_code" class="form-control" minlength="3" maxlength="3" placeholder="xxx" value="">
                                             </div>
                                         </div>
                                     </div>
@@ -228,6 +230,79 @@
                 </div>
             </div>
         </div>
+
+<!--         <script>
+            (function(){
+                // Create a Stripe client.
+                // Note: this merchant has been set up for demo purposes.
+                var stripe = Stripe('pk_test_aUTrj6ziyUcPEbUnNfth1dAc00dB3EI04V');
+
+                // Create an instance of Elements.
+                var elements = stripe.elements();
+
+                // Custom styling can be passed to options when creating an Element.
+                // (Note that this demo uses a wider set of styles than the guide below.)
+                var style = {
+                  base: {
+                    padding: '10px 12px',
+                    color: '#32325d',
+                    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
+                    fontSmoothing: 'antialiased',
+                    fontSize: '16px',
+                    '::placeholder': {
+                      color: '#aab7c4'
+                    },
+                  },
+                  invalid: {
+                    color: '#fa755a',
+                  }
+                };
+
+                // Create an instance of the idealBank Element.
+                var idealBank = elements.create('idealBank', {style: style});
+
+                // Add an instance of the idealBank Element into the `ideal-bank-element` <div>.
+                idealBank.mount('#ideal-bank-element');
+
+                var errorMessage = document.getElementById('error-message');
+
+                // Handle form submission.
+                var form = document.getElementById('payment-form');
+                form.addEventListener('submit', function(event) {
+                  event.preventDefault();
+                  showLoading();
+
+                  var sourceData = {
+                    type: 'ideal',
+                    amount: 1099,
+                    currency: 'eur',
+                    owner: {
+                      name: document.querySelector('input[name="name"]').value,
+                    },
+                    // Specify the URL to which the customer should be redirected
+                    // after paying.
+                    redirect: {
+                      return_url: 'https://shop.example.com/crtA6B28E1',
+                    },
+                  };
+
+                  // Call `stripe.createSource` with the idealBank Element and additional options.
+                  stripe.createSource(idealBank, sourceData).then(function(result) {
+                    if (result.error) {
+                      // Inform the customer that there was an error.
+                      errorMessage.textContent = result.error.message;
+                      errorMessage.classList.add('visible');
+                      stopLoading();
+                    } else {
+                      // Redirect the customer to the authorization URL.
+                      errorMessage.classList.remove('visible');
+                      stripeSourceHandler(result.source);
+                    }
+                  });
+                });
+
+            })();
+        </script> -->
 
 
 @endsection

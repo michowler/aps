@@ -1,148 +1,8 @@
 @extends('layouts.owner_layout')
 
+@section('navbar-brand', 'Survey Owner Profile')
+
 @section('content')
-<body>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
-  <div class="modal-dialog">
-  
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title text-center">Voucher Redemption</h4>
-      </div>
-      <div class="modal-body text-center">
-        <p>Are you sure you want to redeem?</p>
-        <button type="button" class="btn btn-info btn-md" style="margin-right:10px" data-toggle="modal" data-target="#myModal">Yes, confirm</button>
-        <button type="button" class="btn btn-danger btn-md" data-toggle="modal" data-target="#myModal">No, reject</button>
-      </div>
-      <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div> -->
-    </div>
-    
-  </div>
-</div>
-
-<div class="wrapper">
-    <div class="sidebar" data-color="purple" data-image="{{ asset('FrontEnd') }}/img/sidebar-5.jpg">
-
-    <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
-
-
-    	<div class="sidebar-wrapper">
-            <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text">
-                    APSE
-                </a>
-            </div>
-
-            <ul class="nav">
-                
-                 <li >
-                    <a href="/dashboard">
-                        <i class="pe-7s-graph"></i>
-                        <p>Dashboard</p>
-                    </a>
-                </li>
-                 <li>
-                    <a href="/createSurvey">
-                        <i class="pe-7s-plus"></i>
-                        <p>Create Survey</p>
-                    </a>
-                </li>
-                <li>
-
-                     <a href="/mySurvey">
-                        <i class="pe-7s-note2"></i>
-                        <p>My Survey</p>
-                    </a>
-                </li>
-                <li class="active">
-
-                    <a href="/userProfile">
-                        <i class="pe-7s-user"></i>
-                        <p>User Profile</p>
-                    </a>
-                </li>
-                <li class="active-pro">
-                    <a href="upgrade.html">
-                        <i class="pe-7s-rocket"></i>
-                        <p>Upgrade to PRO</p>
-                    </a>
-                </li>
-                
-            </ul>
-    	</div>
-    </div>
-
-    <div class="main-panel">
-
-		<nav class="navbar navbar-default navbar-fixed">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Survey Owner Profile</a>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-left">
-                        
-                        
-                       
-                    </ul>
-
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-globe"></i>
-                                    <b class="caret hidden-sm hidden-xs"></b>
-                                    <span class="notification hidden-sm hidden-xs">1</span>
-                                    <p class="hidden-lg hidden-md">
-                                        1 Notifications
-                                        <b class="caret"></b>
-                                    </p>
-                              </a>
-                              <ul class="dropdown-menu">
-                                <!-- <li> <a onclick="demo.showMessage('top','center', 
-                                  'Error: Please fill in all fields.')">Submit</a>
-                                  </li> -->
-                                  <li><a data-toggle="modal" data-target="#myModal">Voucher Redemption Approval</a></li>
-
-                                
-
-                               
-                              </ul>
-                        </li>
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <p>
-										User
-										<b class="caret"></b>
-									</p>
-
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Settings</a></li>
-                                <li><a href="/login">Logout</a></li>                               
-                              </ul>
-                        </li>
-                       <!--  <li>
-                            <a href="#">
-                                <p>Log out</p>
-                            </a>
-                        </li> -->
-						            <li class="separator hidden-lg hidden-md"></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
 
 
         <div class="content">
@@ -304,7 +164,7 @@
     <!--  Notifications Plugin    -->
     <script src="{{ asset('FrontEnd') }}/js/bootstrap-notify.js"></script>
 
-    <!--  Google Maps Plugin    -->
+     Google Maps Plugin   
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 
     <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->

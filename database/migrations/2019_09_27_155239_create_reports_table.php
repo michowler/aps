@@ -19,13 +19,10 @@ class CreateReportsTable extends Migration
             $table->date('create_at');
             $table->string('report_query');
             $table->timestamps();
-<<<<<<< HEAD
             //users_id,report_query
-=======
             $table->foreign('users_id')
             ->references('users_id')
             ->on('users')->onDelete('cascade');
->>>>>>> 89a743f621439c9de0d425095311e3ea07509ddb
         });
     }
 

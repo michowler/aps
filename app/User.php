@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -17,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'profile_image'
+        'name', 'email', 'password', 'profile_image', 'packages_id'
     ];
 
     /**
@@ -36,7 +37,11 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'start_date' => 'datetime'
     ];
+
+    
+
 
     public function getImageAttribute()
     {
@@ -53,6 +58,11 @@ class User extends Authenticatable
     { 
       // return $this->belongsToMany(User::class);
       return $this->hasMany(Merchant::class);
+    }
+
+     public function packages()
+    {
+    return $this->belongsToMany(Package::class,'tag_owner_packages','users_id','packages_id')->withTimestamps();
     }
 
 

@@ -1,5 +1,7 @@
 <?php
 
+use App\User;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,7 +48,7 @@ Route::get('/users/edit/{users_id}', 'Respondent\RespondentController@edit')->na
 
 Route::get('/', function () {
 	if(Auth::check()) {
-		return redirect()->route('myVouchers');
+		return redirect()->route('ownerDashboard');
 	}
 	return view('auth.login');
 })->name('home');
@@ -68,38 +70,43 @@ Route::get('/', function () {
 Route::get('/upgrade', 'plan\planController@index');
 Route::get('/create','plan\planController@checkout');
 // Route::get('/','Survey\SurveyController@surveyList');
-Route::get('/chart','Survey\SurveyController@showChart');
+// Route::get('/chart','Survey\SurveyController@showChart');
 Route::post('store','plan\planController@store');
 
 
 
 
-
-
-
-
-
 // Alice
+//owner
 
-Route::resource('surveys', 'OwnerController');
+Route::get('/dashboard', 'owner\OwnerController@index')->name('ownerDashboard');
 
-Route::post('/storeSurvey', 'OwnerController@store')->name('storeSurvey');
+Route::get('/userProfile', 'Owner\OwnerController@userProfile');
 
-Route::get('/mySurvey','OwnerController@mySurvey');
+Route::get('/userProfile/editUserProfile', 'Owner\OwnerController@userProfile');
 
-Route::get('/createSurvey', 'OwnerController@createSurvey');
+Route::get('/userProfile/saveUserProfile', 'Owner\OwnerController@userProfile');
 
-Route::post('/insert','OwnerController@insert');
+//survey
 
-Route::get('/createSurvey/editSurvey', 'OwnerController@createSurvey');
+Route::get('/mySurvey','Survey\SurveyController@mySurvey');	//display survey list
 
-Route::get('/dashboard', 'OwnerController@dashboard');
+Route::get('/chart','Survey\SurveyController@showChart');
 
-Route::get('/userProfile', 'OwnerController@userProfile');
+Route::get('/createSurvey', 'Survey\SurveyController@create');
 
-Route::get('/userProfile/editUserProfile', 'OwnerController@userProfile');
+Route::post('/storeSurvey', 'Survey\SurveyController@store')->name('storeSurvey');
 
-Route::get('/userProfile/saveUserProfile', 'OwnerController@userProfile');
+// Route::resource('surveys', 'Owner\OwnerController');
+
+// Route::post('/insert','Owner\OwnerController@insert');
+
+// Route::get('/createSurvey/editSurvey', 'Owner\OwnerController@createSurvey');
+
+
+
+
+//admin
 
 Route::get('/login','FrontController@login')->name('login');
 
@@ -119,9 +126,9 @@ Route::get('/passwordNotification', 'FrontController@passwordNotification');
 
 Route::get('/subPlan','FrontController@subPlan');
 
-Route::get('/createQuestion', 'OwnerController@createQuestion');
+Route::get('/createQuestion', 'Owner\OwnerController@createQuestion');
 
-Route::get('/createQuestion/editQuestion', 'OwnerController@createQuestion');
+Route::get('/createQuestion/editQuestion', 'Owner\OwnerController@createQuestion');
 
 Route::get('/adminProfile','AdminController@adminProfile');
 

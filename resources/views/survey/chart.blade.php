@@ -1,5 +1,7 @@
 @extends('layouts.owner_layout')
 
+@section('navbar-brand', 'Survey Visualization')
+
 @section('content')
 
         <div class="content">

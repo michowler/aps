@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\owner;
 
 use Auth;
 use DB;
 use App\surveys;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 
 // $servername = "127.0.0.1:8000";
@@ -25,7 +26,7 @@ class OwnerController extends Controller
      */
     public function index()
     {
-        return view("owner.createSurvey");
+        return view("owner.owner_dashboard");
     }
 
     /**
@@ -33,10 +34,7 @@ class OwnerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        return view('owner.createSurvey');
-    }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -108,15 +106,7 @@ class OwnerController extends Controller
     }
 
 
-
-   // public function index(){
-  //      return view('frontView.surveyOwner.dashboard');
-    //}
-    public function mySurvey(){
-        return view('owner.mySurvey');
-    }
-
-   /* public function insert(Request $req){
+    public function insert(Request $req){
         $surveytitle = $req ->input('surveys_title');
         $surveydescription = $req -> input('surveys_description') ;
         $interest = $req ->input('interest');
@@ -127,14 +117,8 @@ class OwnerController extends Controller
 
         DB::table('surveys')->insert($data);
         echo "success";
-    }*/
-     public function createSurvey(){
-       
-        return view('owner.createSurvey');
     }
-    /*public function dashboard(){
-        return view('frontView.surveyOwner.dashboard');
-    }*/
+
 
     public function userProfile(){
         return view('owner.userProfile');
@@ -148,13 +132,13 @@ class OwnerController extends Controller
         return view('owner.userProfile');
     }
 
-    public function createQuestion(){
-        return view('owner.createQuestion');
-    }
+    // public function createQuestion(){
+    //     return view('owner.createQuestion');
+    // }
 
-     public function verification(){
-        return view('owner.createQuestion');
-    }
+    //  public function verification(){
+    //     return view('owner.createQuestion');
+    // }
 }
 
 
