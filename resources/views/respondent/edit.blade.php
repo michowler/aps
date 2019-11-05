@@ -84,7 +84,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">       
-                                    <label class="control-label" for="date">Marital Status</label>                                       
+                                    <label class="control-label" >Marital Status</label>                                       
                                     <select class="form-control">
                                          <option>-</option>                                                     
                                        <option>single</option>
@@ -95,7 +95,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">       
-                                    <label class="control-label" for="date">Date of Birth</label> 
+                                    <label class="control-label">Date of Birth</label> 
                                     <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="date"/>
                                                                                                           
                                     </select>
@@ -106,7 +106,7 @@
                          <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">       
-                                    <label class="control-label" for="date">Education Levels</label>                                       
+                                    <label class="control-label" >Education Levels</label>                                       
                                     <select class="form-control">
                                          <option>-</option>                                                     
                                        <option>primary school</option>
@@ -119,7 +119,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">       
-                                    <label class="control-label" for="date">Working Levels</label>                                       
+                                    <label class="control-label">Working Levels</label>                                       
                                      <select class="form-control">
                                      <option>-</option>
                                      <option>student</option>

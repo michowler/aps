@@ -30,10 +30,11 @@ class VoucherController extends Controller
 	*/
 	public function __construct()
 	{
+		// $this->middleware('merchant');
 		$this->middleware(function ($request, $next) {
 			$this->user = Auth::user();
 			return $next($request);
-		});
+		});		
 	}
 
 	/**

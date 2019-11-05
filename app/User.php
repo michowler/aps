@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'profile_image', 'packages_id'
+        'name', 'email', 'password', 'profile_image', 'packages_id', 'address', 'marital_status'
     ];
 
     /**
@@ -39,22 +39,23 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'start_date' => 'datetime'
     ];
-    
-
-
-    // public function getImageAttribute()
-    // {
-    //    return $this->profile_image;
-    // }
 
     //Alice
 
     public function roles()
     {
-      return $this->hasMany(User::class, 'users_id');
+      return $this->belongsToMany(Role::class, 'tag_users_roles','users_id','roles_id')->withTimestamps();
     }
 
     //Michelle
+    public function hasRole($role = null) {
+        $hasRole = false;
+        $hasRole = !$this->roles->filter(function($item) use ($role) {
+            return $item->name == $role;
+        })->isEmpty();
+        return $hasRole;
+    }
+
     public function getImageAttribute()
     {
        return $this->profile_image;
@@ -65,18 +66,17 @@ class User extends Authenticatable
       return $this->hasMany(Merchant::class);
     }
 
-
-     public function packages()
-    {
-    return $this->belongsToMany(Package::class,'tag_owner_packages','users_id','packages_id')->withTimestamps();
-    }
-
     public function vouchers()
     { 
       return $this->hasMany(Voucher::class);
     }
 
     //Ying Ying
+
+    public function packages()
+    {
+    return $this->belongsToMany(Package::class,'tag_owner_packages','users_id','packages_id')->withTimestamps();
+    }
 
 
 

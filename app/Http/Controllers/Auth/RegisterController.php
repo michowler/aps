@@ -6,10 +6,12 @@ use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Package;
+use App\Role;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use DateTime;
+use Illuminate\Http\Request;
 
 
 class RegisterController extends Controller
@@ -44,6 +46,16 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+
+
+    // public function authenticated($request , $user){
+    //     if($user->role=='super_admin'){
+    //         return redirect()->route('admin.dashboard') ;
+    //     }elseif($user->role=='brand_manager'){
+    //         return redirect()->route('brands.dashboard') ;
+    //     }
+    // }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -67,32 +79,41 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // $packages = new Package;        
         $startDate =  date('Y-m-d H:i:s');
-    
-       
-        // var_dump($_REQUEST);
-        // console.log($startDate);
-        // die();        
-        
-        
-        $user =  User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password'])
-            
+
+        // var_dump($_REQUEST);                   
+        // die();     
+
+        // if($roles_id)
+        $role = $data['roles_id'];        
+
+        $user =  User::create([            
+            'name' => $data['name'],            
+            'email' => $data['email'],                        
+            'password' => Hash::make($data['password'])            
         ]);
 
-        $packages = Package::where('packages_id', '=', 1)->get();
-        
+        if(request('address')){
+            $user->address = request('address');
+        }else if(request('marital_status')){
+            $user->marital_status = request('marital_status');
+        }else if(request('gender')){
+            $user->gender = request('gender');
+        }else if(request('education_level')){
+            $user->education_level = request('education_level');
+        }else if(request('working_lvl')){
+            $user->working_lvl = request('working_lvl');
+        }
+                
+        $packages = Package::where('packages_id', '=', 1)->get();        
+        $roles = Role::where('roles_id', '=', $role)->get();  
         $user::findOrFail($user->users_id)->packages()->attach($packages, ['start_date' => $startDate]);
-
+        $user::findOrFail($user->users_id)->roles()->attach($roles);
 
         // $user->notify(new UserRegisteredSuccessfully($user));
-        return $user;
-        // return $packages;
-        return redirect()->back()->with('message', 'Successfully created a new account!');
-        
+        return $user;    
+
+        return redirect()->back()->with('message', 'Successfully created a new account!');            
         
     }
 

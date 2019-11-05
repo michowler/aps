@@ -44,6 +44,7 @@ Auth::routes(['reset' => false]);
 // Michelle 
 
 //Vouchers
+
 Route::get('/vouchers', 'Voucher\VoucherController@index')->name('myVouchers');
 Route::get('/voucher/create', 'Voucher\VoucherController@create')->name('generate');
 Route::post('/voucher/store', 'Voucher\VoucherController@store')->name('storeVoucher');
@@ -63,13 +64,9 @@ Route::post('/{name}/profile', 'User\UserController@destroy')->name('deleteUser'
 // Route::post('/{name}/vouchers/{vouchers_id}/redeem/success', 'User\UserController@redeem_success')->name('redeemSuccess');
 
 //Auth
-Route::get('/', function () {
-	if(Auth::check()) {
-		return redirect()->route('ownerDashboard');
-	}
-	return view('auth.login');
-})->name('home');
-
+Route::get('/', ['middleware' =>'guest', function(){
+  return view('auth.login');
+}]);
 
 
 // Ying Ying 
