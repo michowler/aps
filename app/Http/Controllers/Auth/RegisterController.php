@@ -75,6 +75,7 @@ class RegisterController extends Controller
         // console.log($startDate);
         // die();        
         
+        
         $user =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],

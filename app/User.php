@@ -42,10 +42,10 @@ class User extends Authenticatable
     
 
 
-    public function getImageAttribute()
-    {
-       return $this->profile_image;
-    }
+    // public function getImageAttribute()
+    // {
+    //    return $this->profile_image;
+    // }
 
     //Alice
 

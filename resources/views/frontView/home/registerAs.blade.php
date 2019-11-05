@@ -11,20 +11,32 @@
           <!-- <div class="card-header">-->
               <div class="text-center mt-2 mb-4"><h2 style="Open Sans;" class="text-white">-Sign up as-</h2></div>
               <div class="text-center ">
-               <a style="margin-top:10px; display:block;" href="/ownerRegister" class="btn btn-neutral">
-                  <!---<span class="btn-inner--icon"><img src="../assets/img/icons/common/github.svg"></span>-->
-                  <span class="btn-inner--text">Survey Owner</span>
-                </a>
-               <a style="margin-top:10px; display:block;" href="/resRegister" class="btn btn-neutral">
-                 <!-- <span class="btn-inner--icon"><img src="../assets/img/icons/common/google.svg"></span>-->
-                  <span class="btn-inner--text">Survey Respondent</span>
-                </a>
-				<a style="margin-top:10px; display:block;" href="/merchantRegister" class="btn btn-neutral">
-                  <!--<span class="btn-inner--icon"><img src="../assets/img/icons/common/github.svg"></span>-->
-                  <span class="btn-inner--text">Merchant</span>
-                </a>
+                <div id="error">
+
+                </div>
+               <form method="post" action="">
+              {{ csrf_field()   }}
+              <input type="hidden" name="user_id" value="" />
+               <div class="form-group">
+                <select name="roles_id" id="roleVal" class="form-control" >
+                  <option value="0">select a role</option>
+                  <option value="1">Survey Respondent</option>
+                  <option value="2">Survey Owner</option>
+                  <option value="3">Merchant</option>
+                </select>
+               </div>               
+               <div id="registerContent">
+                 
+               </div>
+
+                <button type="submit" class="btn btn-primary">
+                    Create Account
+                </button>
+              </form>
               </div>
             </div>
+
+            
             
 			
 			
@@ -35,4 +47,18 @@
 
 </body>
 @endsection
-</html>
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(event) {
+    var role = document.getElementById('roleVal');
+    $("#roleVal").on('change',function(){         
+      var roleVal = role.options[role.selectedIndex].value;   
+        if(roleVal == 1){                                    
+          $("#registerContent").load("resRegister");          
+        }else if(roleVal == 2){
+          $("#registerContent").load("ownerRegister");          
+        }else if(roleVal == 3){
+          $("#registerContent").load("merchantRegister");          
+        }          
+    });
+});
+</script>
