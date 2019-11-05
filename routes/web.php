@@ -58,6 +58,7 @@ Route::post('/voucher/edit/{vouchers_id}/update', 'Voucher\VoucherController@upd
 
 //Respondents
 Route::get('/{name}/profile', 'Respondent\RespondentController@edit')->name('editUser');
+Route::post('/{name}/profile', 'User\UserController@destroy')->name('deleteUser');
 // Route::post('/{name}/profile', 'Respondent\RespondentController@destroy')->name('deleteUser');
 // Route::post('/{name}/vouchers/{vouchers_id}/redeem/success', 'User\UserController@redeem_success')->name('redeemSuccess');
 
