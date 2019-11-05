@@ -101,7 +101,7 @@ class VoucherController extends Controller
 		
 		$voucher->save();
 		$voucher::findOrFail($voucher->vouchers_id)->interests()->attach($interests);
-		$voucher::findOrFail($voucher->vouchers_id)->stores()->attach($stores,['status' => 1 ]);				
+		$voucher::findOrFail($voucher->vouchers_id)->stores()->attach($stores,['id' => 1 ]);				
 		return redirect()->route('myVouchers')->with('success','Voucher created successfully.');
 			
 	}

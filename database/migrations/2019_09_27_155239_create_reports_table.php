@@ -19,6 +19,7 @@ class CreateReportsTable extends Migration
             $table->date('create_at');
             $table->string('report_query');
             $table->timestamps();
+            //users_id,report_query
             $table->foreign('users_id')
             ->references('users_id')
             ->on('users')->onDelete('cascade');

@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Package;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use DateTime;
+
 
 class RegisterController extends Controller
 {
@@ -63,15 +67,35 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        // $packages = new Package;        
+        $startDate =  date('Y-m-d H:i:s');
+    
+       
+        // var_dump($_REQUEST);
+        // console.log($startDate);
+        // die();        
+        
+        $user =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' => Hash::make($data['password'])
+            
         ]);
+
+        $packages = Package::where('packages_id', '=', 1)->get();
         
-        $user->notify(new UserRegisteredSuccessfully($user));
+        $user::findOrFail($user->users_id)->packages()->attach($packages, ['start_date' => $startDate]);
+
+
+        // $user->notify(new UserRegisteredSuccessfully($user));
+        return $user;
+        // return $packages;
         return redirect()->back()->with('message', 'Successfully created a new account!');
+        
+        
     }
+
+
 
 
 }

@@ -233,6 +233,7 @@ return [
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
         'Input' => Illuminate\Support\Facades\Input::class,
 
+
     ],
 
 ];

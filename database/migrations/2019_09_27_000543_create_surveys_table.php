@@ -21,6 +21,7 @@ class CreateSurveysTable extends Migration
             $table->string('surveys_description');
             $table->string('status');
             $table->timestamps();
+            //foreign tag owner package table id use shortform
             $table -> foreign('owner_packages_id') 
             -> references('owner_packages_id') 
             -> on ('tag_owner_packages')->onDelete('cascade');
