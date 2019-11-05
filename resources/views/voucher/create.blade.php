@@ -3,6 +3,15 @@
 @section('navbar-brand', 'Create Vouchers')
 
 @section('content')
+@if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <div class="container-fluid">
     <div class="col-md-3">
         <div class="card card-user">
@@ -12,16 +21,16 @@
             <div class="content">
                 <div class="author">
                    <a href="#">
-                    <img class="avatar border-gray" src="storage/logos/default.jpg" alt="..."/>
+                    <img class="avatar border-gray" id="logoVoucher" src="#" alt="..."/>
                                         
                     <form method="POST" enctype="multipart/form-data" action="{{ route('storeVoucher') }}">
                        @csrf
 
                        <h4 class="title">{{strtoupper(\Auth::user()->name)}}<br />
-                           <label for="image">
-                            <input id="logo" type="file" class="form-control" name="logo">
-                            
-                        </label>
+                            <label for="image">                                
+                                <input id="logo" class="form-control" name="logo" type='file' onchange="readURL(this);" />
+                                                         
+                            </label>
                     </h4>
                 </a>
             </div>
@@ -104,7 +113,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="control-label" for="date">Expiry Date</label>
-                    <input name="expiry_date" class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="date" min="<?php echo date('Y-m-d'); ?>"/>
+                    <input name="expiry_date" class="form-control" id="date" value="<?php echo date('Y-m-d'); ?>" name="date" type="date" min="<?php echo date('Y-m-d'); ?>"/>
                 </div>
             </div>
             <div class="col-md-6">
@@ -167,3 +176,16 @@
 </div>
 </div>
 @endsection
+<script type="text/javascript">
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#logoVoucher').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>

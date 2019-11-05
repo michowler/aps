@@ -11,6 +11,6 @@ class Interest extends Model
 
     public function vouchers()
     {
-        return $this->belongsToMany(Voucher::class, 'tag_interests_vouchers', 'interests_id', 'vouchers_id' );
+        return $this->belongsToMany(Voucher::class, 'tag_interests_vouchers', 'interests_id', 'vouchers_id' )->withTimestamps();
     }
 }

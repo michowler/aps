@@ -15,7 +15,7 @@ class Store extends Model
 
  	public function vouchers()
  	{
- 	  return $this->belongsToMany(Voucher::class, 'tag_stores_vouchers', 'stores_id', 'vouchers_id' );
+ 	  return $this->belongsToMany(Voucher::class, 'tag_stores_vouchers', 'stores_id', 'vouchers_id' )->withTimestamps();
  	}
 
 }

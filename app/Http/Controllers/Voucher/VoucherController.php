@@ -8,7 +8,7 @@ use App\Store;
 use App\Interest;
 use App\VouchersType;
 use QrCode;
-use Validator; 
+use Validator;
 use Storage;
 use Input;
 use Illuminate\Http\Request;
@@ -80,33 +80,30 @@ class VoucherController extends Controller
 		// die();
 
 		$voucher = new Voucher; 		
-
-		$validator = Validator::make($request->all(), [ // <---
-			'title' => 'required|max:255',			
+		$validatedData = $request->validate([
 			'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+			'title' => 'required|max:255',						
 			'terms' => 'required',
 			'expiry_date' => 'required', 
+			'interests' => 'required',
+			'stores' => 'required',
 			'vouchers_types_id' => 'required'
 		]);
-
 		$voucher->merchants_id = \Auth::user()->users_id;
 		$voucher->logo = request()->file('logo')->store('images');	
 		$voucher->title = request('title');
 		$voucher->terms = request('terms');		
 		$interests = $request->input('interests');				
-		$stores = $request->input('stores');
-		
-		$voucher->qr_code = QrCode::size(250)->generate(route('redeem',['vouchers_id' => $voucher->vouchers_id]));   
+		$stores = $request->input('stores');		
+		$voucher->qr_code = QrCode::size(250)->generate(route('redeemVoucher',['vouchers_id' => $voucher->vouchers_id]));   	
 		$voucher->expiry_date = request('expiry_date');		
 		$voucher->vouchers_types_id = request('vouchers_types_id');		
 		
-		if ($validator->fails()) {
-			return redirect('voucher.create')->withErrors($validator)->withInput();
-		}
 		$voucher->save();
 		$voucher::findOrFail($voucher->vouchers_id)->interests()->attach($interests);
 		$voucher::findOrFail($voucher->vouchers_id)->stores()->attach($stores,['id' => 1 ]);				
 		return redirect()->route('myVouchers')->with('success','Voucher created successfully.');
+			
 	}
 
 	/**
@@ -132,9 +129,13 @@ class VoucherController extends Controller
 	 * @param  \App\Voucher  $voucher
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit(Voucher $voucher)
+	public function edit(Request $request)
 	{
-		return view('voucher.edit',compact('voucher'));
+		$voucher = Voucher::where('vouchers_id', '=', $request->vouchers_id)->firstOrFail();		
+		// $interests = $voucher->interests()->wherePivot('vouchers_id', '=', $voucher->vouchers_id)->get();
+		// $stores = Store::where('merchants_id', \Auth::user()->users_id)->get();		
+		$vType = VouchersType::where('vouchers_types_id', $voucher->vouchers_types_id)->pluck('vouchers_type');		
+		return view('voucher.edit', ['voucher' => $voucher], ['vType' => $vType]);        
 	}
 
 	/**
@@ -144,15 +145,23 @@ class VoucherController extends Controller
 	 * @param  \App\Voucher  $voucher
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, Voucher $voucher)
+	public function update(Request $request)
 	{
+		$voucher = Voucher::where('vouchers_id', '=', $request->vouchers_id)->firstOrFail();
 		$request->validate([
 			'title' => 'required',
 			'terms' => 'required',
-			'outlet' => 'required',
+			'expiry_date' => 'required',	
+				
 		]);
 
-		$voucher->update($request->all());
+		// $voucher = Voucher::where('vouchers_id', '=', $request->vouchers_id)->firstOrFail();		
+        $voucher->title = request('title');
+        $voucher->terms = request('terms');
+		$voucher->qr_code = QrCode::size(250)->generate(route('redeemVoucher',['vouchers_id' => $voucher->vouchers_id]));   
+        $voucher->expiry_date = request('expiry_date');
+        $voucher->vouchers_types_id = request('vouchers_types_id');		
+		$voucher->save();
 
 		return redirect()->route('myVouchers')->with('success','Voucher updated successfully');
 	}
@@ -166,17 +175,50 @@ class VoucherController extends Controller
 	public function destroy(Voucher $voucher)
 	{
 		$voucher = Voucher::find(request('vouchers_id'));
+		// $voucher->stores()->detach($stores_id);
+		// $voucher->interests()->detach($interests_id);
 		$voucher->delete();		
 		return redirect()->route('myVouchers')->with('success','Voucher deleted successfully');
 		
 	}
 
-	public function redeem(Voucher $voucher)
+	public function redeem_index(Voucher $voucher)
 	{
 		$vouchers = Voucher::Paginate(10);
 		$vouchers->withPath('/vouchers/redeem'); //get only vouchers that are valid
-		return view('voucher.redeem', ['vouchers' => $vouchers]);  		
+		return view('voucher.redeem_index', ['vouchers' => $vouchers]);  		
+	}
 
+	public function redeem_success(Voucher $voucher) //should be inside respondents, post method
+	{		
+		//update the redeem status to 1
+		//get and then save stores id in tag_suv_resp
+		//udpate the redeemed voucher date
+		//if done then view success redeem page
+		$voucher->voucher_redeem_status = request('voucher_redeem_status');
+		$voucher->voucher_redemption_date = request('voucher_redemption_date');
+		
+		$voucher::findOrFail($voucher->vouchers_id)->stores()->attach($stores,['status' => 1 ]);	
+		if ($voucher->save()){
+			 Alert::success('Success Redeem', 'Voucher redeemed successfully!');
+			return redirect()->route('redeemSuccess');	
+		}else{
+			return redirect()->route('myVouchers')->with('error','Voucher redeem unsuccessful.');
+		}				
+	}
+
+	public function redeem(Voucher $voucher)
+	{
+		$voucher = Voucher::find(request('vouchers_id'));
+		$vouchers = Voucher::with('stores')->get();					
+		return view('voucher.redeem', ['voucher' => $voucher], ['vouchers' => $vouchers]);        
+	}
+
+	public function redeem_qr(Voucher $voucher)
+	{
+		$voucher = Voucher::find(request('vouchers_id'));
+		$vouchers = Voucher::with('stores')->get();					
+		return view('voucher.redeem_qr', ['voucher' => $voucher], ['vouchers' => $vouchers]);        
 	}
 
 	public function demo(Voucher $voucher)
