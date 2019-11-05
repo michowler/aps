@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             console.log("here")                     ;
           $("#registerContent1").load("ownerRegister");          
         }else if(roleVal == 3){
-          $("#registerContent1").load("ownerRegister");          
+          $("#registerContent1").load("merchantRegister");          
         }          
     });
 });

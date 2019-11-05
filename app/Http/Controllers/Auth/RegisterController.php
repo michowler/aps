@@ -84,26 +84,12 @@ class RegisterController extends Controller
         // var_dump($_REQUEST);                   
         // die();     
 
-        // if($roles_id)
-        $role = $data['roles_id'];        
-
+        $role = $data['roles_id']; 
         $user =  User::create([            
             'name' => $data['name'],            
-            'email' => $data['email'],                        
+            'email' => $data['email'],                                
             'password' => Hash::make($data['password'])            
-        ]);
-
-        if(request('address')){
-            $user->address = request('address');
-        }else if(request('marital_status')){
-            $user->marital_status = request('marital_status');
-        }else if(request('gender')){
-            $user->gender = request('gender');
-        }else if(request('education_level')){
-            $user->education_level = request('education_level');
-        }else if(request('working_lvl')){
-            $user->working_lvl = request('working_lvl');
-        }
+        ]);       
                 
         $packages = Package::where('packages_id', '=', 1)->get();        
         $roles = Role::where('roles_id', '=', $role)->get();  
