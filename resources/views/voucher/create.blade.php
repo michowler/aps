@@ -139,11 +139,11 @@
                     <tbody>
                         @foreach($interests->chunk(3) as $chunk_interest)
                         <tr>         
-                            @foreach( $chunk_interest as $interest )                   
+                            @foreach( $chunk_interest as $interest )                               
                             <td>
                                                    
                                     <input class="checkbox" value="{{$interest->interests_id}}" name="interests[]" id="checkbox{$interest->interests_id}" type="checkbox">
-                                    
+                            
                                 
                             </td>
                             <td>{{$interest->interests_name}}</td>                            
