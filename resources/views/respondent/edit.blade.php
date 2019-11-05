@@ -1,7 +1,6 @@
 @extends('layouts.res_layout')
-
 @section('navbar-brand', 'Edit Profile')
-
+@include('partials.delete-user-modal')
 @section('content')
 <div class="container-fluid">
 
@@ -131,7 +130,7 @@
                                 </div>
                             </div>
                         </div>                               
-                        <button data-toggle="modal" data-target="#deleteModal" type="submit" class="btn btn-danger btn-fill pull-left" >Delete Account</button>
+                        <button data-toggle="modal" data-target="#deleteUserModal" type="submit" class="btn btn-danger btn-fill pull-left" >Delete Account</button>
                         <button type="submit" class="btn btn-info btn-fill pull-right">Update Profile</button>
                         <div class="clearfix"></div>
                     </form>
@@ -144,3 +143,9 @@
     </div>
 </div>
 @endsection
+<script type="text/javascript">
+ function formSubmit()
+ {
+   $("#deleteUserForm").submit();
+ }
+</script>
