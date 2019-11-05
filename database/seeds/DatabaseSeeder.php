@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
             VoucherTypeTableSeeder::class,
             InterestTableSeeder::class,
             MerchantTableSeeder::class,
-            StoreTableSeeder::class
+            StoreTableSeeder::class,
+            PackageTableSeeder::class
         ]);
         
          // factory(App\User::class, 10)->create()->each(function ($user) {

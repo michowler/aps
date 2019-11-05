@@ -1,7 +1,8 @@
 @extends('layouts.owner_layout')
 
-@section('content')
+@section('navbar-brand', 'Survey List')
 
+@section('content')
 
         <div class="content">
             <div class="container-fluid">
@@ -81,7 +82,5 @@
                     </div>
     </div>
 </div>
-
-@endsection
-
+   @endsection
 

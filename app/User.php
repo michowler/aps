@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -17,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'profile_image'
+        'name', 'email', 'password', 'profile_image', 'packages_id'
     ];
 
     /**
@@ -36,9 +37,24 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'start_date' => 'datetime'
     ];
 
+<<<<<<< HEAD
+    
+
+
+    public function getImageAttribute()
+    {
+       return $this->profile_image;
+    }
+=======
     //Alice
+<<<<<<< HEAD
+=======
+>>>>>>> 4cdd23ef011a4929dcb2c7bf635b03c715e235a6
+
+>>>>>>> f9bcae2f73bf02efd7e9e773756fc7be88f86594
     public function roles()
     {
       return $this->hasMany(User::class, 'users_id');
@@ -55,6 +71,13 @@ class User extends Authenticatable
       return $this->hasMany(Merchant::class);
     }
 
+<<<<<<< HEAD
+     public function packages()
+    {
+    return $this->belongsToMany(Package::class,'tag_owner_packages','users_id','packages_id')->withTimestamps();
+    }
+
+=======
     public function vouchers()
     { 
       return $this->hasMany(Voucher::class);
@@ -63,6 +86,7 @@ class User extends Authenticatable
     //Ying Ying
 
 
+>>>>>>> 4cdd23ef011a4929dcb2c7bf635b03c715e235a6
 
 
 }

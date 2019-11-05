@@ -30,9 +30,6 @@ class planController extends Controller
     {
         $payments = new Payments;
 
-
-            
-            // $payments -> users_id = 1;
             $payments -> amount = '100';
             $payments -> first_name =   $request ->first_name;
             $payments -> last_name  =   $request ->last_name;
@@ -48,27 +45,6 @@ class planController extends Controller
 
             $payments -> save();
 
-        	// $first_name	=	$request ->input('first_name');
-        	// $last_name	=	$request ->input('last_name');
-        	// $billing_address	=	$request ->input('billing_address');
-        	// $city	= $request ->input('city');
-        	// $country	= $request ->input('country');
-        	// $postal_code	= $request ->input('postal_code');
-        	// $name_on_card	= $request ->input('name_on_card');
-        	// $card_num	= $request ->input('card_num');
-        	// $card_expiry	= $request ->input('card_expiry');
-        	// $sec_code	= $request ->input('sec_code');
-
-         //    $data = array("first_name" => $first_name, "last_name" => $last_name, "billing_address" => $billing_address, "city" => $city, "country" => $country, "postal_code" => $postal_code, 
-         //        "name_on_card" => $name_on_card, "card_num"    => $card_num, "card_expiry" => $card_expiry, 
-         //        "sec_code" => $sec_code);
-
-         //    DB::table('payments') -> insert($data);
-         //    echo"Success.<br/>";
-
-
-        // $payments ->save();
-        // return redirect() -> route('payment.create') ;
     }
 
 }

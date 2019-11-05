@@ -16,9 +16,13 @@ class CreateTagOwnerPackagesTable extends Migration
         Schema::create('tag_owner_packages', function (Blueprint $table) {
             $table->bigIncrements('owner_packages_id');
             $table->unsignedBigInteger('users_id');
-            $table->unsignedBigInteger('packages_id');        
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->unsignedBigInteger('packages_id') -> default('1');
+            $table->dateTime('start_date');
+            $table->dateTime('end_date')->nullable();
+            $table->timestamp('cancelled_on')->nullable();
+            $table->integer('no_surveys');
+            $table->integer('no_respondents');
+            $table->integer('no_questions'); 
             $table->timestamps();
             $table->foreign('users_id')
             ->references('users_id')
@@ -26,6 +30,7 @@ class CreateTagOwnerPackagesTable extends Migration
             $table->foreign('packages_id')
             ->references('packages_id')
             ->on('packages')->onDelete('cascade');
+
         });
       }
 

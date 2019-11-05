@@ -16,11 +16,11 @@ class CreatePackagesTable extends Migration
         Schema::create('packages', function (Blueprint $table) {
             $table->bigIncrements('packages_id');
             $table->string('packages_name',45);
-            $table->string('package_description');
             $table->double('package_price');
             $table->integer('no_surveys');
             $table->integer('no_respondents');
-            $table->date('created_date');
+            $table->integer('no_questions');            
+            // $table->dateTime('created_at');
             $table->timestamps();
         });
     }

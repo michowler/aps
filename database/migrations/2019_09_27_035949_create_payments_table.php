@@ -29,10 +29,10 @@ class CreatePaymentsTable extends Migration
             $table->string('card_expiry');
             $table->unsignedBigInteger('sec_code');
             $table->timestamps();
-            $table -> foreign('users_id') 
+            $table -> foreign('users_id') //pay for ownself
             -> references('users_id')
             -> on ('users')->onDelete('cascade');
-            $table -> foreign('owner_packages_id') 
+            $table -> foreign('owner_packages_id') //pay for others
             -> references('owner_packages_id')
             -> on ('tag_owner_packages')->onDelete('cascade');
 

@@ -1,117 +1,8 @@
 @extends('layouts.owner_layout')
 
+@section('navbar-brand', 'Create Survey')
+
 @section('content')
-<div class="wrapper">
-    <div class="sidebar" data-color="purple" data-image="{{ asset('FrontEnd') }}/img/sidebar-5.jpg">
-
-    <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
-
-
-        <div class="sidebar-wrapper">
-            <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text">
-                    APSE
-                </a>
-            </div>
-
-            <ul class="nav">
-                
-                 <li >
-                    <a href="/dashboard">
-                        <i class="pe-7s-graph"></i>
-                        <p>Dashboard</p>
-                    </a>
-                </li>
-                 <li class="active">
-                    <a href="/createSurvey">
-                        <i class="pe-7s-plus"></i>
-                        <p>Create Survey</p>
-                    </a>
-                </li>
-                <li>
-
-                     <a href="/mySurvey">
-                        <i class="pe-7s-note2"></i>
-                        <p>My Survey</p>
-                    </a>
-                </li>
-                   <li>
-
-                    <a href="/userProfile">
-                        <i class="pe-7s-user"></i>
-                        <p>User Profile</p>
-                    </a>
-                </li>
-                <li class="active-pro">
-                    <a href="upgrade.html">
-                        <i class="pe-7s-rocket"></i>
-                        <p>Upgrade to PRO</p>
-                    </a>
-                </li>
-                
-            </ul>
-        </div>
-    </div>
-    <div class="main-panel">
-        <nav class="navbar navbar-default navbar-fixed">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Generate Survey</a>
-                </div>
-                <div class="collapse navbar-collapse">
-                   
-
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-globe"></i>
-                                    <b class="caret hidden-sm hidden-xs"></b>
-                                    <span class="notification hidden-sm hidden-xs">1</span>
-                                    <p class="hidden-lg hidden-md">
-                                        1 Notifications
-                                        <b class="caret"></b>
-                                    </p>
-                              </a>
-                              <ul class="dropdown-menu">
-                                <!-- <li> <a onclick="demo.showMessage('top','center', 
-                                  'Error: Please fill in all fields.')">Submit</a>
-                                  </li> -->
-                                  <li><a data-toggle="modal" data-target="#myModal">Voucher Redemption Approval</a></li>
-
-                                
-
-                               
-                              </ul>
-                        </li>
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <p>
-                                        User
-                                        <b class="caret"></b>
-                                    </p>
-
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Settings</a></li>
-                                <li><a href="/login">Logout</a></li>                               
-                              </ul>
-                        </li>
-                       <!--  <li>
-                            <a href="#">
-                                <p>Log out</p>
-                            </a>
-                        </li> -->
-                                    <li class="separator hidden-lg hidden-md"></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
 
 
         <div class="content">
@@ -124,9 +15,10 @@
                             </div>
                             <div class="content">
 
-                                <form action="{{action('OwnerController@store')}}" method="POST">
+                                <form action="{{url('store')}}" method="POST">
 
                                     {{csrf_field()}}
+
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
@@ -210,11 +102,8 @@
                             </div>
                         </div>
                     </div>
-               
-        </footer-->
-
     </div>
 </div>
-   @endsection
+   
+@endsection
 
-</body>
