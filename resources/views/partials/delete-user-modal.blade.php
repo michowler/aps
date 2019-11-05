@@ -16,7 +16,7 @@
                 <input type="text" name="deleteText" id="delUsrText" placeholder="Copy the text above here">
             </div>
             
-                <input type="hidden" name="users_id" id="users_id" value="{{$voucher->vouchers_id}}">
+                <input type="hidden" name="users_id" id="users_id" value="{{\Auth::user()->users_id}}">
                 <div class="modal-footer">                    
                     <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">No, Cancel</button>
                     <button type="submit" class="btn btn-sm btn-danger"  id="delUsrbtn" onclick="formSubmit()">Yes, Delete</button>

@@ -15,12 +15,38 @@ class RedirectIfAuthenticated
      * @param  string|null  $guard
      * @return mixed
      */
+    // public function handle($request, Closure $next, $guard = null)
+    // {
+    //     if (Auth::guard($guard)->check()) {            
+    //         return redirect('/');
+    //     }
+
+    //     return $next($request);
+    // }
+
     public function handle($request, Closure $next, $guard = null)
-    {
-        if (Auth::guard($guard)->check()) {
-            return redirect('/');
+   {
+       if (Auth::guard($guard)->check()) {
+
+           $auth = \Auth::user()->roles()->first();
+
+           switch ($auth->title) {
+               case 'admin':
+                       return  redirect()->route('editUser');    
+                   break;
+               case 'merchant':
+                       return  redirect()->route('myVouchers'); 
+                   break;
+               case 'owner':
+                       return  redirect()->route('ownerDashboard');  
+                   break;
+               default:                   
+                   return  redirect()->route('login');  
+                   break;
+           }   
+
         }
 
-        return $next($request);
-    }
+       return $next($request);
+   }
 }

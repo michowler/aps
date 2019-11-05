@@ -7,13 +7,6 @@ use Illuminate\Http\Request;
 class FrontController extends Controller
 {
     
-
-    public function login(){
-    	return view('frontView.home.login');
-    }
-
-        
-
     public function registerAs(){
     	return view('frontView.home.registerAs');
     }

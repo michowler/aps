@@ -11,7 +11,7 @@ class RoleTableSeeder extends Seeder
      */
     public function run()
     {        
-    	$roles = [['title'=> 'merchant'], ['title' => 'owner'], ['title' => 'respondent'], ['title' => 'admin'], ['title' => 'guest']];
+    	$roles = [['title'=> 'respondent'], ['title' => 'owner'], ['title' => 'merchant'], ['title' => 'admin'], ['title' => 'guest']];
     	\DB::table('roles')->insert($roles);
     }
 }
