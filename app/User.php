@@ -39,8 +39,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'start_date' => 'datetime'
     ];
-
-<<<<<<< HEAD
     
 
 
@@ -48,13 +46,9 @@ class User extends Authenticatable
     {
        return $this->profile_image;
     }
-=======
-    //Alice
-<<<<<<< HEAD
-=======
->>>>>>> 4cdd23ef011a4929dcb2c7bf635b03c715e235a6
 
->>>>>>> f9bcae2f73bf02efd7e9e773756fc7be88f86594
+    //Alice
+
     public function roles()
     {
       return $this->hasMany(User::class, 'users_id');
@@ -71,13 +65,12 @@ class User extends Authenticatable
       return $this->hasMany(Merchant::class);
     }
 
-<<<<<<< HEAD
+
      public function packages()
     {
     return $this->belongsToMany(Package::class,'tag_owner_packages','users_id','packages_id')->withTimestamps();
     }
 
-=======
     public function vouchers()
     { 
       return $this->hasMany(Voucher::class);
@@ -86,7 +79,6 @@ class User extends Authenticatable
     //Ying Ying
 
 
->>>>>>> 4cdd23ef011a4929dcb2c7bf635b03c715e235a6
 
 
 }
