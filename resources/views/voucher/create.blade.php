@@ -25,6 +25,7 @@
                                         
                     <form method="POST" enctype="multipart/form-data" action="{{ route('storeVoucher') }}">
                        @csrf
+                       <input type="hidden" name="status" value="valid"/>
 
                        <h4 class="title">{{strtoupper(\Auth::user()->name)}}<br />
                             <label for="image">                                
