@@ -193,23 +193,23 @@ class VoucherController extends Controller
 		return view('voucher.redeem_index', ['vouchers' => $vouchers]);  		
 	}
 
-	public function redeem_success(Voucher $voucher) //should be inside respondents, post method
-	{		
-		//update the redeem status to 1
-		//get and then save stores id in tag_suv_resp
-		//udpate the redeemed voucher date
-		//if done then view success redeem page
-		$voucher->voucher_redeem_status = request('voucher_redeem_status');
-		$voucher->voucher_redemption_date = request('voucher_redemption_date');
+	// public function redeem_success(Voucher $voucher) //should be inside respondents, post method
+	// {		
+	// 	//update the redeem status to 1
+	// 	//get and then save stores id in tag_suv_resp
+	// 	//udpate the redeemed voucher date
+	// 	//if done then view success redeem page
+	// 	$voucher->voucher_redeem_status = request('voucher_redeem_status');
+	// 	$voucher->voucher_redemption_date = request('voucher_redemption_date');
 		
-		$voucher::findOrFail($voucher->vouchers_id)->stores()->attach($stores,['status' => 1 ]);	
-		if ($voucher->save()){
-			 Alert::success('Success Redeem', 'Voucher redeemed successfully!');
-			return redirect()->route('redeemSuccess');	
-		}else{
-			return redirect()->route('myVouchers')->with('error','Voucher redeem unsuccessful.');
-		}				
-	}
+	// 	$voucher::findOrFail($voucher->vouchers_id)->stores()->attach($stores,['status' => 1 ]);	
+	// 	if ($voucher->save()){
+	// 		 Alert::success('Success Redeem', 'Voucher redeemed successfully!');
+	// 		return redirect()->route('redeemSuccess');	
+	// 	}else{
+	// 		return redirect()->route('myVouchers')->with('error','Voucher redeem unsuccessful.');
+	// 	}				
+	// }
 
 	public function redeem(Voucher $voucher)
 	{
