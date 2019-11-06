@@ -15,7 +15,7 @@ class Voucher extends Model
      * @var array
      */
     protected $fillable = [
-        'vouchers_id', 'title', 'terms', 'stores', 'vouchers_types_id', 'merchants_id', 'logo', 'qr_code', 'interests'
+        'vouchers_id', 'title', 'terms', 'stores', 'vouchers_types_id', 'merchants_id', 'logo', 'qr_code', 'interests', 'status'
     ];
 
     /**
