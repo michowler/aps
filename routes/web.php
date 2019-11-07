@@ -52,6 +52,7 @@ Route::post('/voucher/show/{vouchers_id}', 'Voucher\VoucherController@destroy')-
 Route::get('/voucher/show/{vouchers_id}', 'Voucher\VoucherController@show')->name('showVoucher');
 Route::get('/voucher/demo', 'Voucher\VoucherController@demo')->name('demo');
 Route::get('/voucher/redeem/{vcode1}', 'Voucher\VoucherController@redeem')->name('redeemVoucher');
+Route::post('/voucher/redeem/{vcode1}', 'Voucher\VoucherController@redeem')->name('redeemVoucher');
 Route::get('/voucher/redeem/qr-code/{vcode2}', 'Voucher\VoucherController@redeem_qr')->name('redeemQR');
 Route::get('/voucher/redeem', 'Voucher\VoucherController@redeem_index')->name('redeem');
 Route::get('/voucher/edit/{vouchers_id}', 'Voucher\VoucherController@edit')->name('editVoucher');
@@ -61,7 +62,7 @@ Route::post('/voucher/edit/{vouchers_id}/update', 'Voucher\VoucherController@upd
 Route::get('/{name}/profile', 'Respondent\RespondentController@edit')->name('editUser');
 Route::post('/{name}/profile', 'User\UserController@destroy')->name('deleteUser');
 // Route::post('/{name}/profile', 'Respondent\RespondentController@destroy')->name('deleteUser');
-// Route::post('/{name}/vouchers/{vouchers_id}/redeem/success', 'User\UserController@redeem_success')->name('redeemSuccess');
+Route::post('/{name}/vouchers/{vouchers_id}/redeem/success', 'User\UserController@redeem_success')->name('redeemSuccess');
 
 //Auth
 Route::get('/', ['middleware' =>'guest', function(){

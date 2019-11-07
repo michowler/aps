@@ -11,7 +11,7 @@
                     <h4 class="title">Voucher ID: 2348</h4>
                 </div>
                 <div class="content">
-                    <form method="POST" enctype="multipart/form-data" action="{{ route('redeemQR', ['encrypted' => $encrypted]) }}">
+                    <form method="GET" enctype="multipart/form-data" action="{{ route('redeemQR', ['vcode2' => $encrypted]) }}">
                      @csrf
                         <input type="hidden" id="redeem_stat" name="voucher_redeem_status" value="1">
                         <input type="hidden" id="redeem_date" name="voucher_redemption_date" value="{{date('Y-m-d H:i:s')}}">
