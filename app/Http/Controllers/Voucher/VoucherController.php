@@ -11,6 +11,7 @@ use QrCode;
 use Validator;
 use Storage;
 use Input;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -49,7 +50,7 @@ class VoucherController extends Controller
 		$vCount = $vList->count();
 		$vouchers = Voucher::Paginate(10);
 		$vouchers->withPath('/vouchers');
-		return view('voucher.index', ['vouchers' => $vouchers], ['vCount' => $vCount ]);  
+		return view('voucher.index', ['vouchers' => $vouchers, 'vCount' => $vCount ]);  
 
 	}
 
@@ -63,7 +64,7 @@ class VoucherController extends Controller
 		//show stores available from database		
 		$stores = Store::where('merchants_id', \Auth::user()->users_id)->get();
 		$interests = Interest::all();		
-		return view('voucher.create', ['stores' => $stores], ['interests' => $interests]);
+		return view('voucher.create', ['stores' => $stores, 'interests' => $interests]);
 	}
 
 	/**
@@ -122,9 +123,11 @@ class VoucherController extends Controller
 		//return DB::table('files')->latest('upload_time')->first()/take(5)->get();					
 		// $store = Store::where('stores_id', '=', request('stores_id'))->with('vouchers');
 		$voucher = Voucher::where('vouchers_id', '=', $request->vouchers_id)->firstOrFail();		
-		$vouchers = Voucher::with('stores')->get();		
-		$vType = VouchersType::where('vouchers_types_id', '=', $voucher->vouchers_types_id)->first();		
-		return view('voucher.show', ['voucher' => $voucher], ['vType' => $vType]);        
+		$vouchers = Voucher::with('stores')->get();	
+		$vcode1 = request('vouchers_id');
+		$encrypted = Crypt::encryptString($vcode1);			
+		$vType = VouchersType::where('vouchers_types_id', '=', $voucher->vouchers_types_id)->first();				
+		return view('voucher.show', ['voucher' => $voucher , 'encrypted' => $encrypted , 'vType' => $vType]);        
 	}
 
 	/**
@@ -139,7 +142,7 @@ class VoucherController extends Controller
 		// $interests = $voucher->interests()->wherePivot('vouchers_id', '=', $voucher->vouchers_id)->get();
 		// $stores = Store::where('merchants_id', \Auth::user()->users_id)->get();		
 		$vType = VouchersType::where('vouchers_types_id', $voucher->vouchers_types_id)->pluck('vouchers_type');		
-		return view('voucher.edit', ['voucher' => $voucher], ['vType' => $vType]);        
+		return view('voucher.edit', ['voucher' => $voucher, 'vType' => $vType]);        
 	}
 
 	/**
@@ -211,18 +214,21 @@ class VoucherController extends Controller
 		}				
 	}
 
-	public function redeem(Voucher $voucher)
+	public function redeem(Voucher $voucher, $vcode1)
 	{
-		$voucher = Voucher::find(request('vouchers_id'));
-		$vouchers = Voucher::with('stores')->get();					
-		return view('voucher.redeem', ['voucher' => $voucher], ['vouchers' => $vouchers]);        
+		$decrypted = Crypt::decryptString($vcode1);
+		$voucher = Voucher::find($decrypted);		
+		$vouchers = Voucher::with('stores')->get();	
+		$encrypted = Crypt::encryptString($decrypted, $voucher->created_at);
+		return view('voucher.redeem', ['voucher' => $voucher, 'vouchers' => $vouchers, 'encrypted' => $encrypted]);     
 	}
 
-	public function redeem_qr(Voucher $voucher)
-	{
-		$voucher = Voucher::find(request('vouchers_id'));
-		$vouchers = Voucher::with('stores')->get();					
-		return view('voucher.redeem_qr', ['voucher' => $voucher], ['vouchers' => $vouchers]);        
+	public function redeem_qr(Voucher $voucher, $vcode2)
+	{		
+		$decrypted = Crypt::decryptString($vcode2, $voucher->created_at);
+		$voucher = Voucher::find(rtrim($decrypted, $voucher->created_at));		
+		$vouchers = Voucher::with('stores')->get();								
+		return view('voucher.redeem_qr', ['voucher' => $voucher, 'vouchers' => $vouchers]);        
 	}
 
 	public function demo(Voucher $voucher)
