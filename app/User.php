@@ -17,8 +17,11 @@ class User extends Authenticatable
      *
      * @var array
      */
+    // protected $fillable = [
+    //     'name', 'email', 'password', 'country', 'birth_date', 'occupation', 'profile_image', 'packages_id', 'marital_status', 'working_level', 'gender', 'age', 'education_level', 'address'
+    // ];
     protected $fillable = [
-        'name', 'email', 'password', 'country', 'birth_date', 'occupation', 'profile_image', 'packages_id', 'marital_status', 'working_level', 'gender', 'age', 'education_level', 'address'
+        'name', 'email', 'password', 'packages_id', 'marital_status', 'working_level', 'gender', 'age', 'education_level'
     ];
 
     /**
@@ -51,7 +54,7 @@ class User extends Authenticatable
     public function hasRole($role = null) {
         $hasRole = false;
         $hasRole = !$this->roles->filter(function($item) use ($role) {
-            return $item->name == $role;
+            return $item->title == $role;
         })->isEmpty();
         return $hasRole;
     }

@@ -87,7 +87,7 @@ class RegisterController extends Controller
 
         $role = $data['roles_id']; 
 
-        if ($role == '1' ){
+        if ($role == '1'){
             $user =  User::create([            
                 'name' => $data['name'],            
                 'email' => $data['email'],  
@@ -98,7 +98,7 @@ class RegisterController extends Controller
                 'marital_status' => $data['marital_status'],                                
                 'password' => Hash::make($data['password'])            
             ]);
-        }else if ($role == '2' ){
+        }else if ($role == '2'){
             $user =  User::create([            
                 'name' => $data['name'],            
                 'email' => $data['email'],                                
@@ -124,7 +124,7 @@ class RegisterController extends Controller
 
         // $user->notify(new UserRegisteredSuccessfully($user));
         return $user;    
-        return redirect()->route('login')->with('message', 'Successfully created a new account!');            
+        return redirect()->back()->with('message', 'Successfully created a new account!');            
         
     }
 
