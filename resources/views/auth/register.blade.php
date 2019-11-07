@@ -37,9 +37,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
       var roleVal = role.options[role.selectedIndex].value;   
         if(roleVal == 1){               
 
-          $("#registerContent1").load("_res");          
+          $("#registerContent1").load("resRegister");          
         }else if(roleVal == 2){
-            console.log("here")                     ;
+            
           $("#registerContent1").load("ownerRegister");          
         }else if(roleVal == 3){
           $("#registerContent1").load("merchantRegister");          
