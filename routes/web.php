@@ -51,8 +51,8 @@ Route::post('/voucher/store', 'Voucher\VoucherController@store')->name('storeVou
 Route::post('/voucher/show/{vouchers_id}', 'Voucher\VoucherController@destroy')->name('deleteVoucher');
 Route::get('/voucher/show/{vouchers_id}', 'Voucher\VoucherController@show')->name('showVoucher');
 Route::get('/voucher/demo', 'Voucher\VoucherController@demo')->name('demo');
-Route::get('/voucher/redeem/{vouchers_id}', 'Voucher\VoucherController@redeem')->name('redeemVoucher');
-Route::get('/voucher/redeem/{vouchers_id}/qr-code', 'Voucher\VoucherController@redeem_qr')->name('redeemQR');
+Route::get('/voucher/redeem/{vcode1}', 'Voucher\VoucherController@redeem')->name('redeemVoucher');
+Route::get('/voucher/redeem/{vcode2}', 'Voucher\VoucherController@redeem_qr')->name('redeemQR');
 Route::get('/voucher/redeem', 'Voucher\VoucherController@redeem_index')->name('redeem');
 Route::get('/voucher/edit/{vouchers_id}', 'Voucher\VoucherController@edit')->name('editVoucher');
 Route::post('/voucher/edit/{vouchers_id}/update', 'Voucher\VoucherController@update')->name('updateVoucher');
