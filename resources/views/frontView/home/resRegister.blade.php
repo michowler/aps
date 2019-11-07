@@ -18,7 +18,7 @@
     <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
 
     <div class="col-md-6">
-        <input id="gender" type="text" class="form-control @error('name') is-invalid @enderror" name="gender" value="{{ old('gender') }}" required autocomplete="address" autofocus>
+        <input id="gender" type="text" class="form-control @error('name') is-invalid @enderror" name="gender" value="" required autocomplete="address" autofocus>
 
         @error('address')
             <span class="invalid-feedback" role="alert">
@@ -32,9 +32,9 @@
     <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Age') }}</label>
 
     <div class="col-md-6">
-        <input id="age" type="text" class="form-control @error('email') is-invalid @enderror" name="age" value="{{ old('age') }}" required autocomplete="email">
+        <input id="age" type="text" class="form-control @error('age') is-invalid @enderror" name="age" value="" required autocomplete="age">
 
-        @error('email')
+        @error('age')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
@@ -46,7 +46,7 @@
     <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Marital Status') }}</label>
 
     <div class="col-md-6">
-        <input id="marital_status" type="text"  name="marital_status" value="" required autocomplete="marital_status">
+        <input id="marital_status" type="text"  class="form-control @error('password') is-invalid @enderror"  name="marital_status" value="" required autocomplete="marital_status">
 
     </div>
 </div>
@@ -55,7 +55,16 @@
     <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Working Level') }}</label>
 
     <div class="col-md-6">
-        <input id="working_level" type="text" name="working_level" value="" required autocomplete="working_level">
+        <input id="working_level" class="form-control @error('password') is-invalid @enderror" type="text" name="working_level" value="" required autocomplete="working_level">
+
+    </div>
+</div>
+
+<div class="form-group row">
+    <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Education Level') }}</label>
+
+    <div class="col-md-6">
+        <input id="working_level" class="form-control @error('password') is-invalid @enderror" type="text" name="education_level" value="" required autocomplete="working_level">
 
     </div>
 </div>
