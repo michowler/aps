@@ -217,15 +217,17 @@ class VoucherController extends Controller
 	public function redeem(Voucher $voucher, $vcode1)
 	{
 		$decrypted = Crypt::decryptString($vcode1);
-		$voucher = Voucher::find(request('vouchers_id'));		
-		$vouchers = Voucher::with('stores')->get();					
-		return view('voucher.redeem', ['voucher' => $voucher, 'vouchers' => $vouchers]);        
+		$voucher = Voucher::find($decrypted);		
+		$vouchers = Voucher::with('stores')->get();	
+		$vcode2 = request('vouchers_id');
+		$encrypted = Crypt::encryptString($vcode2);
+		return view('voucher.redeem', ['voucher' => $voucher, 'vouchers' => $vouchers, 'encrypted' => $encrypted]);        
 	}
 
 	public function redeem_qr(Voucher $voucher, $vcode2)
 	{		
 		$voucher = Voucher::find($decrypted);		
-		$vouchers = Voucher::with('stores')->get();					
+		$vouchers = Voucher::with('stores')->get();								
 		return view('voucher.redeem_qr', ['voucher' => $voucher, 'vouchers' => $vouchers]);        
 	}
 
