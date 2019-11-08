@@ -112,7 +112,6 @@ Route::post('/storeSurvey', 'Survey\SurveyController@store')->name('storeSurvey'
 
 //admin
 
-Route::get('/login','FrontController@login')->name('login');
 
 Route::get('/registerAs','FrontController@registerAs');
 
