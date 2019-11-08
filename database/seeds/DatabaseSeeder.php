@@ -20,6 +20,10 @@ class DatabaseSeeder extends Seeder
             UserTableSeeder::class,
             MerchantTableSeeder::class,           
             StoreTableSeeder::class                                   
+            SurveyTableSeeder::class,
+            QuestionTableSeeder::class,
+            OptionTableSeeder::class,
+            RespondentsOptionsTableSeeder::class
         ]);
         
          // factory(App\User::class, 10)->create()->each(function ($user) {

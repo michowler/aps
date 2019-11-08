@@ -12,7 +12,9 @@ class UserTableSeeder extends Seeder
      * @return void
      */
     public function run()
+    
     {
+
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('users');
         DB::table('roles');
@@ -32,6 +34,15 @@ class UserTableSeeder extends Seeder
 
         $user->roles()->attach($role); //sync roles_id
         // $user[1]->roles()->sync([2,3]);        
+
+         $michelle = [['name'=> 'Michelle', 'email' => 'm@gmail.com', 'password' => bcrypt('123123123'), 'email_verified_at' => now(), 'remember_token' => Str::random(10)]];
+
+         $test = [['name'=> 'test', 'email' => 'test@gmail.com', 'password' => bcrypt('123123123'), 'email_verified_at' => now(), 'remember_token' => Str::random(10)],['name'=> 'test2', 'email' => 'test2@gmail.com', 'password' => bcrypt('123123123'), 'email_verified_at' => now(), 'remember_token' => Str::random(10)],['name'=> 'test3', 'email' => 'test3@gmail.com', 'password' => bcrypt('123123123'), 'email_verified_at' => now(), 'remember_token' => Str::random(10)],['name'=> 'test4', 'email' => 'test4@gmail.com', 'password' => bcrypt('123123123'), 'email_verified_at' => now(), 'remember_token' => Str::random(10)],['name'=> 'test5', 'email' => 'test5@gmail.com', 'password' => bcrypt('123123123'), 'email_verified_at' => now(), 'remember_token' => Str::random(10)]];
+
+        \DB::table('users')->insert($michelle);
+        \DB::table('users')->insert($test);
+
+
     }
 
     // public function run()

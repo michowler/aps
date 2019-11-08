@@ -12,13 +12,19 @@
                     <div class="col-md-12">
                         <div class="card ">
                             <div class="header">
-                                <h4 class="title">Customer Satisfaction</h4> <span class="category">24/06/2019</span>
+
+                                
+                                <h4 class="title">First</h4> 
+                                <span class="category">24/06/2019</span>
+                                
+
                             </div>
                             <br><br>
                             <div class="content">
                                 <p class="category">Number of responses</p>
-                                <div id="chartActivity" class="ct-chart"></div>
-                                <p class="category" style="text-align:center;">Questions</p>
+                                    {!! $usersChart->container() !!}
+<!--                                 <div id="chartActivity" class="ct-chart"></div>
+ -->                                <p class="category" style="text-align:center;">Questions</p>
                                 <br>
                                 <br>
                                 <div class="footer">                                    
@@ -41,6 +47,7 @@
         </div>
     </div>
 </div>
+
 
 
 @endsection

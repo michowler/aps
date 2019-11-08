@@ -6,11 +6,14 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 	<title>APSE</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
 
     <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://paypal.com/sdk/js?client-id=AWqFH5FUdSDffNjAC24Ll12PEfjah7B_GhlmICz6uFaJeGphsAc-D9yhh6h87YnAbSUJorLRsPKqEwR6"></script>
+
 
     <!-- Bootstrap core CSS     -->
     <link href="{{asset('assets')}}/css/bootstrap.min.css" rel="stylesheet" />
@@ -159,22 +162,20 @@
 	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 	<script src="{{asset('assets')}}/js/demo.js"></script>
 
-    <script type="text/javascript">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.3/js/bootstrap-select.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js" charset="utf-8"></script>
+
+    <!-- <script type="text/javascript">
         $(document).ready(function(){
 
             demo.initChartist();
 
-            // $.notify({
-            //     icon: 'pe-7s-gift',
-            //     message: "Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for every web developer."
-
-            // },{
-            //     type: 'info',
-            //     timer: 4000
-            // });
+           
 
         });
-    </script>
+    </script> -->
 
 
 </html>

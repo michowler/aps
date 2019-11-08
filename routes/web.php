@@ -77,6 +77,9 @@ Route::get('/create','plan\planController@checkout');
 // Route::get('/chart','Survey\SurveyController@showChart');
 Route::post('store','plan\planController@store');
 
+Route::post('paypal','plan\planController@payWithpaypal');
+Route::get('status','plan\planController@getPaymentStatus');
+
 
 
 
@@ -95,7 +98,11 @@ Route::get('/userProfile/saveUserProfile', 'Owner\OwnerController@userProfile');
 
 Route::get('/mySurvey','Survey\SurveyController@mySurvey');	//display survey list
 
-Route::get('/chart','Survey\SurveyController@showChart');
+Route::get('/mySurvey','Survey\SurveyController@show');
+
+Route::get('/mySurvey/{id}','Survey\SurveyController@cshow')->name('chartResult');
+
+Route::get('/chart','Survey\SurveyController@chartindex');
 
 Route::get('/createSurvey', 'Survey\SurveyController@create');
 

@@ -24,15 +24,19 @@
                                         <th>Delete Survey</th>
                                     </thead>
                                     <tbody>
+
+                                    @foreach($survey as $value)
                                         <tr>
-                                        	<td>1</td>
-                                        	<td>Customer Satisfaction</td>
-                                        	<td>24/06/2019</td>
+                                        	<td>{{$value->surveys_id}}</td>
+                                        	<td>{{$value->surveys_title}}</td>
+                                            <td>24/06/2019</td>
                                         	<td>0</td>
-                                        	<td><a href="/chart"><button class="btn"><i class="far fa-chart-bar"></i></a></td>
+                                        	<td><button href="{{route('/chartResult/{id}')}}" class="btn" id="{{$value->surveys_id}}" ><i class="far fa-chart-bar"></i></a></td>
                                             <td><button class="btn"><i class="fa fa-trash"></i> Trash</button></td>
                                         </tr>
-                                        <tr>
+                                    @endforeach
+<!--                                     {{$survey ?? ''->links()}}
+ -->                                        <!-- <tr>
                                         	<td>2</td>
                                         	<td>Employee Engagement</td>
                                         	<td>20/06/2019</td>
@@ -63,7 +67,7 @@
                                         	<td>2</td>
                                         	<td><button class="btn"><i class="far fa-chart-bar"></i></td>
                                             <td><button class="btn"><i class="fa fa-trash"></i> Trash</button></td>
-                                        </tr>
+                                        </tr> -->
                                     </tbody>
                                 </table>
                                  <nav aria-label="Page navigation example " style="text-align:center;">
@@ -82,5 +86,19 @@
                     </div>
     </div>
 </div>
+
+<!-- onClick="reply_click(this.id)"
+
+<script type="text/javascript">
+function reply_click(clicked_id)
+{
+    alert(clicked_id);
+
+}    
+
+
+</script> -->
    @endsection
+
+
 
