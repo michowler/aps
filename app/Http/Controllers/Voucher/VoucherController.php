@@ -50,8 +50,7 @@ class VoucherController extends Controller
 		$vCount = $vList->count();
 		$vouchers = Voucher::Paginate(10);
 		$vouchers->withPath('/vouchers');
-		return view('voucher.index', ['vouchers' => $vouchers, 'vCount' => $vCount ]);  
-
+		return view('voucher.index', ['vouchers' => $vouchers, 'vCount' => $vCount ]);  		
 	}
 
 	/**
