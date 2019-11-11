@@ -124,10 +124,28 @@ class RegisterController extends Controller
 
         // $user->notify(new UserRegisteredSuccessfully($user));
         return $user;    
-        return redirect()->back()->with('message', 'Successfully created a new account!');            
-        
+        return redirect()->back()->with('message', 'Successfully created a new account!');                    
     }
 
+    public function resRegister()
+    {
+        return view('frontView.home.resRegister');
+    }
+
+     public function ownerRegister()
+    {
+        return view('frontView.home.ownerRegister');
+    }
+
+     public function merchantRegister()
+    {
+        return view('frontView.home.merchantRegister');
+    }
+
+    public function registerAs()
+    {
+        return view('frontView.home.registerAs');
+    }
 
 
 

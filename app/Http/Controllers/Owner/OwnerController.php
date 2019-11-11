@@ -26,7 +26,7 @@ class OwnerController extends Controller
      */
     public function index()
     {
-        return view("owner.owner_dashboard");
+        return view("surveyOwner.owner_dashboard");
     }
 
     /**
@@ -121,23 +121,23 @@ class OwnerController extends Controller
 
 
     public function userProfile(){
-        return view('owner.userProfile');
+        return view('surveyOwner.userProfile');
     }
 
     public function editUserProfile(){
-        return view('owner.userProfile');
+        return view('surveyOwner.userProfile');
     }
 
     public function saveUserProfile(){
-        return view('owner.userProfile');
+        return view('surveyOwner.userProfile');
     }
 
     // public function createQuestion(){
-    //     return view('owner.createQuestion');
+    //     return view('surveyOwner.createQuestion');
     // }
 
     //  public function verification(){
-    //     return view('owner.createQuestion');
+    //     return view('surveyOwner.createQuestion');
     // }
 }
 

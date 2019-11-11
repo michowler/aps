@@ -28,6 +28,7 @@ class CreatePaymentsTable extends Migration
             $table->unsignedBigInteger('card_num');
             $table->string('card_expiry');
             $table->unsignedBigInteger('sec_code');
+            $table->unsignedBigInteger('status');
             $table->timestamps();
             $table -> foreign('users_id') //pay for ownself
             -> references('users_id')

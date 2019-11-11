@@ -44,12 +44,12 @@ class VoucherController extends Controller
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index()
-	{
-		// $vouchers = DB::table('vouchers')->paginate(15);
-		$vList = Voucher::where('merchants_id', '=', \Auth::user()->users_id)->get();
-		$vCount = $vList->count();
-		$vouchers = Voucher::Paginate(10);
-		$vouchers->withPath('/vouchers');
+	{		
+		$merchant = Merchant::where('users_id', '=', \Auth::user()->users_id)->firstOrFail();
+		$vList = Voucher::where('merchants_id', '=', $merchant->merchants_id)->get();
+		$vCount = $vList->count();					
+		$vouchers = Voucher::where('merchants_id', $merchant->merchants_id)->paginate(10);				
+		$vouchers->withPath('/vouchers');		
 		return view('voucher.index', ['vouchers' => $vouchers, 'vCount' => $vCount ]);  		
 	}
 
@@ -189,8 +189,9 @@ class VoucherController extends Controller
 	}
 
 	public function redeem_index(Voucher $voucher)
-	{
-		$vouchers = Voucher::Paginate(10);
+	{			
+		$merchant = Merchant::where('users_id', '=', \Auth::user()->users_id)->firstOrFail();
+		$vouchers = Voucher::where('merchants_id', $merchant->merchants_id)->paginate(10);				
 		$vouchers->withPath('/vouchers/redeem'); //get only vouchers that are valid
 		return view('voucher.redeem_index', ['vouchers' => $vouchers]);  		
 	}

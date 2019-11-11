@@ -3,42 +3,47 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use App\Admin;
 
 class AdminController extends Controller
 {
-    public function adminProfile(){
-    	return view('frontView.admin.adminProfile');
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
     }
 
-    public function editAdminProfile(){
-        return view('frontView.admin.adminProfile');
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        return view('Admin.admin');
     }
 
-    public function dashboardAdmin(){
-    	return view('frontView.admin.dashboardAdmin');
+     public function adminProfile()
+     {
+        return view('Admin.adminProfile');
     }
 
-    public function merchantTable(){
-    	return view('frontView.admin.merchantTable');
+    public function merchantTable()
+    {
+        return view('Admin.merchantTable');
     }
 
-     public function editMerchant(){
-        return view('frontView.admin.merchantTable');
+      public function ownerTable()
+      {
+        return view('Admin.ownerTable');
     }
 
-    public function ownerTable(){
-    	return view('frontView.admin.ownerTable');
-    }
-
-     public function editOwner(){
-        return view('frontView.admin.ownerTable');
-    }
-
-    public function respondentTable(){
-    	return view('frontView.admin.respondentTable');
-    }
-
-    public function editRespondent(){
-        return view('frontView.admin.respondentTable');
+     public function respondentTable(){
+        return view('Admin.respondentTable');
     }
 }

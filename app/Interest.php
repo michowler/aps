@@ -13,4 +13,10 @@ class Interest extends Model
     {
         return $this->belongsToMany(Voucher::class, 'tag_interests_vouchers', 'interests_id', 'vouchers_id' )->withTimestamps();
     }
+    
+    //Alice
+    public function surveys()
+    {
+    	return $this -> belongsToMany(Interest::class,'tag_intrerest_surveys','interests_id','surveys_id');
+    }
 }

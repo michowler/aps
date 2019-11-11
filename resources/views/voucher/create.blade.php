@@ -87,8 +87,10 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label>{{ __('Branch Store') }}</label>
+                    <!-- <span><input onchange="checkAll(this)" class="checkbox" type="checkbox"> Select All</span> -->
+
                      <div class="form-group">                                                        
-                        <table class="table">
+                        <table class="table" id="storesTable" style="border: none">
                             <tbody>
                                 @foreach($stores->chunk(3) as $chunk_store)
                                 <tr>         
@@ -133,29 +135,33 @@
        </div>
 
        <div class="row">
-        <div class="col-md-12">
-            <label class="control-label" for="date">Tag your voucher</label>
-            <div class="table-full-width borderless" >
-                <table class="table">
-                    <tbody>
-                        @foreach($interests->chunk(3) as $chunk_interest)
-                        <tr>         
-                            @foreach( $chunk_interest as $interest )                               
-                            <td>
-                                                   
-                                    <input class="checkbox" value="{{$interest->interests_id}}" name="interests[]" id="checkbox{$interest->interests_id}" type="checkbox">
-                            
-                                
-                            </td>
-                            <td>{{$interest->interests_name}}</td>                            
-                            @endforeach
-                        </tr>                        
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+           <div class="col-md-12">
+               <div class="form-group">
+                   <label>{{ __('Tag Your Voucher') }}</label>
+                    <div class="form-group">                                                        
+                       <table class="table" style="border: none">
+                           <tbody>
+                               @foreach($interests->chunk(3) as $chunk_interest)
+                               <tr>         
+                                   @foreach( $chunk_interest as $interest )                   
+                                   <td>
+                                                          
+                                           <input class="checkbox" value="{{$interest->interests_id}}" name="interests[]" id="checkbox{$interest->interests_id}" type="checkbox">                                            
+                                       
+                                   </td>
+                                   <td>{{$interest->interests_name}}</td>                           
+                                   @endforeach
+                               </tr>                        
+                               @endforeach
+                           </tbody>
+                       </table>                   
+                   </div>
+
+               </div>
+           </div>
+       </div>
+
+     
 
 
 
@@ -177,16 +183,36 @@
 </div>
 </div>
 @endsection
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
 
-                reader.onload = function (e) {
-                    $('#logoVoucher').attr('src', e.target.result);
-                }
-
-                reader.readAsDataURL(input.files[0]);
-            }
+        reader.onload = function (e) {
+            $('#logoVoucher').attr('src', e.target.result);
         }
-    </script>
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function checkAll(ele) {
+     var checkboxes = document.getElementsByTagName('input');
+     if (ele.checked) {
+         for (var i = 0; i < checkboxes.length; i++) {
+             if (checkboxes[i].type == 'checkbox') {
+                 checkboxes[i].checked = true;
+             }
+         }
+     } else {
+         for (var i = 0; i < checkboxes.length; i++) {
+             console.log(i)
+             if (checkboxes[i].type == 'checkbox') {
+                 checkboxes[i].checked = false;
+             }
+         }
+     }
+ }
+
+</script>
