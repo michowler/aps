@@ -16,8 +16,7 @@
             <div class="row">
               <div class="col-md-12">    
 
-                <p class="title">No. of Vouchers created: {{$vCount}}</h4>
-                <p class="title">No. of Vouchers redeemed: {{$vCount}}</h4><br>
+                <p class="title">No. of Vouchers created: {{$vCount}}</h4>                                  
                 <table class="table table-borderless">
                   
                   <tbody>

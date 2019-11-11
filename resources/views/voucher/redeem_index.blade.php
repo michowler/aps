@@ -6,14 +6,14 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Active Vouchers</h4>
+                                <h4 class="title">Redeemed Vouchers</h4>
                             </div>
                             <div class="content">
                                 <form>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <table class="table table-borderless">
-                                              
+                                            <p class="title">No. of Vouchers redeemed: </h4><br>
+                                            <table class="table table-borderless">                                              
                                               <tbody>
                                                 <tr>
                                                   <th scope="row">Voucher</th>
