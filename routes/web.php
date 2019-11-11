@@ -56,9 +56,12 @@ Route::get('/voucher/redeem', 'Voucher\VoucherController@redeem_index')->name('r
 Route::get('/voucher/edit/{vouchers_id}', 'Voucher\VoucherController@edit')->name('editVoucher');
 Route::post('/voucher/edit/{vouchers_id}/update', 'Voucher\VoucherController@update')->name('updateVoucher');
 
+//Merchants
+Route::get('/merchant-profile/{name}/edit', 'User\UserController@edit_merchant')->name('editMerchant');
+Route::get('/owner-profile/{name}/edit', 'User\UserController@edit_owner')->name('editOwner');
 //Respondents
-Route::get('/{name}/profile', 'Respondent\RespondentController@edit')->name('editUser');
-Route::post('/{name}/profile', 'User\UserController@destroy')->name('deleteUser');
+Route::get('/user-profile/{name}/edit', 'Respondent\RespondentController@edit')->name('editUser');
+Route::post('/user-profile/{name}', 'User\UserController@destroy')->name('deleteUser');
 // Route::post('/{name}/profile', 'Respondent\RespondentController@destroy')->name('deleteUser');
 Route::post('/{name}/vouchers/{vouchers_id}/redeem/success', 'User\UserController@redeem_success')->name('redeemSuccess');
 
