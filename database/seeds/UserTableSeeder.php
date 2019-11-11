@@ -21,16 +21,19 @@ class UserTableSeeder extends Seeder
 
         // $users = [];
 
-        $user = User::create(['name'=> 'Michelle', 'email' => 'm@gmail.com', 'password' => bcrypt('123123123'), 'email_verified_at' => now(), 'remember_token' => Str::random(10)]);
+        $merchant = User::create(['name'=> 'Subway', 'email' => 'm@gmail.com', 'password' => bcrypt('123123123'), 'email_verified_at' => now(), 'remember_token' => Str::random(10)]);
+        $owner = User::create(['name'=> 'Michelle', 'email' => 'o@gmail.com', 'password' => bcrypt('123123123'), 'email_verified_at' => now(), 'remember_token' => Str::random(10)]);
         // $users[$user->users_id] = $user;
         // $user = User::create(['id' => 2, 'blah' => 'honk']);
         // $users[$user->id] = $user;        
 
         // $roles = [];
-        $role = Role::where('roles_id', '=', 3)->get();          
+        $role3 = Role::where('roles_id', '=', 3)->get();          
+        $role2 = Role::where('roles_id', '=', 2)->get();          
         // $roles[$role->roles_id] = $role;        
 
-        $user->roles()->attach($role); //sync roles_id
+        $merchant->roles()->attach($role3); //sync roles_id
+        $owner->roles()->attach($role2); //sync roles_id
         // $user[1]->roles()->sync([2,3]);        
     }
 
