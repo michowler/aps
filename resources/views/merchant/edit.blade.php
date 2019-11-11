@@ -101,15 +101,25 @@
 					</div>    
 					<div class="row">
 						<div class="col-md-12">                 
-							<button data-toggle="modal" data-target="#deleteUserModal" type="submit" class="btn btn-danger btn-fill pull-left" >Delete Account</button>
+							
 							<button type="submit" class="btn btn-info btn-fill pull-right">Update Profile</button>
 							<div class="clearfix"></div>
 						</div>
 					</div>
 				</form>
+				<hr>
+				<div class="row">
+					<div class="col-md-12">    
+					<h4 class="title">Delete Account</h4><br>
+						<button data-toggle="modal" data-target="#deleteUserModal" class="btn btn-danger btn-fill pull-left" >Delete Account</button>
+					</div>
+				</div> 
+				
 			</div>
 		</div>
-	</div>                          
+	</div>      
+    
+             
 
 
 
