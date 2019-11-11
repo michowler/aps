@@ -11,4 +11,21 @@ class UserController extends Controller
     {
         return view('merchant.edit');
     }
+
+    public function edit_owner()
+    {
+        return view('owner.edit');
+    }
+
+    public function redeem_success()
+    {
+        return view('respondent.redeem_success');
+    }
+
+    public function destroy(User $user)
+    {
+    	$user = User::find(request('users_id'));
+    	$user->delete();		
+    	return redirect()->route('login')->with('success','User deleted successfully');
+    }
 }

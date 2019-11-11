@@ -99,6 +99,7 @@
     </div>
     <!-- Page content -->
     <div class="container mt--8 pb-5">
+      @include('flash-message')
       @yield('content') 
     </div>
   <!-- Footer 

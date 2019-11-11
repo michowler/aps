@@ -231,6 +231,14 @@ class VoucherController extends Controller
 		return view('voucher.redeem_qr', ['voucher' => $voucher, 'vouchers' => $vouchers]);        
 	}
 
+	public function update_status(Request $request)
+	{
+		$voucher = Voucher::where('vouchers_id', '=', $request->vouchers_id)->firstOrFail();
+		$voucher->status = request('status');
+		$voucher->save();
+		return redirect()->route('myVouchers')->with('success','Voucher updated successfully');
+	}
+
 	public function demo(Voucher $voucher)
 	{
 		//

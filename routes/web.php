@@ -55,13 +55,15 @@ Route::get('/voucher/redeem/qr-code/{vcode2}', 'Voucher\VoucherController@redeem
 Route::get('/voucher/redeem', 'Voucher\VoucherController@redeem_index')->name('redeem');
 Route::get('/voucher/edit/{vouchers_id}', 'Voucher\VoucherController@edit')->name('editVoucher');
 Route::post('/voucher/edit/{vouchers_id}/update', 'Voucher\VoucherController@update')->name('updateVoucher');
+Route::post('/voucher/show/{vouchers_id}/update_status', 'Voucher\VoucherController@update_status')->name('updateStatVoucher');
 
-//Merchants
+//Edit Profiles (merchant, respondent, owner)
 Route::get('/merchant-profile/{name}/edit', 'User\UserController@edit_merchant')->name('editMerchant');
 Route::get('/owner-profile/{name}/edit', 'User\UserController@edit_owner')->name('editOwner');
-//Respondents
 Route::get('/user-profile/{name}/edit', 'Respondent\RespondentController@edit')->name('editUser');
-Route::post('/user-profile/{name}', 'User\UserController@destroy')->name('deleteUser');
+//Respondents
+Route::post('/profile/{name}', 'User\UserController@destroy')->name('deleteUser');
+Route::post('/user-profile/{name}', 'Respondent\RespondentController@destroy')->name('deleteRes');
 // Route::post('/{name}/profile', 'Respondent\RespondentController@destroy')->name('deleteUser');
 Route::post('/{name}/vouchers/{vouchers_id}/redeem/success', 'User\UserController@redeem_success')->name('redeemSuccess');
 
@@ -108,8 +110,7 @@ Route::get('/respondentTable','AdminController@respondentTable')->name('responde
 Route::get('/resRegister','Auth\RegisterController@resRegister')->name('res.register');
 //Route::post('/resRegister','Auth\RegisterController@register')->name('register');
 Route::get('/res','Respondent\RespondentController@index')->name('res.dashboard');
-Route::get('/resProfile','Respondent\RespondentController@resProfile')->name('res.profile');
-Route::get('/resVoucher','Respondent\RespondentController@resVoucher')->name('res.voucher');
+Route::get('/resVoucher','Respondent\RespondentController@res_voucher_index')->name('resVoucher');
 
 //merchant
 Route::get('/merchantRegister','Auth\RegisterController@merchantRegister')->name('res.register');
@@ -147,7 +148,6 @@ Route::get('/merchantRegister','Auth\RegisterController@merchantRegister')->name
 
 // Route::get('/resRegister','Auth\RegisterController@resRegister')->name('res.register');
 // Route::get('/ownerRegister','Auth\RegisterControllerr@ownerRegister')->name('owner.register');
-Route::get('/merchantRegister','Auth\RegisterController@merchantRegister')->name('merchant.register');
 
 // Route::get('/verify','FrontController@verify');
 // Route::get('/forgetPassword','FrontController@forgetPassword');
