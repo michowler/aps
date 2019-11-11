@@ -8,16 +8,18 @@ use App\plan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\payments;
+use App\Package;
+use Carbon\Carbon;
 
 
 class planController extends Controller
 {
     public function index(){
-    	return view('owner.upgrade');
+        return view('surveyOwner.upgrade');
     }
 
     public function  checkout(){
-    	return view ('payment.create');
+        return view ('payment.create');
     }
 
     /**
@@ -31,6 +33,7 @@ class planController extends Controller
         $payments = new Payments;
 
             $payments -> amount = '100';
+            $payments -> status = '1';
             $payments -> first_name =   $request ->first_name;
             $payments -> last_name  =   $request ->last_name;
             $payments -> billing_address    =   $request ->billing_address;
@@ -43,7 +46,27 @@ class planController extends Controller
             $payments -> sec_code   = $request ->sec_code;
             $payments -> users_id = Auth::user() -> users_id;
 
+
+            DB::table('tag_owner_packages')->insert(
+                ['packages_id' => 2, 'users_id' => Auth::user()->users_id, 'no_surveys' => -1, 'no_respondents' => -1, 'no_questions' => -1,'start_date' => Carbon::today()->format('Y-m-d')]
+                );
+
+            $latestOwnerPackageID = DB::table('tag_owner_packages')->where('users_id',Auth::user() -> users_id)->get()->last()->owner_packages_id;
+            $payments -> owner_packages_id = $latestOwnerPackageID;
+
             $payments -> save();
+
+            // return view('surveyOwner.owner_dashboard');
+
+    }
+
+    public function unSub(){
+
+        DB::table('tag_owner_packages')->insert(
+                ['packages_id' => 1, 'users_id' => Auth::user()->users_id, 'no_surveys' => 20, 'no_respondents' => 50, 'no_questions' => 10, 'end_date' =>  Carbon::today()->addMonth(1)->format('Y-m-d H:i:s')]
+                );
+
+        return view('surveyOwner.owner_dashboard');
 
     }
 

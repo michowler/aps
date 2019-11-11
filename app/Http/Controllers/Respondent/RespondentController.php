@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class RespondentController extends Controller
 {
+
+      public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +20,7 @@ class RespondentController extends Controller
      */
     public function index()
     {
-        //
+        return view('respondent.res');
     }
 
     /**
@@ -85,5 +90,10 @@ class RespondentController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function resVoucher()
+    {
+    return view('respondent.resVoucher');
     }
 }

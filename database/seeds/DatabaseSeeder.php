@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             RoleTableSeeder::class,
             UserTableSeeder::class,
             MerchantTableSeeder::class,           
-            StoreTableSeeder::class                                   
+            StoreTableSeeder::class,
+            LocationTableSeeder::class                                 
         ]);
         
          // factory(App\User::class, 10)->create()->each(function ($user) {

@@ -42,9 +42,7 @@ Auth::routes(['reset' => false]);
 // Auth::routes(['register' => false]);
 
 // Michelle 
-
 //Vouchers
-
 Route::get('/vouchers', 'Voucher\VoucherController@index')->name('myVouchers');
 Route::get('/voucher/create', 'Voucher\VoucherController@create')->name('generate');
 Route::post('/voucher/store', 'Voucher\VoucherController@store')->name('storeVoucher');
@@ -71,35 +69,65 @@ Route::get('/', ['middleware' =>'guest', function(){
 
 
 // Ying Ying 
-Route::get('/upgrade', 'plan\planController@index');
-Route::get('/create','plan\planController@checkout');
-// Route::get('/','Survey\SurveyController@surveyList');
-// Route::get('/chart','Survey\SurveyController@showChart');
-Route::post('store','plan\planController@store');
+Route::get('/upgrade', 'plan\planController@index')->name('packageSubscription');
+Route::get('/create','plan\planController@checkout')->name('checkout');
+Route::get('/chart','Survey\SurveyController@showChart');
+Route::post('storePayment','plan\planController@store');
 
 
 
 
 // Alice
 //owner
+Route::get('/ownerRegister','Auth\RegisterController@ownerRegister')->name('owner.register');
+Route::get('/ownerDashboard', 'Owner\OwnerController@index')->name('ownerDashboard');
+Route::resource('surveys', 'Survey\SurveyController');
+Route::post("store", 'Survey\SurveyController@store')->name('storeSurvey');
+Route::get('/createSurvey','Survey\SurveyController@createSurvey')->name('createSurvey');
+Route::resource('questions', 'Survey\SurveyController@storeQuestion');
+Route::post("storeQuestion", 'Survey\SurveyController@storeQuestion')->name('storeQuestion');
+Route::get('/createQuestion','Survey\SurveyController@createQuestion')->name('createQuestion');
+Route::get('/userProfile','Owner\OwnerController@userProfile')->name('owner.profile');
+Route::get('/mySurvey','Survey\SurveyController@mySurvey')->name('ownerSurvey');
+Route::get('/mySurvey/delete/{id}','Survey\SurveyController@destroy')->name('survey.destroy');
 
-Route::get('/dashboard', 'owner\OwnerController@index')->name('ownerDashboard');
 
-Route::get('/userProfile', 'Owner\OwnerController@userProfile');
+//admin
+Route::get('/admin/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+Route::post('/admin/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
+Route::get('/admin', 'AdminController@index')->name('admin.dashboard');
+Route::get('/adminProfile','AdminController@adminProfile')->name('admin.profile');
+Route::get('/merchantTable','AdminController@merchantTable')->name('merchantTable');
+Route::get('/ownerTable','AdminController@ownerTable')->name('ownerTable');
+Route::get('/respondentTable','AdminController@respondentTable')->name('respondentTable');
 
-Route::get('/userProfile/editUserProfile', 'Owner\OwnerController@userProfile');
+//respondent
+Route::get('/resRegister','Auth\RegisterController@resRegister')->name('res.register');
+//Route::post('/resRegister','Auth\RegisterController@register')->name('register');
+Route::get('/res','Respondent\RespondentController@index')->name('res.dashboard');
+Route::get('/resProfile','Respondent\RespondentController@resProfile')->name('res.profile');
+Route::get('/resVoucher','Respondent\RespondentController@resVoucher')->name('res.voucher');
 
-Route::get('/userProfile/saveUserProfile', 'Owner\OwnerController@userProfile');
+//merchant
+Route::get('/merchantRegister','Auth\RegisterController@merchantRegister')->name('res.register');
+//Route::get('/merchant','Auth\LoginController@merchant')->name('merchant.dashboard');
+
+//
+// Route::get('/userProfile', 'Owner\OwnerController@userProfile');
+
+// Route::get('/userProfile/editUserProfile', 'Owner\OwnerController@userProfile');
+
+// Route::get('/userProfile/saveUserProfile', 'Owner\OwnerController@userProfile');
 
 //survey
 
-Route::get('/mySurvey','Survey\SurveyController@mySurvey');	//display survey list
+//Route::get('/mySurvey','Survey\SurveyController@mySurvey');	//display survey list
 
-Route::get('/chart','Survey\SurveyController@showChart');
+//Route::get('/chart','Survey\SurveyController@showChart');
 
-Route::get('/createSurvey', 'Survey\SurveyController@create');
+// Route::get('/createSurvey', 'Survey\SurveyController@create');
 
-Route::post('/storeSurvey', 'Survey\SurveyController@store')->name('storeSurvey');
+// Route::post('/storeSurvey', 'Survey\SurveyController@store')->name('storeSurvey');
 
 // Route::resource('surveys', 'Owner\OwnerController');
 
@@ -110,46 +138,29 @@ Route::post('/storeSurvey', 'Survey\SurveyController@store')->name('storeSurvey'
 
 
 
-//admin
 
 
-Route::get('/registerAs','FrontController@registerAs');
+// Route::get('/registerAs','FrontController@registerAs');
 
-Route::get('/resRegister','FrontController@resRegister');
+// Route::get('/resRegister','Auth\RegisterController@resRegister')->name('res.register');
+// Route::get('/ownerRegister','Auth\RegisterControllerr@ownerRegister')->name('owner.register');
+Route::get('/merchantRegister','Auth\RegisterController@merchantRegister')->name('merchant.register');
 
-Route::get('/ownerRegister','FrontController@ownerRegister');
-
-Route::get('/merchantRegister','FrontController@merchantRegister');
-
-Route::get('/verify','FrontController@verify');
-
-Route::get('/forgetPassword','FrontController@forgetPassword');
-
-Route::get('/passwordNotification', 'FrontController@passwordNotification');
-
-Route::get('/subPlan','FrontController@subPlan');
-
-Route::get('/createQuestion', 'Owner\OwnerController@createQuestion');
-
-Route::get('/createQuestion/editQuestion', 'Owner\OwnerController@createQuestion');
-
-Route::get('/adminProfile','AdminController@adminProfile');
-
-Route::get('/adminProfile/editAdminProfile','AdminController@adminProfile');
-
-Route::get('/dashboardAdmin','AdminController@dashboardAdmin');
-
-Route::get('/merchantTable','AdminController@merchantTable');
-
-Route::get('/merchantTable/editMerchant','AdminController@merchantTable');
-
-Route::get('/respondentTable','AdminController@respondentTable');
-
-Route::get('/respondentTable/editRespondent','AdminController@respondentTable');
-
-Route::get('/ownerTable','AdminController@ownerTable');
-
-Route::get('/ownerTable/editOwner','AdminController@ownerTable');
+// Route::get('/verify','FrontController@verify');
+// Route::get('/forgetPassword','FrontController@forgetPassword');
+// Route::get('/passwordNotification', 'FrontController@passwordNotification');
+// Route::get('/subPlan','FrontController@subPlan');
+// Route::get('/createQuestion', 'Owner\OwnerController@createQuestion');
+// Route::get('/createQuestion/editQuestion', 'Owner\OwnerController@createQuestion');
+// Route::get('/adminProfile','AdminController@adminProfile');
+// Route::get('/adminProfile/editAdminProfile','AdminController@adminProfile');
+// Route::get('/dashboardAdmin','AdminController@dashboardAdmin');
+// Route::get('/merchantTable','AdminController@merchantTable');
+// Route::get('/merchantTable/editMerchant','AdminController@merchantTable');
+// Route::get('/respondentTable','AdminController@respondentTable');
+// Route::get('/respondentTable/editRespondent','AdminController@respondentTable');
+// Route::get('/ownerTable','AdminController@ownerTable');
+// Route::get('/ownerTable/editOwner','AdminController@ownerTable');
 
 
 
