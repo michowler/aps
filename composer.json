@@ -1,7 +1,7 @@
 {
     "name": "laravel/laravel",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Automated and Personalized Survey Engine",
     "keywords": [
         "framework",
         "laravel"
