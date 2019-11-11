@@ -114,28 +114,7 @@ window.addEventListener('load', function () {
 
 </script>
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
-  <div class="modal-dialog">
-  
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title text-center">Voucher Redemption</h4>
-      </div>
-      <div class="modal-body text-center">
-        <p>Are you sure you want to redeem?</p>
-        <button type="button" class="btn btn-info btn-md" style="margin-right:10px" data-toggle="modal" data-target="#myModal">Yes, confirm</button>
-        <button type="button" class="btn btn-danger btn-md" data-toggle="modal" data-target="#myModal">No, reject</button>
-      </div>
-      <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div> -->
-    </div>
-    
-  </div>
-</div>
+
 
 <div class="wrapper">
     <div class="sidebar" data-color="blue" data-image="{{asset('assets')}}/img/sidebar-5.jpg">
@@ -205,27 +184,7 @@ window.addEventListener('load', function () {
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-globe"></i>
-                                    <b class="caret hidden-sm hidden-xs"></b>
-                                    <span class="notification hidden-sm hidden-xs">1</span>
-                                    <p class="hidden-lg hidden-md">
-                                        1 Notifications
-                                        <b class="caret"></b>
-                                    </p>
-                              </a>
-                              <ul class="dropdown-menu">
-                                <!-- <li> <a onclick="demo.showMessage('top','center', 
-                                  'Error: Please fill in all fields.')">Submit</a>
-                                  </li> -->
-                                  <li><a data-toggle="modal" data-target="#myModal">Voucher Redemption Approval</a></li>
-
-                                
-
-                               
-                              </ul>
-                        </li>
+                      
                         <li class="dropdown">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <p>
@@ -235,7 +194,7 @@ window.addEventListener('load', function () {
 
                               </a>
                               <ul class="dropdown-menu">
-                                <li><a href="{{ route('editUser', [\Auth::user()->name]) }}">Settings</a></li>
+                                <li><a href="{{ route('editUser', ['name' => \Auth::user()->name]) }}">Settings</a></li>
                                 <li>
                                   <a href="{{ route('logout') }}"
                                      onclick="event.preventDefault();

@@ -28,8 +28,8 @@ class AdminController extends Controller
         return view('Admin.admin');
     }
 
-     public function adminProfile()
-     {
+    public function adminProfile()
+    {
         return view('Admin.adminProfile');
     }
 

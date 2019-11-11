@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Respondent;
 
+use App\Voucher;
+use App\User;
+use App\surveys;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -92,8 +95,15 @@ class RespondentController extends Controller
         //
     }
 
-    public function resVoucher()
+    public function res_voucher_index()
     {
-        return view('respondent.resVoucher');
+        //1.find the user 
+        //2. find all completed surveys from the user
+        //3. get the voucher from the completed surveys
+        //4. list the vouchers 
+        $res = User::where('users_id', '=', \Auth::user()->users_id)->firstOrFail();               
+        $surveyswithvouchers = surveys::where('vouchers_id', $res->merchants_id)->paginate(10);              
+        $vouchers->withPath('/my-vouchers');       
+        return view('respondent.resVoucher', ['vouchers' => $vouchers]);
     }
 }

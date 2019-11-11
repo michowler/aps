@@ -13,7 +13,7 @@
                 <p>Are you sure you, want to delete your account?</p>
                 <p>Please copy the following sentence to delete account.</p>
                 <p>"I confirm to delete"</p>
-                <input type="text" name="deleteText" id="delUsrText" placeholder="Copy the text above here">
+                <input name="deleteText" type="text" class="form-control" id="delUsrText" placeholder="Copy the text above here">
             </div>
             
                 <input type="hidden" name="users_id" id="users_id" value="{{\Auth::user()->users_id}}">

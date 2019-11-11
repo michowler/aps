@@ -8,6 +8,7 @@
                 <div class="card-header">{{ __('Registration') }}</div>
 
                 <div class="card-body">
+                  
                     <form id="registerForm" method="POST" action="{{ route('register') }}">
                         @csrf
                         <select name="roles_id" id="roleVal1" class="form-control" >

@@ -140,12 +140,7 @@
 
                               </a>
                               <ul class="dropdown-menu">
-                                <li><a href="#">Settings</a></li>
-                                  <!-- <li><a href="#">Another action</a></li>
-                                  <li><a href="#">Something</a></li>
-                                  <li><a href="#">Another action</a></li>
-                                  <li><a href="#">Something</a></li>
-                                  <li class="divider"></li> -->
+                                <li><a href="{{route('editMerchant', ['name' => \Auth::user()->name])}}">Settings</a></li>
                                   <li>
                                     
                                         <a href="{{ route('logout') }}"
