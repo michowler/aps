@@ -138,14 +138,14 @@ window.addEventListener('load', function () {
 </div>
 
 <div class="wrapper">
-    <div class="sidebar" data-color="purple" data-image="{{asset('assets')}}/img/sidebar-5.jpg">
+    <div class="sidebar" data-color="blue" data-image="{{asset('assets')}}/img/sidebar-5.jpg">
 
     <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
 
 
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text">
+                <a href="/" class="simple-text">
                     APSE
                 </a>
             </div>
@@ -155,42 +155,32 @@ window.addEventListener('load', function () {
                 <p>RESPONDENTS</p>
 
               </li>
-                
-                 <li >
-                    <a href="#">
-                        <i class="pe-7s-graph"></i>
-                        <p>Dashboard</p>
-                    </a>
-                </li>
+               <li>
+                   <a href="/res">
+                       <i class="pe-7s-graph"></i>
+                       <p>Dashboard</p>
+                   </a>
+               </li>
+              <li >
+                   <a href="/resVoucher">
+                       <i class="pe-7s-note2"></i>
+                       <p>My Voucher</p>
+                   </a>
+               </li>
                 <li>
-
-                     <a href="#">
-                        <i class="pe-7s-note2"></i>
-                        <p>My Surveys</p>
-                    </a>
-                </li>
-                <li>
-
-                     <a href="#">
-                        <i class="pe-7s-gift"></i>
-                        <p>My Vouchers</p>
-                    </a>
-                </li>
-                <li class="">
-
-                    <a href="editUser.html">
-                        <i class="pe-7s-user"></i>
-                        <p>User Profile</p>
-                    </a>
-                </li>
-               <!--  <li class="active-pro">
-                    <a href="upgrade.html">
-                        <i class="pe-7s-rocket"></i>
-                        <p>Upgrade to PRO</p>
-                    </a>
-                </li> -->
-                
+                   <a href="/resProfile">
+                       <i class="pe-7s-user"></i>
+                       <p>Profile</p>
+                   </a>
+               </li>
+                <li class="active-pro">
+                   <a href="upgrade.html">
+                       <i class="pe-7s-rocket"></i>
+                       <p>Upgrade to PRO</p>
+                   </a>
+               </li>
             </ul>
+
     	</div>
     </div>
 

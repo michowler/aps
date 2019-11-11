@@ -94,6 +94,6 @@ class RespondentController extends Controller
 
     public function resVoucher()
     {
-    return view('respondent.resVoucher');
+        return view('respondent.resVoucher');
     }
 }
