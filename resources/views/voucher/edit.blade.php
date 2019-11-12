@@ -5,7 +5,7 @@
 @section('content')
 <div class="container-fluid">
     
-<div class="col-md-9">
+<div class="col-md-12">
     <div class="card">
        <div class="header">
            <h4 class="title">Edit your customisable voucher</h4>
@@ -52,7 +52,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="control-label" for="date">Expiry Date</label>
-                    <input name="expiry_date" class="form-control" id="date" name="date" value="{{ \Carbon\Carbon::parse($voucher->expiry_date)->format('d/m/Y')}}" type="date" min="<?php echo date('Y-m-d'); ?>" />
+                    <input name="expiry_date" class="form-control" id="date" name="date" value="{{ $voucher->expiry_date->format('Y-m-d')}}" type="date" min="<?php echo date('Y-m-d'); ?>" />
                 </div>
             </div>
             <div class="col-md-6">

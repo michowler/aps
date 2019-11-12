@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function edit_merchant()
-    {
+    {        
         return view('merchant.edit');
     }
 

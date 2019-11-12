@@ -157,8 +157,7 @@ class VoucherController extends Controller
 		$request->validate([
 			'title' => 'required',
 			'terms' => 'required',
-			'expiry_date' => 'required',	
-				
+			'expiry_date' => 'required',					
 		]);
 
 		// $voucher = Voucher::where('vouchers_id', '=', $request->vouchers_id)->firstOrFail();		
