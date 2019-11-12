@@ -162,7 +162,8 @@ class VoucherController extends Controller
 
 		// $voucher = Voucher::where('vouchers_id', '=', $request->vouchers_id)->firstOrFail();		
         $voucher->title = request('title');
-        $voucher->terms = request('terms');        
+        $voucher->terms = request('terms');  
+        $voucher->status = request('status');        
 		$voucher->qr_code = QrCode::size(250)->generate(route('redeemVoucher',['vouchers_id' => $voucher->vouchers_id]));   
         $voucher->expiry_date = request('expiry_date');
         $voucher->vouchers_types_id = request('vouchers_types_id');		
@@ -190,8 +191,8 @@ class VoucherController extends Controller
 	public function redeem_index(Voucher $voucher)
 	{			
 		$merchant = Merchant::where('users_id', '=', \Auth::user()->users_id)->firstOrFail();
-		$vouchers = Voucher::where('merchants_id', $merchant->merchants_id)->paginate(10);				
-		$vouchers->withPath('/vouchers/redeem'); //get only vouchers that are valid
+		$vouchers = Voucher::where('merchants_id', $merchant->merchants_id)->where('status', 'invalid')->paginate(10); //get only vouchers that are invalid	
+		$vouchers->withPath('/vouchers/redeem'); 
 		return view('voucher.redeem_index', ['vouchers' => $vouchers]);  		
 	}
 

@@ -20,7 +20,7 @@
                                                   <th>Title</th>
                                                   <th>Expiry Date</th>
                                                   <th>Status</th>
-                                                  <th>Action</th>
+                                                  <!-- <th>Action</th> -->
                                                   
                                                 </tr>
                                                 @foreach($vouchers as $voucher)
@@ -29,7 +29,7 @@
                                                     <td><a href="{{ route('showVoucher',['vouchers_id' => $voucher->vouchers_id]) }}" style="color:black;">{{ $voucher->title }}</a></td>
                                                     <td>{{ $voucher->expiry_date }}</td>
                                                     <td>Valid</td>
-                                                    <td><button class="btn btn-danger">redeem</button><td>
+                                                    <!-- <td><button href="{{ route('redeemVoucher',['vouchers_id' => $voucher->vouchers_id]) }}" class="btn btn-danger">redeem</button><td> -->
 
                                                   </tr>
                                                   @endforeach
