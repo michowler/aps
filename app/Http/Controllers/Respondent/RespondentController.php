@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Respondent;
 
 use App\Voucher;
 use App\User;
+use App\VouchersType;
 use App\surveys;
+use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -95,9 +97,18 @@ class RespondentController extends Controller
 		//
 	}
 
+	public function res_voucher_show()
+	{
+		$voucher = Voucher::find(request('vouchers_id'))->firstOrFail();		
+		$vouchers = Voucher::with('stores')->get();	
+		$vcode1 = request('vouchers_id');
+		$encrypted = Crypt::encryptString($vcode1);			
+		$vType = VouchersType::where('vouchers_types_id', '=', $voucher->vouchers_types_id)->first();	
+		return view('respondent.showVoucher', ['voucher' => $voucher, 'encrypted' => $encrypted , 'vType' => $vType]);
+	}
+
 	public function res_voucher_index()
 	{
-
 		$res = User::where('users_id', '=', \Auth::user()->users_id)->firstOrFail();		
 		$surveys = $res->surveys()->get()->vouchers()->get();
 		// $vouchers = $surveys->vouchers()->get();

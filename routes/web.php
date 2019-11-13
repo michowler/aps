@@ -61,6 +61,7 @@ Route::get('/merchant-profile/{name}/edit', 'User\UserController@edit_merchant')
 Route::get('/owner-profile/{name}/edit', 'User\UserController@edit_owner')->name('editOwner');
 Route::get('/user-profile/{name}/edit', 'Respondent\RespondentController@edit')->name('editUser');
 //Respondents
+Route::get('/showVoucher/{vouchers_id}', 'Respondent\RespondentController@res_voucher_show')->name('showResVoucher');
 Route::post('/profile/{name}', 'User\UserController@destroy')->name('deleteUser');
 Route::post('/user-profile/{name}', 'Respondent\RespondentController@destroy')->name('deleteRes');
 // Route::post('/{name}/profile', 'Respondent\RespondentController@destroy')->name('deleteUser');
