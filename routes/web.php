@@ -65,8 +65,8 @@ Route::get('/showVoucher/{vouchers_id}', 'Respondent\RespondentController@res_vo
 Route::post('/profile/{name}', 'User\UserController@destroy')->name('deleteUser');
 Route::post('/user-profile/{name}', 'Respondent\RespondentController@destroy')->name('deleteRes');
 // Route::post('/{name}/profile', 'Respondent\RespondentController@destroy')->name('deleteUser');
-Route::get('/{name}/vouchers/{vouchers_id}/redeem/success', 'User\UserController@redeem_success')->name('redeemSuccess');
-Route::post('/{name}/vouchers/{vouchers_id}/redeem-success', 'User\UserController@redeem_v_success')->name('redeemVSuccess');
+Route::get('/{name}/vouchers/{vouchers_id}/redeem/success', 'Respondent\RespondentController@redeem_success')->name('redeemSuccess');
+Route::post('/{name}/vouchers/{vouchers_id}/redeem-success', 'Respondent\RespondentController@redeem_v_success')->name('redeemVSuccess');
 
 //Auth
 Route::get('/', ['middleware' =>'guest', function(){

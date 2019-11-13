@@ -20,7 +20,7 @@ class surveys extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class,'tag_respondents_surveys','surveys_id','users_id')->withTimestamps();
+        return $this->belongsToMany(User::class,'tag_respondents_surveys','surveys_id','users_id')->withTimestamps()->withPivot('voucher_redeem_status', 'voucher_redemption_date');
     }
 
     //Alice

@@ -114,9 +114,22 @@ class RespondentController extends Controller
 		    ->join('surveys', 'surveys.surveys_id', '=', 'tag_respondents_surveys.surveys_id')
 		    ->where('tag_respondents_surveys.users_id', $res->users_id) 
 		    ->join('vouchers', 'vouchers.vouchers_id', '=', 'surveys.vouchers_id')   
-		    ->paginate(10);		
+		    ->paginate(10);	
+		$res_sur = $res->surveys()->get();		
 		$vouchers->withPath('/resVoucher');       
-		return view('respondent.resVoucher', ['vouchers' => $vouchers]);
+		return view('respondent.resVoucher', ['res_sur' => $res_sur, 'vouchers' => $vouchers]);
+	}
+
+	public function redeem_success($vouchers_id)
+	{
+		$res = User::find(Auth::user()->users_id)->firstOrFail();				
+		$res->surveys()->attach($vouchers_id,['voucher_redeemption_status' => 1 ]);
+		$voucher = Voucher::find($vouchers_id);		
+		if ($voucher->save()){    
+		    return view('respondent.redeem_success');  
+		}else{
+		    return redirect()->route('res.dashboard')->with('error','Voucher redeem unsuccessful.');
+		} 
 	}
 
 

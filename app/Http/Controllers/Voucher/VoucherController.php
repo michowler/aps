@@ -85,7 +85,7 @@ class VoucherController extends Controller
 		$voucher = new Voucher; 		
 		$validatedData = $request->validate([
 			'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-			'title' => 'required|max:255',						
+			'title' => 'required|max:20',						
 			'terms' => 'required',
 			'expiry_date' => 'required', 
 			'interests' => 'required',
@@ -108,7 +108,6 @@ class VoucherController extends Controller
 		$voucher::findOrFail($voucher->vouchers_id)->interests()->attach($interests);
 		$voucher::findOrFail($voucher->vouchers_id)->stores()->attach($stores,['status' => 1 ]);				
 		return redirect()->route('myVouchers')->with('success','Voucher created successfully.');
-			
 	}
 
 	/**
