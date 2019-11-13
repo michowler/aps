@@ -8,13 +8,13 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="header">
-                    <h4 class="title">Voucher ID: 2348</h4>
+                    <h4 class="title">Voucher ID: {{$voucher->vouchers_id}}</h4>
                 </div>
                 <div class="content">
                     <form method="GET" enctype="multipart/form-data" action="{{ route('redeemQR', ['vcode2' => $encrypted]) }}">
                      @csrf
-                        <input type="hidden" id="redeem_stat" name="voucher_redeem_status" value="1">
-                        <input type="hidden" id="redeem_date" name="voucher_redemption_date" value="{{date('Y-m-d H:i:s')}}">
+                   <!--      <input type="hidden" id="redeem_stat" name="voucher_redeem_status" value="1">
+                        <input type="hidden" id="redeem_date" name="voucher_redemption_date" value="{{date('Y-m-d H:i:s')}}"> -->
                         <div class="row">
                             <div class="col-md-12">
                                 <table class="table table-borderless">
