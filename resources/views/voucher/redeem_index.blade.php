@@ -16,11 +16,12 @@
                                             <table class="table table-borderless">                                              
                                               <tbody>
                                                 <tr>
-                                                  <th scope="row">Voucher</th>
+                                                  <th scope="row">ID</th>
                                                   <th>Title</th>
                                                   <th>Expiry Date</th>
                                                   <th>Status</th>
-                                                  <th>Action</th>
+                                                  <th>Redeemed</th>
+                                                  <!-- <th>Action</th> -->
                                                   
                                                 </tr>
                                                 @foreach($vouchers as $voucher)
@@ -28,8 +29,9 @@
                                                     <td>{{ $voucher->vouchers_id }}</td>
                                                     <td><a href="{{ route('showVoucher',['vouchers_id' => $voucher->vouchers_id]) }}" style="color:black;">{{ $voucher->title }}</a></td>
                                                     <td>{{ $voucher->expiry_date }}</td>
-                                                    <td>Valid</td>
-                                                    <td><button class="btn btn-danger">redeem</button><td>
+                                                    <td>{{ ucFirst($voucher->status) }}</td>
+                                                    <td>? yes : no</td>
+                                                    <!-- <td><button href="{{ route('redeemVoucher',['vouchers_id' => $voucher->vouchers_id]) }}" class="btn btn-danger">redeem</button><td> -->
 
                                                   </tr>
                                                   @endforeach

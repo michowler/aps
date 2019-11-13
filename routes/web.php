@@ -55,7 +55,6 @@ Route::get('/voucher/redeem/qr-code/{vcode2}', 'Voucher\VoucherController@redeem
 Route::get('/voucher/redeem', 'Voucher\VoucherController@redeem_index')->name('redeem');
 Route::get('/voucher/edit/{vouchers_id}', 'Voucher\VoucherController@edit')->name('editVoucher');
 Route::post('/voucher/edit/{vouchers_id}/update', 'Voucher\VoucherController@update')->name('updateVoucher');
-Route::post('/voucher/show/{vouchers_id}/update_status', 'Voucher\VoucherController@update_status')->name('updateStatVoucher');
 
 //Edit Profiles (merchant, respondent, owner)
 Route::get('/merchant-profile/{name}/edit', 'User\UserController@edit_merchant')->name('editMerchant');
@@ -65,7 +64,8 @@ Route::get('/user-profile/{name}/edit', 'Respondent\RespondentController@edit')-
 Route::post('/profile/{name}', 'User\UserController@destroy')->name('deleteUser');
 Route::post('/user-profile/{name}', 'Respondent\RespondentController@destroy')->name('deleteRes');
 // Route::post('/{name}/profile', 'Respondent\RespondentController@destroy')->name('deleteUser');
-Route::post('/{name}/vouchers/{vouchers_id}/redeem/success', 'User\UserController@redeem_success')->name('redeemSuccess');
+Route::get('/{name}/vouchers/{vouchers_id}/redeem/success', 'User\UserController@redeem_success')->name('redeemSuccess');
+Route::post('/{name}/vouchers/{vouchers_id}/redeem-success', 'User\UserController@redeem_v_success')->name('redeemVSuccess');
 
 //Auth
 Route::get('/', ['middleware' =>'guest', function(){

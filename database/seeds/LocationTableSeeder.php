@@ -18,6 +18,6 @@ class LocationTableSeeder extends Seeder
         ['locations_name' => 'MidValley', 'longitude' => '3.1184', 'latitude' => '101.6776']
     	];
     	\DB::table('locations')->insert($locations_name);
-}
+    }
 
 }

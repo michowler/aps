@@ -26,12 +26,15 @@
                     <form method="POST" enctype="multipart/form-data" action="{{ route('storeVoucher') }}">
                        @csrf
                        <input type="hidden" name="status" value="valid"/>
-
-                       <h4 class="title">{{strtoupper(\Auth::user()->name)}}<br />
-                            <label for="image">                                
-                                <input id="logo" class="form-control" name="logo" type='file' onchange="readURL(this);" />
-                                                         
-                            </label>
+                          <div class="row">
+                              <label>{{ __('Voucher Logo') }}</label>
+                              
+                       </div>
+                       <label for="image">                                
+                           <input id="logo" class="form-control" name="logo" type='file' onchange="readURL(this);" />
+                                             
+                       </label>
+                       
                     </h4>
                 </a>
             </div>
@@ -49,21 +52,6 @@
            <h4 class="title">Create your customisable voucher</h4>
        </div>
        <div class="content">
-       
-           <div class="row">
-
-           <!--  <div class="col-md-5">
-                <div class="form-group">
-                    <label>Company (disabled)</label>
-                    <input type="text" class="form-control" disabled placeholder="Company" value="{{\Auth::user()->name}}">
-                </div>
-            </div> -->
-
-
-
-
-        </div>
-
 
         <div class="row">
             <div class="col-md-12">
@@ -113,13 +101,13 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label class="control-label" for="date">Expiry Date</label>
                     <input name="expiry_date" class="form-control" id="date" value="<?php echo date('Y-m-d'); ?>" name="date" type="date" min="<?php echo date('Y-m-d'); ?>"/>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">       
                     <label class="control-label" for="date">Voucher Type</label>                                       
                     <select name="vouchers_types_id" class="form-control">
@@ -131,7 +119,13 @@
                        <option value="5">Deals</option>
                    </select>
                </div>
-           </div>                                    
+           </div>   
+           <div class="col-md-4">
+               <div class="form-group">
+                   <label class="control-label" for="date">Number of Vouchers</label>
+                   <input type="number" name="max_redeem" class="form-control"/>
+               </div>
+           </div>                                 
        </div>
 
        <div class="row">

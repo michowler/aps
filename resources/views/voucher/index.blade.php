@@ -24,6 +24,7 @@
                     <th>ID</th>
                     <th>Title</th>
                     <th>Expiry Date</th>
+                    <th>No. of Vouchers</th>   
                     <th>Status</th>    
                     <th></th>                                                  
                   </tr>
@@ -34,7 +35,8 @@
                       <td>{{ $voucher->vouchers_id }}</td>
                       <td><a href="{{ route('showVoucher',['vouchers_id' => $voucher->vouchers_id]) }}" style="color:black;">{{ $voucher->title }}</a></td>
                       <td>{{ $voucher->expiry_date->format('Y-m-d') }}</td>
-                      <td>{{ $voucher->status }}</td>
+                      <td>{{ $voucher->max_redeem }}</td>
+                      <td>{{ ucFirst($voucher->status) }}</td>
                       <!-- <td><button class="btn btn-danger">delete</button><td> -->
 
                     </tr>

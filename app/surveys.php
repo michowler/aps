@@ -11,6 +11,17 @@ class surveys extends Model
     public $incrementing = true;
 
     protected $fillable = [ 'surveys_id','surveys_title','surveys_description'];
+    
+    //Michelle
+    public function vouchers()
+    {
+        return $this->belongsTo(Voucher::class,'vouchers_id');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class,'tag_respondents_surveys','surveys_id','users_id')->withTimestamps();
+    }
 
     //Alice
     public function interests()
@@ -25,16 +36,13 @@ class surveys extends Model
 
     public function questions()
     {
-        return $this->hasoMany(Question::class,'questions','questions_id','surveys_id');
-    }
-
-     public function vouchers()
-    {
-        return $this->belongsToMany(Voucher::class,'surveys','vouchers_id','surveys_id');
+        return $this->hasMany(Question::class,'questions','questions_id','surveys_id');
     }
 
     // public function vouchers()
     // {
-    // 	return $this->brlongsToMany(Voucher::class,'')
+    //     return $this->belongsToMany(Voucher::class,'surveys','vouchers_id','surveys_id');
     // }
+
+
 }

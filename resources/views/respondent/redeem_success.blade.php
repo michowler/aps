@@ -1,7 +1,7 @@
 @extends('layouts.res_layout')
 @section('navbar-brand', "Redeem Voucher Success" )
 @section('content')
-@php
+<!-- @php
 alert('Redeem Voucher','Voucher sucessfully redeemed!', 'success')
-@endphp
+@endphp -->
 @endsection
