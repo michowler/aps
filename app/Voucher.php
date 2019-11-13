@@ -27,6 +27,8 @@ class Voucher extends Model
         'expiry_date' => 'datetime',
     ];
 
+    protected $dates = ['expiry_date'];
+
     public function merchants()
     {
       return $this->belongsTo(Merchant::class, 'merchants_id');      

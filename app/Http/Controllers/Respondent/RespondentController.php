@@ -109,12 +109,14 @@ class RespondentController extends Controller
 
 	public function res_voucher_index()
 	{
-		$res = User::where('users_id', '=', \Auth::user()->users_id)->firstOrFail();		
-		$surveys = $res->surveys()->get()->vouchers()->get();
-		// $vouchers = $surveys->vouchers()->get();
-		
-		// $surveys->withPath('/my-vouchers');       
-		return view('respondent.resVoucher', ['surveys' => $surveys]);
+		$res = User::find(Auth::user()->users_id)->firstOrFail();		
+		$vouchers = User::join('tag_respondents_surveys', 'users.users_id', '=', 'tag_respondents_surveys.users_id')
+		    ->join('surveys', 'surveys.surveys_id', '=', 'tag_respondents_surveys.surveys_id')
+		    ->where('tag_respondents_surveys.users_id', $res->users_id) 
+		    ->join('vouchers', 'vouchers.vouchers_id', '=', 'surveys.vouchers_id')   
+		    ->paginate(10);		
+		$vouchers->withPath('/resVoucher');       
+		return view('respondent.resVoucher', ['vouchers' => $vouchers]);
 	}
 
 

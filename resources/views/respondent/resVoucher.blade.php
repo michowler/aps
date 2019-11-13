@@ -27,7 +27,7 @@
                     <th>Status</th>    
                     <th></th>                                                  
                   </tr>
-                  {{$surveys}}
+                  
                   
                   
                   
@@ -37,8 +37,8 @@
                     <tr>
                       <td>{{ $voucher->vouchers_id }}</td>
                       <td><a href="{{ route('showResVoucher',['vouchers_id' => $voucher->vouchers_id]) }}" style="color:black;">{{ $voucher->title }}</a></td>
-                      <td>{{ $voucher->expiry_date->format('Y-m-d') }}</td>
-                      <td>{{ $voucher->status }}</td>
+                      <td>{{ Carbon\Carbon::parse($voucher->expiry_date)->format('Y-m-d') }}</td>
+                      <td>{{ ucFirst($voucher->status) }}</td>
                       <!-- <td><button class="btn btn-danger">delete</button><td> -->
 
                     </tr>
