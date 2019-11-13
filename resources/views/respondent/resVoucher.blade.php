@@ -27,19 +27,13 @@
                     <th>Status</th>    
                     <th></th>                                                  
                   </tr>
+                  {{$surveys}}
                   
                   
-                  @foreach($vouchers as $voucher)
-                    <tr>
-                      <td>{{ $voucher->vouchers_id }}</td>
-                      <td><a href="{{ route('showVoucher',['vouchers_id' => $voucher->vouchers_id]) }}" style="color:black;">{{ $voucher->title }}</a></td>
-                      <td>{{ $voucher->expiry_date->format('Y-m-d') }}</td>
-                      <td>{{ $voucher->status }}</td>
-                      <!-- <td><button class="btn btn-danger">delete</button><td> -->
-
-                    </tr>
-                    @endforeach
-                    {{ $vouchers->links() }}
+                  
+                  
+                  
+               
 
                       
                               </tbody>

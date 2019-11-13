@@ -13,7 +13,7 @@ class MerchantTableSeeder extends Seeder
     public function run()
     {        
         $faker = Faker::create();
-    	$merchants = [['users_id' => '1', 'merchants_email' => 'abc@gmail.com', 'status' => 'true']];
+    	$merchants = [['users_id' => '1', 'merchants_name' => 'Subway', 'merchants_email' => 'subway@gmail.com', 'status' => 'true']];
     	\DB::table('merchants')->insert($merchants);
 
     }

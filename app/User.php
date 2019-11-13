@@ -44,6 +44,10 @@ class User extends Authenticatable
     ];
 
     //Alice
+    public function surveys()
+    {
+      return $this->belongsToMany(User::class,'tag_respondents_surveys','users_id','surveys_id')->withTimestamps();
+    }
 
     public function roles()
     {
