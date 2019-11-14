@@ -8,6 +8,7 @@ use App\Store;
 use App\Interest;
 use App\VouchersType;
 use QrCode;
+use Route;
 use Validator;
 use Storage;
 use Input;
@@ -205,12 +206,13 @@ class VoucherController extends Controller
 		return view('voucher.redeem', ['voucher' => $voucher, 'vouchers' => $vouchers, 'encrypted' => $encrypted]);     
 	}
 
-	public function redeem_qr(Voucher $voucher, $vcode2)
-	{		
+	public function redeem_qr(Voucher $voucher, $vcode2, Request $request)
+	{		//check user and voucher info //if see the update then only show qr code
 		$decrypted = Crypt::decryptString($vcode2, $voucher->created_at);
 		$voucher = Voucher::find(rtrim($decrypted, $voucher->created_at));		
-		$vouchers = Voucher::with('stores')->get();								
-		return view('voucher.redeem_qr', ['voucher' => $voucher, 'vouchers' => $vouchers]);        
+		$vouchers = Voucher::with('stores')->get();	
+		$stores_id = $request->stores_id;			
+		return view('voucher.redeem_qr', ['stores_id' => $stores_id, 'voucher' => $voucher]);        
 	}
 
 	public function demo(Voucher $voucher)

@@ -60,13 +60,16 @@ Route::post('/voucher/edit/{vouchers_id}/update', 'Voucher\VoucherController@upd
 Route::get('/merchant-profile/{name}/edit', 'User\UserController@edit_merchant')->name('editMerchant');
 Route::get('/owner-profile/{name}/edit', 'User\UserController@edit_owner')->name('editOwner');
 Route::get('/user-profile/{name}/edit', 'Respondent\RespondentController@edit')->name('editUser');
-//Respondents
-Route::get('/showVoucher/{vouchers_id}', 'Respondent\RespondentController@res_voucher_show')->name('showResVoucher');
 Route::post('/profile/{name}', 'User\UserController@destroy')->name('deleteUser');
 Route::post('/user-profile/{name}', 'Respondent\RespondentController@destroy')->name('deleteRes');
 // Route::post('/{name}/profile', 'Respondent\RespondentController@destroy')->name('deleteUser');
-Route::get('/{name}/vouchers/{vouchers_id}/redeem/success', 'Respondent\RespondentController@redeem_success')->name('redeemSuccess');
-Route::post('/{name}/vouchers/{vouchers_id}/redeem-success', 'Respondent\RespondentController@redeem_v_success')->name('redeemVSuccess');
+
+//Respondents
+Route::get('/showVoucher/{vouchers_id}', 'Respondent\RespondentController@res_voucher_show')->name('showResVoucher');
+Route::get('resVoucher/{vouchers_id}/{stores
+_id}/redeem-success', 'Respondent\RespondentController@redeem_success')->name('redeemSuccess');
+Route::post('resVoucher/{vouchers_id}/{stores
+_id}/redeem-success', 'Respondent\RespondentController@redeem_v_success')->name('redeemVSuccess');
 
 //Auth
 Route::get('/', ['middleware' =>'guest', function(){

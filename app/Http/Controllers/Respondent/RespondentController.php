@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Respondent;
 use App\Voucher;
 use App\User;
 use App\VouchersType;
+use App\Store;
 use App\surveys;
+use DateTime;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -110,27 +112,56 @@ class RespondentController extends Controller
 	public function res_voucher_index()
 	{
 		$res = User::find(Auth::user()->users_id)->firstOrFail();		
-		$vouchers = User::join('tag_respondents_surveys', 'users.users_id', '=', 'tag_respondents_surveys.users_id')
-		    ->join('surveys', 'surveys.surveys_id', '=', 'tag_respondents_surveys.surveys_id')
-		    ->where('tag_respondents_surveys.users_id', $res->users_id) 
-		    ->join('vouchers', 'vouchers.vouchers_id', '=', 'surveys.vouchers_id')   
-		    ->paginate(10);	
-		$res_sur = $res->surveys()->get();		
+		// $vouchers = surveys::join('tag_respondents_surveys', 'tag_respondents_surveys.surveys_id', '=', 'surveys.surveys_id')			
+		//     ->join('vouchers', 'vouchers.vouchers_id', '=', 'surveys.vouchers_id')   
+		//     ->where('tag_respondents_surveys.users_id', '=', $res->users_id) 	
+		//     ->select('vouchers.vouchers_id', 'tag_respondents_surveys.voucher_redeem_status', 'vouchers.title', 'vouchers.status', 'vouchers.expiry_date' )
+		//     ->paginate(10);
+		// $res_sur = $res->surveys()->get();
+	    $vouchers = \DB::table('tag_respondents_surveys')
+        ->join('surveys', 'tag_respondents_surveys.surveys_id', '=', 'surveys.surveys_id')
+        ->join('vouchers', 'vouchers.vouchers_id', '=', 'surveys.vouchers_id')
+        ->select('vouchers.vouchers_id', 'tag_respondents_surveys.voucher_redeem_status', 'vouchers.title', 'vouchers.status', 'vouchers.expiry_date')
+        ->where('tag_respondents_surveys.users_id', '=', \Auth::user()->users_id)             
+        ->paginate(10);
+           	
 		$vouchers->withPath('/resVoucher');       
-		return view('respondent.resVoucher', ['res_sur' => $res_sur, 'vouchers' => $vouchers]);
+		return view('respondent.resVoucher', ['vouchers' => $vouchers]);
 	}
 
-	public function redeem_success($vouchers_id)
+	public function redeem_success(Request $request)
 	{
-		$res = User::find(Auth::user()->users_id)->firstOrFail();				
-		$res->surveys()->attach($vouchers_id,['voucher_redeemption_status' => 1 ]);
+		$dateNow =  date('Y-m-d H:i:s');
+		$res = User::find(\Auth::user()->users_id)->firstOrFail();	
+		$vouchers_id = $request->vouchers_id;
 		$voucher = Voucher::find($vouchers_id);		
-		if ($voucher->save()){    
-		    return view('respondent.redeem_success');  
-		}else{
-		    return redirect()->route('res.dashboard')->with('error','Voucher redeem unsuccessful.');
-		} 
+		//$voucher = Voucher::where('vouchers_id', '=', $request->vouchers_id)->get(); 					
+		$store = Store::find($request->stores_id);
+		$res->surveys()->sync($request->vouchers_id,['voucher_redeem_status' => 1, 'voucher_redemption_date' => $dateNow, 'stores_id' => $request->stores_id]);
+		if ($voucher->save()){    			
+		    return redirect()->route('resVoucher', ['vouchers_id'=> $request->vouchers_id, 'stores_id' => $request->stores_id])->with('success','Voucher redeem successful.');
+		} else{
+		    return redirect()->route('resVoucher')->with('error','Voucher redeem unsuccessful.');
+		}	
+		
 	}
 
+	public function redeem_v_success(Request $request)
+	{
+		$dateNow =  date('Y-m-d H:i:s');
+		$res = User::find(\Auth::user()->users_id)->firstOrFail();	
+		$vouchers_id = $request->vouchers_id;
+		$voucher = Voucher::find($vouchers_id);		
+		//$voucher = Voucher::where('vouchers_id', '=', $request->vouchers_id)->get(); 					
+		$store = Store::find($request->stores_id);
+		$r_s = $res->surveys()->attach($request->vouchers_id,['voucher_redeem_status' => 1, 'voucher_redemption_date' => $dateNow, 'stores_id' => $request->stores_id])->get();
+		// $r_s->updateExistingPivot($roleId, $attributes)
+		if ($voucher->save()){    			
+		    return redirect()->route('redeemSuccess', ['vouchers_id'=> $request->vouchers_id, 'stores_id' => $request->stores_id])->with('success','Voucher redeem successful.');
+		}else{
+		    return redirect()->route('resVoucher')->with('error','Voucher redeem unsuccessful.');
+		}			
+		
+	}
 
 }
