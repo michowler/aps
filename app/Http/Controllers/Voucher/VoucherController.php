@@ -201,7 +201,7 @@ class VoucherController extends Controller
 	{
 		$decrypted = Crypt::decryptString($vcode1);
 		$voucher = Voucher::find($decrypted);		
-		$vouchers = Voucher::with('stores')->get();	
+		$vouchers = Voucher::with('stores')->get();
 		$encrypted = Crypt::encryptString($decrypted, $voucher->created_at);
 		return view('voucher.redeem', ['voucher' => $voucher, 'vouchers' => $vouchers, 'encrypted' => $encrypted]);     
 	}
@@ -211,7 +211,7 @@ class VoucherController extends Controller
 		$decrypted = Crypt::decryptString($vcode2, $voucher->created_at);
 		$voucher = Voucher::find(rtrim($decrypted, $voucher->created_at));		
 		$vouchers = Voucher::with('stores')->get();	
-		$stores_id = $request->stores_id;			
+		$stores_id = $request->stores_id;	
 		return view('voucher.redeem_qr', ['stores_id' => $stores_id, 'voucher' => $voucher]);        
 	}
 

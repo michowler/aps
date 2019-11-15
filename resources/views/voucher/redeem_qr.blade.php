@@ -6,7 +6,7 @@
 	                              
 	     @if ($voucher->qr_code)          
 	            
-	       {!!QrCode::size(500)->generate(route('redeemVSuccess',['vouchers_id' => $voucher->vouchers_id, 'stores_id' => $stores_id]))!!}
+	       {!!QrCode::size(450)->generate(route('redeemAccept',['vouchers_id' => $voucher->vouchers_id, 'stores_id' => $stores_id]))!!}
 	     
 	     @endif         
 	                      

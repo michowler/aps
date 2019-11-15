@@ -14,6 +14,7 @@
        <form method="POST" enctype="multipart/form-data" action="{{ route('updateVoucher', $voucher->vouchers_id) }}">
         @csrf
            <div class="row">
+             
 
            <!--  <div class="col-md-5">
                 <div class="form-group">
@@ -45,7 +46,6 @@
                 </div>
             </div>
         </div>
-
         
 
         <div class="row">
