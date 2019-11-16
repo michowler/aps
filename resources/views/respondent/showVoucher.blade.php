@@ -1,7 +1,7 @@
-@extends('layouts.merchant_layout')
+@extends('layouts.res_layout')
 @section('navbar-brand', "Voucher {$voucher->vouchers_id}: {$voucher->title}" )
 @section('content')
-@include('partials.delete-voucher-modal')
+
 <div class="container-fluid">
 	<div class="col-md-12">
 		<div class="card">
@@ -41,7 +41,7 @@
 					<div class="col-md-4 text-center">
 					 <div>                                
 							@if ($voucher->qr_code)                
-								{!!QrCode::size(250)->generate(route('redeemVoucher',['vcode1' => $encrypted]))!!}
+								{!!QrCode::size(250)->generate(route('redeemVoucher',['vcode1' => $encryptedVC, 'surveys_id' => $encryptedSid]))!!}
 							@endif                                    
 					 </div>
 				 </div>                                  
@@ -59,13 +59,7 @@
 					<label>VOUCHER TYPE: {{ $vType->vouchers_type }}</label><br>
 					<label>EXPIRY DATE: {{ $voucher->expiry_date->format('Y-m-d') }}</label>
 				</div>
-				<div class="col-md-4 text-center" style="padding:20px;">
-					<button type="button" data-toggle="modal" data-target="#deleteVoucherModal" type="submit" class="btn btn-danger btn-fill " style="margin-left:10px;">Delete <i class="fa fa-trash"></i></button>                    
-					<a href="{{ route('editVoucher',$voucher->vouchers_id)}}" class="btn btn-info btn-fill">Edit</a>          
-
-					<div class="clearfix"></div>
-
-				</div>
+				
 			</div>
 			 </form>
 			 
@@ -82,10 +76,4 @@
 
 </div>
 
-<script type="text/javascript">
- function formSubmit()
- {
-	 $("#deleteVoucherForm").submit();
- }
-</script>
 @endsection

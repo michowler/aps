@@ -9,7 +9,7 @@ class Merchant extends Model
     protected $primaryKey = 'merchants_id';
 
     protected $fillable = [
-        'users_id', 'merchants_email', 'merchants_address'
+        'users_id', 'merchants_email', 'merchants_address', 'merchants_name', 'merchants_phone'
     ];
 
     public function users()

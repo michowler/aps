@@ -10,14 +10,17 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function edit_merchant()
-    {        
-        return view('merchant.edit');
-    }
 
     public function edit_owner()
     {
-        return view('owner.edit');
+        $curUser = User::find(\Auth::user()->users_id);
+        return view('owner.edit', ['name' => $curUser->name]);
+    }
+
+    public function update_owner()
+    {
+        $curUser = User::find(\Auth::user()->users_id);
+        return view('owner.edit', ['name' => $curUser->name]);
     }
 
     public function redeem_v_success(Voucher $voucher) //should be inside respondents, post method

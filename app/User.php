@@ -46,7 +46,7 @@ class User extends Authenticatable
     //Alice
     public function surveys()
     {
-      return $this->belongsToMany(User::class,'tag_respondents_surveys','users_id','surveys_id')->withTimestamps();
+      return $this->belongsToMany(User::class,'tag_respondents_surveys','users_id','surveys_id')->withTimestamps()->withPivot('voucher_redeem_status', 'voucher_redemption_date');
     }
 
     public function roles()

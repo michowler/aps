@@ -11,14 +11,12 @@
                     <h4 class="title">Voucher ID: {{$voucher->vouchers_id}}</h4>
                 </div>
                 <div class="content">
-                    <form method="GET" enctype="multipart/form-data" action="{{ route('redeemQR', ['vcode2' => $encrypted]) }}">
+                    <form method="get" enctype="multipart/form-data" action="{{ route('redeemQR', ['vcode2' => $encryptedVC, 'surveys_id'=> $encryptedSid]) }}">
                      @csrf
-                   <!--      <input type="hidden" id="redeem_stat" name="voucher_redeem_status" value="1">
-                        <input type="hidden" id="redeem_date" name="voucher_redemption_date" value="{{date('Y-m-d H:i:s')}}"> -->
+                        <!-- <input type="hidden" name="users_id" value="{{\Auth::user()->users_id}}"> -->                        
                         <div class="row">
                             <div class="col-md-12">
                                 <table class="table table-borderless">
-
 
                                     <tbody>
                                         <tr>
@@ -45,7 +43,7 @@
                                                     <select name="stores_id" class="form-control" id="rSelect" >                                                              
                                                        
                                                         @foreach($voucher->stores as $store)            
-                                                          <option value="{{$store->stores_id}}">{{$store->name}}</option>                            
+                                                          <option value="{{$store->stores_id}}">{{$store->name}}</option>                                                                                     
                                                         @endforeach 
                                                            
                                                     </select>
