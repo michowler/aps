@@ -56,7 +56,8 @@ Route::get('/voucher/edit/{vouchers_id}', 'Voucher\VoucherController@edit')->nam
 Route::post('/voucher/edit/{vouchers_id}/update', 'Voucher\VoucherController@update')->name('updateVoucher');
 
 //Edit Profiles (merchant, respondent, owner)
-Route::get('/merchant-profile/{name}/edit', 'User\UserController@edit_merchant')->name('editMerchant');
+Route::get('/merchant-profile/{name}/edit', 'Merchant\MerchantController@edit')->name('editMerchant');
+Route::post('/merchant-profile/{name}/edit', 'Merchant\MerchantController@update')->name('updateMerchant');
 Route::get('/owner-profile/{name}/edit', 'User\UserController@edit_owner')->name('editOwner');
 Route::get('/user-profile/{name}/edit', 'Respondent\RespondentController@edit')->name('editUser');
 Route::post('/profile/{name}', 'User\UserController@destroy')->name('deleteUser');

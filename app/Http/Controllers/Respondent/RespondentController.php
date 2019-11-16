@@ -94,9 +94,11 @@ class RespondentController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy($id)
+	public function destroy()
 	{
-		//
+	    Auth::logout();
+	    alert()->success('You have been logged out.', 'Good bye!');
+	    return view('login');
 	}
 
 	public function res_voucher_show(Request $request)
