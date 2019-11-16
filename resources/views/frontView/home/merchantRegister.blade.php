@@ -1,11 +1,39 @@
 <div class="form-group row">
 
-    <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Company Name') }}</label>
+    <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
     <div class="col-md-6">
         <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
         @error('name')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+</div>
+<div class="form-group row">
+
+    <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Company Name') }}</label>
+
+    <div class="col-md-6">
+        <input id="mname" type="text" class="form-control @error('name') is-invalid @enderror" name="merchants_name" value="" required autocomplete="name" autofocus>
+
+        @error('merchants_name')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+</div>
+<div class="form-group row">
+
+    <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Company Phone') }}</label>
+
+    <div class="col-md-6">
+        <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="merchants_phone" value="" required autocomplete="phone" autofocus>
+
+        @error('phone')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>

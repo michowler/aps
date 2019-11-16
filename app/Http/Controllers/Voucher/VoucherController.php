@@ -126,7 +126,7 @@ class VoucherController extends Controller
 		$vouchers = Voucher::with('stores')->get();	
 		$vcode1 = request('vouchers_id');
 		$encrypted = Crypt::encryptString($vcode1);			
-		$vType = VouchersType::where('vouchers_types_id', '=', $voucher->vouchers_types_id)->first();				
+		$vType = VouchersType::where('vouchers_types_id', '=', $voucher->vouchers_types_id)->first();			
 		return view('voucher.show', ['voucher' => $voucher , 'encrypted' => $encrypted , 'vType' => $vType]);        
 	}
 
@@ -181,12 +181,11 @@ class VoucherController extends Controller
 	 */
 	public function destroy(Voucher $voucher)
 	{
-		$voucher = Voucher::find(request('vouchers_id'));
 		// $voucher->stores()->detach($stores_id);
 		// $voucher->interests()->detach($interests_id);
+		$voucher = Voucher::find(request('vouchers_id'));
 		$voucher->delete();		
-		return redirect()->route('myVouchers')->with('success','Voucher deleted successfully');
-		
+		return redirect()->route('myVouchers')->with('success','Voucher deleted successfully');		
 	}
 
 	public function redeem_index(Voucher $voucher)
@@ -220,7 +219,6 @@ class VoucherController extends Controller
 
 	public function demo(Voucher $voucher)
 	{
-		//
 		return view('voucher.demo');
 	}
 }

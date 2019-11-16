@@ -112,6 +112,8 @@ class RegisterController extends Controller
             ]);
             $merchant =  Merchant::create([            
                 'users_id' => $user->users_id,
+                'merchants_name' => $data['merchants_name'],
+                'merchants_phone' => $data['merchants_phone'],
                 'merchants_address' => $data['merchants_address'],
                 'merchants_email' => $data['merchants_email']                                            
             ]);   

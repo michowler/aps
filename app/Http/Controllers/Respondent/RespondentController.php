@@ -83,7 +83,7 @@ class RespondentController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{        
-		$user = Auth::user();
+		$user = \Auth::user();
 		$user->name = request('name');
 		return view('respondent.update', ['user' => $user]); 
 	}
@@ -95,10 +95,13 @@ class RespondentController extends Controller
 	 * @return \Illuminate\Http\Response
 	 */
 	public function destroy()
-	{
-	    Auth::logout();
-	    alert()->success('You have been logged out.', 'Good bye!');
-	    return view('login');
+	{	    
+	    $curUser = User::find(\Auth::user()->users_id);       		
+		$curUser->status = "invalid";
+		if ($curUser->delete()){
+			alert()->success('Your account has been deleted. You have been logged out.');
+	 	   return redirect()->route('login');
+		}	    
 	}
 
 	public function res_voucher_show(Request $request)

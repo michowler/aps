@@ -58,11 +58,14 @@ Route::post('/voucher/edit/{vouchers_id}/update', 'Voucher\VoucherController@upd
 //Edit Profiles (merchant, respondent, owner)
 Route::get('/merchant-profile/{name}/edit', 'Merchant\MerchantController@edit')->name('editMerchant');
 Route::post('/merchant-profile/{name}/edit', 'Merchant\MerchantController@update')->name('updateMerchant');
-Route::get('/owner-profile/{name}/edit', 'User\UserController@edit_owner')->name('editOwner');
+Route::get('/owner-profile/{name}/edit', 'Owner\OwnerController@edit')->name('editOwner');
+Route::post('/owner-profile/{name}/edit', 'Owner\OwnerController@update')->name('updateOwner');
 Route::get('/user-profile/{name}/edit', 'Respondent\RespondentController@edit')->name('editUser');
-Route::post('/profile/{name}', 'User\UserController@destroy')->name('deleteUser');
-Route::post('/user-profile/{name}', 'Respondent\RespondentController@destroy')->name('deleteRes');
-// Route::post('/{name}/profile', 'Respondent\RespondentController@destroy')->name('deleteUser');
+Route::post('/user-profile/{name}/edit', 'Respondent\RespondentController@update')->name('updateUser');
+//Delete account
+Route::post('/owner-profile/{name}/delete', 'Owner\OwnerController@destroy')->name('deleteOwner');
+Route::post('/merchant-profile/{name}/delete', 'Merchant\MerchantController@destroy')->name('deleteMerchant');
+Route::post('/user-profile/{name}/delete', 'Respondent\RespondentController@destroy')->name('deleteUser');
 
 //Respondents
 Route::get('/showVoucher/{surveys_id}/{vouchers_id}', 'Respondent\RespondentController@res_voucher_show')->name('showResVoucher');

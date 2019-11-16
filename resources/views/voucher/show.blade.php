@@ -41,7 +41,7 @@
 					<div class="col-md-4 text-center">
 					 <div>                                
 							@if ($voucher->qr_code)                
-								{!!QrCode::size(250)->generate(route('redeemVoucher',['vcode1' => $encrypted]))!!}
+								{!!QrCode::size(250)->generate(route('showVoucher',['vouchers_id' => $voucher->vouchers_id]))!!}
 							@endif                                    
 					 </div>
 				 </div>                                  
