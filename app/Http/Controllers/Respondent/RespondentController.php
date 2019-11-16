@@ -148,13 +148,13 @@ class RespondentController extends Controller
 	    $stat = \DB::table('tag_respondents_surveys')
         ->join('surveys', 'tag_respondents_surveys.surveys_id', '=', 'surveys.surveys_id')
         ->join('vouchers', 'vouchers.vouchers_id', '=', 'surveys.vouchers_id')
-        ->select('tag_respondents_surveys.voucher_redeem_status', 'surveys.surveys_id')
+        ->select('tag_respondents_surveys.voucher_redeem_status', 'tag_respondents_surveys.surveys_id','tag_respondents_surveys.stores_id' )
         ->where('tag_respondents_surveys.users_id', '=', \Auth::user()->users_id)
         ->where('tag_respondents_surveys.surveys_id', '=', request('surveys_id'))
         ->get()
-        ->first();      
+        ->first();
 
-		if ($stat->voucher_redeem_status == 0 && $voucher->save()){			
+		if ($stat->voucher_redeem_status == 0 && $request->stores_id != 0 && $voucher->save()){			
 			\DB::table('tag_respondents_surveys')			
 			->join('surveys', 'tag_respondents_surveys.surveys_id', '=', 'surveys.surveys_id')
 			->join('vouchers', 'vouchers.vouchers_id', '=', 'surveys.vouchers_id')
@@ -165,7 +165,7 @@ class RespondentController extends Controller
 		    return redirect()->route('resVoucher')->with('success','Voucher redeem successful!');
 		} else if ($stat->voucher_redeem_status == 1){
 		    return redirect()->route('resVoucher')->with('error','Error. Voucher has been redeemed.');
-		} else {
+		} else if ($request->stores_id == 0){
 			return redirect()->route('resVoucher')->with('error','Error. Voucher redeem unsuccessful.');
 		}		
 		
