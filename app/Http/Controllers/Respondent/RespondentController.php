@@ -99,14 +99,14 @@ class RespondentController extends Controller
 		//
 	}
 
-	public function res_voucher_show()
+	public function res_voucher_show(Request $request)
 	{
 		$voucher = Voucher::find(request('vouchers_id'))->firstOrFail();		
-		$vouchers = Voucher::with('stores')->get();	
-		$vcode1 = request('vouchers_id');
-		$encrypted = Crypt::encryptString($vcode1);			
+		$vouchers = Voucher::with('stores')->get();			
+		$encryptedSid = Crypt::encryptString($request->surveys_id);
+		$encryptedVC = Crypt::encryptString($request->vouchers_id);
 		$vType = VouchersType::where('vouchers_types_id', '=', $voucher->vouchers_types_id)->first();	
-		return view('respondent.showVoucher', ['voucher' => $voucher, 'encrypted' => $encrypted , 'vType' => $vType]);
+		return view('respondent.showVoucher', ['voucher' => $voucher, 'encryptedSid' => $encryptedSid,'encryptedVC' => $encryptedVC , 'vType' => $vType]);
 	}
 
 	public function res_voucher_index()
@@ -121,7 +121,7 @@ class RespondentController extends Controller
 	    $vouchers = \DB::table('tag_respondents_surveys')
         ->join('surveys', 'tag_respondents_surveys.surveys_id', '=', 'surveys.surveys_id')
         ->join('vouchers', 'vouchers.vouchers_id', '=', 'surveys.vouchers_id')
-        ->select('vouchers.vouchers_id', 'tag_respondents_surveys.voucher_redeem_status', 'vouchers.title', 'vouchers.status', 'vouchers.expiry_date')
+        ->select('vouchers.vouchers_id', 'tag_respondents_surveys.voucher_redeem_status', 'vouchers.title', 'vouchers.status', 'vouchers.expiry_date', 'surveys.surveys_id')
         ->where('tag_respondents_surveys.users_id', '=', \Auth::user()->users_id)             
         ->paginate(10);
            	
@@ -129,29 +129,42 @@ class RespondentController extends Controller
 		return view('respondent.resVoucher', ['vouchers' => $vouchers]);
 	}
 
-	public function redeem_accept(Request $request)
+	public function redeem_accept($vouchers_id, $stores_id, Request $request)
 	{
-		$voucher = Voucher::find($request->vouchers_id)->firstOrFail();
-		$store = Store::find($request->stores_id)->firstOrFail();
-	
-		return view('respondent.redeem_success', ['voucher'=> $voucher, 'store' => $store]);		
+		$decryptedV = Crypt::decryptString($vouchers_id);
+		$decryptedS = Crypt::decryptString($stores_id);
+		$voucher = Voucher::find($decryptedV)->firstOrFail();
+		$store = Store::find($decryptedS)->firstOrFail();		
+		$survey = $request->surveys_id;
+		return view('respondent.redeem_success', ['voucher'=> $voucher, 'store' => $store, 'survey'=>$survey]);
 	}
 
-	public function redeem_v_success(Request $request, $vouchers_id)
+	public function redeem_v_success(Request $request, $vouchers_id, $surveys_id)
 	{
 		$dateNow =  date('Y-m-d H:i:s');
 		$res = User::find(\Auth::user()->users_id)->firstOrFail();			
 		$voucher = Voucher::find($vouchers_id)->firstOrFail();			
-		$voucher->max_redeem = $voucher->max_redeem-1;	
-		$survey = surveys::where('vouchers_id', '=', $voucher->vouchers_id )->firstOrFail();
-		if ($res->surveys()->where('surveys_id', $survey->surveys_id)->first()->pivot->voucher_redeem_status == 1 ){
-		    return redirect()->route('resVoucher')->with('error','Error. Voucher has been redeemed.');
-		} else if ($voucher->save()){
+		$voucher->max_redeem = $voucher->max_redeem-1;
+	    $stat = \DB::table('tag_respondents_surveys')
+        ->join('surveys', 'tag_respondents_surveys.surveys_id', '=', 'surveys.surveys_id')
+        ->join('vouchers', 'vouchers.vouchers_id', '=', 'surveys.vouchers_id')
+        ->select('tag_respondents_surveys.voucher_redeem_status', 'surveys.surveys_id')
+        ->where('tag_respondents_surveys.users_id', '=', \Auth::user()->users_id)
+        ->where('tag_respondents_surveys.surveys_id', '=', request('surveys_id'))
+        ->get()
+        ->first();      
+
+		if ($stat->voucher_redeem_status == 0 && $voucher->save()){			
 			\DB::table('tag_respondents_surveys')			
-			->where('tag_respondents_surveys.users_id', \Auth::user()->users_id)
-			->where('tag_respondents_surveys.surveys_id', $survey->surveys_id)
+			->join('surveys', 'tag_respondents_surveys.surveys_id', '=', 'surveys.surveys_id')
+			->join('vouchers', 'vouchers.vouchers_id', '=', 'surveys.vouchers_id')
+			->select('tag_respondents_surveys.voucher_redeem_status', 'surveys.surveys_id')
+			->where('tag_respondents_surveys.users_id', '=', \Auth::user()->users_id)
+			->where('tag_respondents_surveys.surveys_id', '=', request('surveys_id'))
 			->update(array('voucher_redeem_status' => 1, 'voucher_redemption_date' => $dateNow, 'stores_id' => $request->stores_id));
 		    return redirect()->route('resVoucher')->with('success','Voucher redeem successful!');
+		} else if ($stat->voucher_redeem_status == 1){
+		    return redirect()->route('resVoucher')->with('error','Error. Voucher has been redeemed.');
 		} else {
 			return redirect()->route('resVoucher')->with('error','Error. Voucher redeem unsuccessful.');
 		}		

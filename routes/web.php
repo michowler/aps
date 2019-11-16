@@ -49,8 +49,8 @@ Route::post('/voucher/store', 'Voucher\VoucherController@store')->name('storeVou
 Route::post('/voucher/show/{vouchers_id}', 'Voucher\VoucherController@destroy')->name('deleteVoucher');
 Route::get('/voucher/show/{vouchers_id}', 'Voucher\VoucherController@show')->name('showVoucher');
 Route::get('/voucher/demo', 'Voucher\VoucherController@demo')->name('demo');
-Route::get('/voucher/redeem/{vcode1}', 'Voucher\VoucherController@redeem')->name('redeemVoucher');
-Route::get('/voucher/redeem/qr-code/{vcode2}', 'Voucher\VoucherController@redeem_qr')->name('redeemQR');
+Route::get('/voucher/redeem/{vcode1}/{surveys_id}', 'Voucher\VoucherController@redeem')->name('redeemVoucher');
+Route::get('/voucher/redeem/qr-code/{vcode2}/{surveys_id}', 'Voucher\VoucherController@redeem_qr')->name('redeemQR');
 Route::get('/voucher/redeem', 'Voucher\VoucherController@redeem_index')->name('redeem');
 Route::get('/voucher/edit/{vouchers_id}', 'Voucher\VoucherController@edit')->name('editVoucher');
 Route::post('/voucher/edit/{vouchers_id}/update', 'Voucher\VoucherController@update')->name('updateVoucher');
@@ -64,11 +64,9 @@ Route::post('/user-profile/{name}', 'Respondent\RespondentController@destroy')->
 // Route::post('/{name}/profile', 'Respondent\RespondentController@destroy')->name('deleteUser');
 
 //Respondents
-Route::get('/showVoucher/{vouchers_id}', 'Respondent\RespondentController@res_voucher_show')->name('showResVoucher');
-Route::get('resVoucher/{vouchers_id}/{stores
-_id}/redeem-accept', 'Respondent\RespondentController@redeem_accept')->name('redeemAccept');
-Route::post('resVoucher/{vouchers_id}/{stores
-_id}/redeem-accept', 'Respondent\RespondentController@redeem_v_success')->name('redeemVSuccess');
+Route::get('/showVoucher/{surveys_id}/{vouchers_id}', 'Respondent\RespondentController@res_voucher_show')->name('showResVoucher');
+Route::get('resVoucher/redeem-accept/{vouchers_id}/{stores_id}/{surveys_id}', 'Respondent\RespondentController@redeem_accept')->name('redeemAccept');
+Route::post('resVoucher/redeem-accept/{vouchers_id}/{stores_id}/{surveys_id}', 'Respondent\RespondentController@redeem_v_success')->name('redeemVSuccess');
 
 //Auth
 Route::get('/', ['middleware' =>'guest', function(){

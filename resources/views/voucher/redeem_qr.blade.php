@@ -3,17 +3,15 @@
 @section('content')
  <div class="col-md-12 text-center"> 	
   <div>            
-	                              
+
 	     @if ($voucher->qr_code)          
 	            
-	       {!!QrCode::size(450)->generate(route('redeemAccept',['vouchers_id' => $voucher->vouchers_id, 'stores_id' => $stores_id]))!!}
+	       {!!QrCode::size(450)->generate(route('redeemAccept',['vouchers_id' => $encV, 'stores_id'=>$encS,  'surveys_id'=>$decryptedSid ]))!!}
 	     
 	     @endif         
 	                      
   </div>
-<!--   <form method="POST" enctype="multipart/form-data" action="{{ route('redeemVSuccess',['vouchers_id' => $voucher->vouchers_id]) }}">
-  	<input type="hidden" name="submit">
-  </form> -->
+
 </div>    
 @endsection
 

@@ -11,13 +11,12 @@
                     <h4 class="title">Voucher ID: {{$voucher->vouchers_id}}</h4>
                 </div>
                 <div class="content">
-                    <form method="get" enctype="multipart/form-data" action="{{ route('redeemQR', ['vcode2' => $encrypted]) }}">
+                    <form method="get" enctype="multipart/form-data" action="{{ route('redeemQR', ['vcode2' => $encryptedVC, 'surveys_id'=> $encryptedSid]) }}">
                      @csrf
                         <!-- <input type="hidden" name="users_id" value="{{\Auth::user()->users_id}}"> -->                        
                         <div class="row">
                             <div class="col-md-12">
                                 <table class="table table-borderless">
-
 
                                     <tbody>
                                         <tr>
