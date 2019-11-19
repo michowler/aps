@@ -35,7 +35,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -94,6 +94,8 @@ class RegisterController extends Controller
                 'age' => $data['age'],  
                 'gender' => $data['gender'],  
                 'working_level' => $data['working_level'],                                
+                'birth_date' => $data['birth_date'],                                
+                'occupation' => $data['occupation'],                                
                 'education_level' => $data['education_level'],                                
                 'marital_status' => $data['marital_status'],                                
                 'password' => Hash::make($data['password'])            
@@ -112,6 +114,8 @@ class RegisterController extends Controller
             ]);
             $merchant =  Merchant::create([            
                 'users_id' => $user->users_id,
+                'merchants_name' => $data['merchants_name'],
+                'merchants_phone' => $data['merchants_phone'],
                 'merchants_address' => $data['merchants_address'],
                 'merchants_email' => $data['merchants_email']                                            
             ]);   

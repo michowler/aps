@@ -4,6 +4,7 @@ namespace App\Http\Controllers\owner;
 
 use Auth;
 use DB;
+use App\User;
 use App\surveys;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -19,6 +20,10 @@ use App\Http\Controllers\Controller;
 
 class OwnerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -77,10 +82,12 @@ class OwnerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        //
+        $owner = User::find(\Auth::user()->users_id);
+        return view('owner.edit', ['owner'=>$owner, 'name' => $owner->name]);
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -89,9 +96,18 @@ class OwnerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update()
     {
-        //
+        $owner = User::find(\Auth::user()->users_id);
+        $owner->name = request('name');
+        $owner->email = request('email');       
+        if ($owner->save()){ 
+            alert()->success('Profile updated!');            
+            return redirect()->route('editOwner', ['name' => \Auth::user()->name]); 
+        }else{            
+            alert()->error('Profile update unsuccessful!'); 
+            return redirect()->route('editOwner', ['name' => \Auth::user()->name]); 
+        }  
     }
 
     /**

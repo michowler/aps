@@ -31,13 +31,9 @@ class VoucherController extends Controller
 	* @return void
 	*/
 	public function __construct()
-	{
-		// $this->middleware('merchant');
-		$this->middleware(function ($request, $next) {
-			$this->user = Auth::user();
-			return $next($request);
-		});		
-	}
+    {
+        $this->middleware(['auth', 'verified']);
+    }
 
 	/**
 	 * Display a listing of the resource.
@@ -103,8 +99,7 @@ class VoucherController extends Controller
 		$voucher->max_redeem = request('max_redeem');		
 		$voucher->qr_code = QrCode::size(250)->generate(route('redeemVoucher',['vouchers_id' => $voucher->vouchers_id]));   	
 		$voucher->expiry_date = request('expiry_date');		
-		$voucher->vouchers_types_id = request('vouchers_types_id');		
-		
+		$voucher->vouchers_types_id = request('vouchers_types_id');				
 		$voucher->save();
 		$voucher::findOrFail($voucher->vouchers_id)->interests()->attach($interests);
 		$voucher::findOrFail($voucher->vouchers_id)->stores()->attach($stores,['status' => 1 ]);				
@@ -126,7 +121,7 @@ class VoucherController extends Controller
 		$vouchers = Voucher::with('stores')->get();	
 		$vcode1 = request('vouchers_id');
 		$encrypted = Crypt::encryptString($vcode1);			
-		$vType = VouchersType::where('vouchers_types_id', '=', $voucher->vouchers_types_id)->first();				
+		$vType = VouchersType::where('vouchers_types_id', '=', $voucher->vouchers_types_id)->first();			
 		return view('voucher.show', ['voucher' => $voucher , 'encrypted' => $encrypted , 'vType' => $vType]);        
 	}
 
@@ -181,12 +176,11 @@ class VoucherController extends Controller
 	 */
 	public function destroy(Voucher $voucher)
 	{
-		$voucher = Voucher::find(request('vouchers_id'));
 		// $voucher->stores()->detach($stores_id);
 		// $voucher->interests()->detach($interests_id);
+		$voucher = Voucher::find(request('vouchers_id'));
 		$voucher->delete();		
-		return redirect()->route('myVouchers')->with('success','Voucher deleted successfully');
-		
+		return redirect()->route('myVouchers')->with('success','Voucher deleted successfully');		
 	}
 
 	public function redeem_index(Voucher $voucher)
@@ -215,12 +209,16 @@ class VoucherController extends Controller
 		$stores_id = request('stores_id');
 		$encV = Crypt::encryptString($decryptedVC);
 		$encS = Crypt::encryptString($stores_id);
-		return view('voucher.redeem_qr', ['stores_id' => $stores_id, 'voucher' => $voucher, 'decryptedSid' => $decryptedSid, 'encV'=> $encV, 'encS'=>$encS]);        
+		return view('voucher.redeem_qr', ['stores_id' => $stores_id, 'voucher' => $voucher, 'decryptedSid' => $decryptedSid, 'encV'=> $encV, 'encS'=>$encS]);     
+		// if($voucher_redeem_status == 1){
+		// 	return redirect()->route('myVouchers')->with('success','Voucher redeem successfully');
+		// }else{
+		// 	return redirect()->route('myVouchers')->with('error','Voucher redeem unsuccessfully');
+		// }
 	}
 
 	public function demo(Voucher $voucher)
 	{
-		//
 		return view('voucher.demo');
 	}
 }

@@ -11,15 +11,12 @@ use App\Admin;
 class AdminLoginController extends Controller
 {
 
-
 	public function __construct (){
 		$this -> middleware('guest:admin');
 	}
     public function showLoginForm(){
     	return view('auth.admin-login'); //admin-login is a view
     }
-
-
 
     public function login(Request $request){
     	//validate the form data

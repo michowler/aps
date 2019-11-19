@@ -37,11 +37,12 @@ use App\User;
 
 // Michelle , Alice
 Auth::routes();
-Auth::routes(['verify' => false]);
-Auth::routes(['reset' => false]);
+Auth::routes(['verify' => true]);
+Auth::routes(['reset' => true]);
 // Auth::routes(['register' => false]);
 
 // Michelle 
+
 //Vouchers
 Route::get('/vouchers', 'Voucher\VoucherController@index')->name('myVouchers');
 Route::get('/voucher/create', 'Voucher\VoucherController@create')->name('generate');
@@ -51,6 +52,7 @@ Route::get('/voucher/show/{vouchers_id}', 'Voucher\VoucherController@show')->nam
 Route::get('/voucher/demo', 'Voucher\VoucherController@demo')->name('demo');
 Route::get('/voucher/redeem/{vcode1}/{surveys_id}', 'Voucher\VoucherController@redeem')->name('redeemVoucher');
 Route::get('/voucher/redeem/qr-code/{vcode2}/{surveys_id}', 'Voucher\VoucherController@redeem_qr')->name('redeemQR');
+// Route::post('/voucher/redeem/qr-code/{vcode2}/{surveys_id}/success', 'Voucher\VoucherController@redeem_qr_s')->name('redeemQRS');
 Route::get('/voucher/redeem', 'Voucher\VoucherController@redeem_index')->name('redeem');
 Route::get('/voucher/edit/{vouchers_id}', 'Voucher\VoucherController@edit')->name('editVoucher');
 Route::post('/voucher/edit/{vouchers_id}/update', 'Voucher\VoucherController@update')->name('updateVoucher');
@@ -58,11 +60,14 @@ Route::post('/voucher/edit/{vouchers_id}/update', 'Voucher\VoucherController@upd
 //Edit Profiles (merchant, respondent, owner)
 Route::get('/merchant-profile/{name}/edit', 'Merchant\MerchantController@edit')->name('editMerchant');
 Route::post('/merchant-profile/{name}/edit', 'Merchant\MerchantController@update')->name('updateMerchant');
-Route::get('/owner-profile/{name}/edit', 'User\UserController@edit_owner')->name('editOwner');
+Route::get('/owner-profile/{name}/edit', 'Owner\OwnerController@edit')->name('editOwner');
+Route::post('/owner-profile/{name}/edit', 'Owner\OwnerController@update')->name('updateOwner');
 Route::get('/user-profile/{name}/edit', 'Respondent\RespondentController@edit')->name('editUser');
-Route::post('/profile/{name}', 'User\UserController@destroy')->name('deleteUser');
-Route::post('/user-profile/{name}', 'Respondent\RespondentController@destroy')->name('deleteRes');
-// Route::post('/{name}/profile', 'Respondent\RespondentController@destroy')->name('deleteUser');
+Route::post('/user-profile/{name}/edit', 'Respondent\RespondentController@update')->name('updateUser');
+//Delete account
+Route::post('/owner-profile/{name}/delete', 'Owner\OwnerController@destroy')->name('deleteOwner');
+Route::post('/merchant-profile/{name}/delete', 'Merchant\MerchantController@destroy')->name('deleteMerchant');
+Route::post('/user-profile/{name}/delete', 'Respondent\RespondentController@destroy')->name('deleteUser');
 
 //Respondents
 Route::get('/showVoucher/{surveys_id}/{vouchers_id}', 'Respondent\RespondentController@res_voucher_show')->name('showResVoucher');
@@ -73,6 +78,9 @@ Route::post('resVoucher/redeem-accept/{vouchers_id}/{stores_id}/{surveys_id}', '
 Route::get('/', ['middleware' =>'guest', function(){
   return view('auth.login');
 }]);
+// Route::get('/', function () {
+    
+// })->middleware('verified');
 
 
 // Ying Ying 

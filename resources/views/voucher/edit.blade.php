@@ -89,7 +89,7 @@
       
 
     <!-- <button type="submit" class="btn btn-info btn-fill pull-right">Generate Voucher</button> -->
-    <a class="btn btn-info btn-fill pull-right"  style="margin: 0 0 0 10px" href="demoVoucher.html">Demo</a>
+    
     <button type="submit" class="btn btn-info btn-fill pull-right">{{ __('Submit') }}</button>
 
 

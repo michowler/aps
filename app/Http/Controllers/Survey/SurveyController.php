@@ -22,11 +22,12 @@ class SurveyController extends Controller
   public function __construct()
   {
     //die("we are here");
-  $this->middleware(function($request, $next)
-  {
-    $this -> user = Auth::user();
-    return $next($request);
-  });
+    $this->middleware(['auth', 'verified']);
+    $this->middleware(function($request, $next)
+    {
+      $this -> user = Auth::user();
+      return $next($request);
+    });
    }
    
   // public function mySurvey(){
