@@ -22,8 +22,8 @@ class UserTableSeeder extends Seeder
         // $users = [];
 
         $merchant = User::create(['name'=> 'Subway', 'email' => 'm@gmail.com', 'password' => bcrypt('123123123'), 'email_verified_at' => now(), 'remember_token' => Str::random(10)]);
-        $owner = User::create(['name'=> 'Michelle', 'email' => 'o@gmail.com', 'password' => bcrypt('123123123'), 'email_verified_at' => now(), 'remember_token' => Str::random(10)]);
-        $res = User::create(['name'=> 'Michelle', 'email' => 'r@gmail.com', 'password' => bcrypt('123123123'), 'email_verified_at' => now(), 'remember_token' => Str::random(10)]);
+        $owner = User::create(['name'=> 'Michelle Owner', 'email' => 'o@gmail.com', 'password' => bcrypt('123123123'), 'email_verified_at' => now(), 'remember_token' => Str::random(10)]);
+        $res = User::create(['name'=> 'Michelle Res', 'email' => 'r@gmail.com', 'password' => bcrypt('123123123'), 'email_verified_at' => now(), 'remember_token' => Str::random(10)]);
         // $users[$user->users_id] = $user;
         // $user = User::create(['id' => 2, 'blah' => 'honk']);
         // $users[$user->id] = $user;        
@@ -31,7 +31,7 @@ class UserTableSeeder extends Seeder
         // $roles = [];
         $role3 = Role::where('roles_id', '=', 3)->get();          
         $role2 = Role::where('roles_id', '=', 2)->get(); 
-        $role2 = Role::where('roles_id', '=', 1)->get();          
+        $role1 = Role::where('roles_id', '=', 1)->get();          
         // $roles[$role->roles_id] = $role;        
 
         $merchant->roles()->attach($role3); //sync roles_id
