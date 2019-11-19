@@ -37,11 +37,12 @@ use App\User;
 
 // Michelle , Alice
 Auth::routes();
-Auth::routes(['verify' => false]);
-Auth::routes(['reset' => false]);
+Auth::routes(['verify' => true]);
+Auth::routes(['reset' => true]);
 // Auth::routes(['register' => false]);
 
 // Michelle 
+
 //Vouchers
 Route::get('/vouchers', 'Voucher\VoucherController@index')->name('myVouchers');
 Route::get('/voucher/create', 'Voucher\VoucherController@create')->name('generate');
@@ -51,6 +52,7 @@ Route::get('/voucher/show/{vouchers_id}', 'Voucher\VoucherController@show')->nam
 Route::get('/voucher/demo', 'Voucher\VoucherController@demo')->name('demo');
 Route::get('/voucher/redeem/{vcode1}/{surveys_id}', 'Voucher\VoucherController@redeem')->name('redeemVoucher');
 Route::get('/voucher/redeem/qr-code/{vcode2}/{surveys_id}', 'Voucher\VoucherController@redeem_qr')->name('redeemQR');
+// Route::post('/voucher/redeem/qr-code/{vcode2}/{surveys_id}/success', 'Voucher\VoucherController@redeem_qr_s')->name('redeemQRS');
 Route::get('/voucher/redeem', 'Voucher\VoucherController@redeem_index')->name('redeem');
 Route::get('/voucher/edit/{vouchers_id}', 'Voucher\VoucherController@edit')->name('editVoucher');
 Route::post('/voucher/edit/{vouchers_id}/update', 'Voucher\VoucherController@update')->name('updateVoucher');
@@ -76,6 +78,9 @@ Route::post('resVoucher/redeem-accept/{vouchers_id}/{stores_id}/{surveys_id}', '
 Route::get('/', ['middleware' =>'guest', function(){
   return view('auth.login');
 }]);
+// Route::get('/', function () {
+    
+// })->middleware('verified');
 
 
 // Ying Ying 

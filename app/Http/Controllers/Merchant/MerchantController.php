@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class MerchantController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified']);
+    }
+    
     public function edit()
     {        
     	$merchant = Merchant::where('users_id', '=', \Auth::user()->users_id)->first();
@@ -27,17 +32,17 @@ class MerchantController extends Controller
             return redirect()->route('editMerchant', ['name' => \Auth::user()->name]); 
         }else{            
         	alert()->error('Profile update unsuccessful!'); 
-            return redirect()->route('editMerchant', ['name' => \Auth::user()->name]); 
+            return redirect()->back();
         }  
     }
 
     public function destroy()
     {       
         $curUser = Merchant::find(\Auth::user()->users_id);                             
-        \Auth::logout();
+        
         if ($curUser->delete()){            
-            // alert()->success('Your account has been deleted. You have been logged out.');
-           return redirect()->route('login')->with('success', 'Your account has been deleted. You have been logged out.');
+            Alert::message('Your account has been deleted. You have been logged out.')->persistent('Close');
+           return Auth::logout();
         }       
     }
 }

@@ -255,6 +255,8 @@
 
 
         <div class="content">
+            @include('flash-message')
+            @include('sweetalert::alert')
            @yield('content') 
         </div>
 

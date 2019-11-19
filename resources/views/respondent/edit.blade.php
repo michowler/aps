@@ -49,7 +49,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Country</label>
+                                    <label>Email</label>
                                     <input type="text" class="form-control" placeholder="Country" value="">
                                 </div>
                             </div>

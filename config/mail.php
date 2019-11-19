@@ -29,7 +29,12 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST', 'smtp.mailtrap.io'),
+    'port' => env('MAIL_PORT', '2525'),
+    'username' => env('MAIL_USERNAME', '52b3e720149b80'),
+    'password' => env('MAIL_PASSWORD', '7bf06c216164e0'),
+      
+
 
     /*
     |--------------------------------------------------------------------------
