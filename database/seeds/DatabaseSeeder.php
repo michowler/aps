@@ -18,9 +18,16 @@ class DatabaseSeeder extends Seeder
             PackageTableSeeder::class,
             RoleTableSeeder::class,
             UserTableSeeder::class,
+            tag_owner_packagesTableSeeder::class,
             MerchantTableSeeder::class,           
-            StoreTableSeeder::class
-            // LocationTableSeeder::class                                 
+            StoreTableSeeder::class,
+            AdminTableSeeder::class,
+            LocationTableSeeder::class,
+            SurveyTableSeeder::class,
+            QuestionTableSeeder::class,
+            ChoiceTableSeeder::class,
+            OptionTableSeeder::class,
+            RespondentsOptionsTableSeeder::class                                   
         ]);
         
          // factory(App\User::class, 10)->create()->each(function ($user) {
@@ -28,5 +35,7 @@ class DatabaseSeeder extends Seeder
          // });        
     
     }
+}
+        
 }
         
