@@ -22,4 +22,4 @@ Route::get('merchants', function() {
     return Merchant::all();
 });
 
-Route::get('vouchers', 'Api\VoucherAPIController@index');
+
