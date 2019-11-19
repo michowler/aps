@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/png" href="{{ asset('FrontEnd') }}/img/favicon.ico">
+    <link rel="icon" type="image/png" href="{{ asset('assets') }}/img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
     <title>Automated and Personalized Survey Engine</title>
@@ -19,17 +19,17 @@
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
     <!-- Bootstrap core CSS     -->
-    <link href="{{ asset('FrontEnd') }}/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="{{ asset('assets') }}/css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- Animation library for notifications   -->
-    <link href="{{ asset('FrontEnd') }}/css/animate.min.css" rel="stylesheet"/>
+    <link href="{{ asset('assets') }}/css/animate.min.css" rel="stylesheet"/>
 
     <!--  Light Bootstrap Table core CSS    -->
-    <link href="{{ asset('FrontEnd') }}/css/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet"/>
+    <link href="{{ asset('assets') }}/css/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet"/>
 
 
     <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="{{ asset('FrontEnd') }}/css/demo.css" rel="stylesheet" />
+    <link href="{{ asset('assets') }}/css/demo.css" rel="stylesheet" />
 
     <script
     src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -41,7 +41,7 @@
     <link href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" rel="stylesheet" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
-    <link href="{{ asset('FrontEnd') }}/css/pe-icon-7-stroke.css" rel="stylesheet" />
+    <link href="{{ asset('assets') }}/css/pe-icon-7-stroke.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     
@@ -150,7 +150,7 @@
 
 
 <div class="wrapper">
-    <div class="sidebar" data-color="purple" data-image="{{ asset('FrontEnd') }}/img/sidebar-5.jpg">
+    <div class="sidebar" data-color="purple" data-image="{{ asset('assets') }}/img/sidebar-5.jpg">
 
 
       <div class="sidebar-wrapper">
@@ -265,20 +265,20 @@
 
 </body>
 
-     <script src="{{ asset('FrontEnd') }}/js/jquery.3.2.1.min.js" type="text/javascript"></script>
-    <script src="{{ asset('FrontEnd') }}/js/bootstrap.min.js" type="text/javascript"></script>
+     <script src="{{ asset('assets') }}/js/jquery.3.2.1.min.js" type="text/javascript"></script>
+    <script src="{{ asset('assets') }}/js/bootstrap.min.js" type="text/javascript"></script>
 
     <!--  Charts Plugin -->
-    <script src="{{ asset('FrontEnd') }}/js/chartist.min.js"></script>
+    <script src="{{ asset('assets') }}/js/chartist.min.js"></script>
 
     <!--  Notifications Plugin    -->
-    <script src="{{ asset('FrontEnd') }}/js/bootstrap-notify.js"></script>
+    <script src="{{ asset('assets') }}/js/bootstrap-notify.js"></script>
 
     <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
-    <script src="{{ asset('FrontEnd') }}/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
+    <script src="{{ asset('assets') }}/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
 
     <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
-    <script src="{{ asset('FrontEnd') }}/js/demo.js"></script>
+    <script src="{{ asset('assets') }}/js/demo.js"></script>
 
     <script type="text/javascript">
 
