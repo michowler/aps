@@ -54,19 +54,19 @@ class User extends Authenticatable implements MustVerifyEmail
       return $this->belongsToMany(Role::class, 'tag_users_roles','users_id','roles_id')->withTimestamps();
     }
 
-    // public function authorizeRoles($roles)
-    // {
-    //     if (is_array($roles)){
-    //         return $this -> hasAnyRole($roles) || abort(401,'This action is unauthorized.');
-    //     }
+    public function authorizeRoles($roles)
+    {
+        if (is_array($roles)){
+            return $this -> hasAnyRole($roles) || abort(401,'This action is unauthorized.');
+        }
 
-    //     return $this -> hasRole($roles) || abort (401,'This action is unauthorized.');
-    // }
+        return $this -> hasRole($roles) || abort (401,'This action is unauthorized.');
+    }
 
-    // public function hasAnyRole($roles)
-    // {
-    //     return null !==$this->roles() -> whereIn('title',$roles)->first();
-    // }
+    public function hasAnyRole($roles)
+    {
+        return null !==$this->roles() -> whereIn('title',$roles)->first();
+    }
 
     // public function hasRole($roles)
     // {

@@ -47,12 +47,12 @@ class planController extends Controller
             $payments -> users_id = Auth::user() -> users_id;
 
 
-            DB::table('tag_owner_packages')->insert(
-                ['packages_id' => 2, 'users_id' => Auth::user()->users_id, 'no_surveys' => -1, 'no_respondents' => -1, 'no_questions' => -1,'start_date' => Carbon::today()->format('Y-m-d')]
-                );
+            // $latestOwnerPackageID = DB::table('tag_owner_packages')->where('users_id',Auth::user() -> users_id)->get()->last()->owner_packages_id;
+            // $payments -> owner_packages_id = $latestOwnerPackageID;
 
-            $latestOwnerPackageID = DB::table('tag_owner_packages')->where('users_id',Auth::user() -> users_id)->get()->last()->owner_packages_id;
-            $payments -> owner_packages_id = $latestOwnerPackageID;
+            DB::table('tag_owner_packages')->insert(
+                ['packages_id' => 2, 'users_id' => Auth::user()->users_id,'start_date' => Carbon::now(),'created_at' => Carbon::now(),'updated_at' => Carbon::now()]
+                );
 
             $payments -> save();
 
@@ -62,8 +62,10 @@ class planController extends Controller
 
     public function unSub(){
 
+        DB::table('tag_owner_packages')->where('users_id',Auth::user() -> users_id)->update(['end_date'=>  Carbon::now(),'cancelled_on' => Carbon::now(),'updated_at' => Carbon::now()]);
+
         DB::table('tag_owner_packages')->insert(
-                ['packages_id' => 1, 'users_id' => Auth::user()->users_id, 'no_surveys' => 20, 'no_respondents' => 50, 'no_questions' => 10, 'end_date' =>  Carbon::today()->addMonth(1)->format('Y-m-d H:i:s')]
+                ['packages_id' => 1, 'users_id' => Auth::user()->users_id, 'start_date' =>  Carbon::today(),'created_at' => Carbon::now(),'updated_at' => Carbon::now()]
                 );
 
         return view('surveyOwner.owner_dashboard');
