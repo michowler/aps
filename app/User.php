@@ -21,7 +21,7 @@ class User extends Authenticatable implements MustVerifyEmail
     //     'name', 'email', 'password', 'country', 'birth_date', 'occupation', 'profile_image', 'packages_id', 'marital_status', 'working_level', 'gender', 'age', 'education_level', 'address'
     // ];
     protected $fillable = [
-        'name', 'email', 'password', 'packages_id', 'marital_status', 'working_level', 'gender', 'age', 'education_level', 'occupation'
+        'name', 'email', 'password', 'packages_id', 'marital_status', 'working_level', 'gender', 'age', 'education_level'
     ];
 
     /**
