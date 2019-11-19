@@ -123,7 +123,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button id="" href="#checkoutSuccess" name="Confirm" class="btn btn-info btn-fill pull-right" >Confirm</button>
+                                    <button id="" href="#checkoutSuccess" data-toggle="modal" data-target="#checkoutSuccess" name="Confirm" class="btn btn-info btn-fill pull-right" >Confirm</button>
                                     <!-- <a href="#checkoutSuccess" class="btn btn-info btn-fill pull-right" data-toggle="modal">Confirm</a> -->
                                     <div class="clearfix"></div>
 
