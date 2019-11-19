@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             tag_owner_packagesTableSeeder::class,
             MerchantTableSeeder::class,           
             StoreTableSeeder::class,
-            AdminTableSeeder::class,
+            // AdminTableSeeder::class,
             LocationTableSeeder::class,
             SurveyTableSeeder::class,
             QuestionTableSeeder::class,
