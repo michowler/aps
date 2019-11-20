@@ -4,11 +4,15 @@
 
 @section('content')
 <div class="container-fluid">
+  
+
+  
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="header">
           <h4 class="title">My Vouchers</h4>
+
         </div>
 
         <div class="content">
