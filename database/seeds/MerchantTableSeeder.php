@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Faker\Factory as Faker;
+
 
 class MerchantTableSeeder extends Seeder
 {
@@ -12,7 +12,7 @@ class MerchantTableSeeder extends Seeder
      */
     public function run()
     {        
-        $faker = Faker::create();
+        
     	$merchants = [['users_id' => '1', 'merchants_name' => 'Subway', 'merchants_email' => 'subway@gmail.com', 'status' => 'true']];
     	\DB::table('merchants')->insert($merchants);
 

@@ -20,6 +20,10 @@ use App\Option;
 
 class OwnerController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -27,26 +31,26 @@ class OwnerController extends Controller
      */
     public function index()
     {
-        $lastestUserData = DB::table('tag_owner_packages')->where('users_id',Auth::user() -> users_id)->get();
+        $lastestUserData = DB::table('tag_owner_packages')->where('users_id',\Auth::user()->users_id)->get();
 
         $surveys = $lastestUserData->sum('no_surveys');
         $res = $lastestUserData->sum('no_respondents');
         $surveyLeft = 20 - ($lastestUserData[0]->no_surveys);
 
-        if(DB::table('tag_owner_packages')->where('users_id',Auth::user() -> users_id)->sum('no_surveys') >= 3)
+        if(DB::table('tag_owner_packages')->where('users_id',\Auth::user()->users_id)->sum('no_surveys') >= 3)
         {
         
-        $lastestSurvey = DB::table('surveys')->where('users_id',Auth::user() -> users_id)->get()->first();
+        $lastestSurvey = DB::table('surveys')->where('users_id',\Auth::user()->users_id)->get()->first();
 
         $lastSurveys = $lastestSurvey->surveys_title;
         $lastSurveysDate = $lastestSurvey->created_at;
 
-        $seclastestSurvey = DB::table('surveys')->where('users_id',Auth::user() -> users_id)->orderBy('created_at','desc')->skip(1)->take(1)->get();
+        $seclastestSurvey = DB::table('surveys')->where('users_id',\Auth::user()->users_id)->orderBy('created_at','desc')->skip(1)->take(1)->get();
 
         $seclastSurveys = $seclastestSurvey[0]->surveys_title;
         $seclastSurveysDate = $seclastestSurvey[0]->created_at;
 
-        $thirdlastestSurvey = DB::table('surveys')->where('users_id',Auth::user() -> users_id)->orderBy('created_at','desc')->skip(2)->take(1)->get();
+        $thirdlastestSurvey = DB::table('surveys')->where('users_id',\Auth::user()->users_id)->orderBy('created_at','desc')->skip(2)->take(1)->get();
 
         $thirdlastSurveys = $thirdlastestSurvey[0]->surveys_title;
         $thirdlastSurveysDate = $thirdlastestSurvey[0]->created_at;
@@ -55,15 +59,15 @@ class OwnerController extends Controller
 
         }
 
-        elseif (DB::table('tag_owner_packages')->where('users_id',Auth::user() -> users_id)->sum('no_surveys') == 2) 
+        elseif (DB::table('tag_owner_packages')->where('users_id',\Auth::user()->users_id)->sum('no_surveys') == 2) 
         {
 
-        $lastestSurvey = DB::table('surveys')->where('users_id',Auth::user() -> users_id)->get()->first();
+        $lastestSurvey = DB::table('surveys')->where('users_id',\Auth::user()->users_id)->get()->first();
 
         $lastSurveys = $lastestSurvey->surveys_title;
         $lastSurveysDate = $lastestSurvey->created_at;
 
-        $seclastestSurvey = DB::table('surveys')->where('users_id',Auth::user() -> users_id)->orderBy('created_at','desc')->skip(1)->take(1)->get();
+        $seclastestSurvey = DB::table('surveys')->where('users_id',\Auth::user()->users_id)->orderBy('created_at','desc')->skip(1)->take(1)->get();
 
         $seclastSurveys = $seclastestSurvey[0]->surveys_title;
         $seclastSurveysDate = $seclastestSurvey[0]->created_at;
@@ -71,10 +75,10 @@ class OwnerController extends Controller
         return view("surveyOwner.owner_dashboard",['surveys'=>$surveys,'res'=>$res,'surveyLeft'=>$surveyLeft,'lastSurveys'=>$lastSurveys,'lastSurveysDate'=>$lastSurveysDate,'seclastSurveys'=>$seclastSurveys,'seclastSurveysDate'=>$seclastSurveysDate]);
         }
 
-        elseif (DB::table('tag_owner_packages')->where('users_id',Auth::user() -> users_id)->sum('no_surveys') == 1) 
+        elseif (DB::table('tag_owner_packages')->where('users_id',\Auth::user()->users_id)->sum('no_surveys') == 1) 
         {
 
-        $lastestSurvey = DB::table('surveys')->where('users_id',Auth::user() -> users_id)->get()->first();
+        $lastestSurvey = DB::table('surveys')->where('users_id',\Auth::user()->users_id)->get()->first();
 
         $lastSurveys = $lastestSurvey->surveys_title;
         $lastSurveysDate = $lastestSurvey->created_at;

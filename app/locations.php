@@ -13,4 +13,9 @@ class locations extends Model
     {
     	return $this -> belongsToMany(locations::class,'tag_surveys_locations','surveys_id','locations_id');
     }
+
+    public function users()
+    {
+      return $this->belongsTo(User::class, 'users_id');      
+    }
 }

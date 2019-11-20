@@ -11,6 +11,10 @@ class Option extends Model
     {
         return $this->belongsToMany(Question::class,'options','options_id','questions_id');
     }
-
+    
+    public function users()
+    {
+      return $this->belongsTo(User::class, 'tag_respondents_options','users_id');      
+    }
 
 }

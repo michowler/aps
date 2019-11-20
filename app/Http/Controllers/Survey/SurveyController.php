@@ -97,133 +97,95 @@ class SurveyController extends Controller
 
     $interests = Interest::all();
     $locations = locations::all();
-     // $vouchers = Voucher::all();
-    //$mohsen="Helloooooo";
+    $vouchers = Voucher::all();
 
-// echo "<pre>";
-//         var_dump($locations);
-//         die();
-
-    return view ('surveyOwner.createSurvey',['interests'=>$interests], ['locations'=>$locations]);
+    return view ('surveyOwner.createSurvey',['interests'=>$interests, 'locations'=>$locations, 'vouchers'=>$vouchers]);
 
 
    }
   
    public function store(Request $request)
   {
-    if((DB::table('tag_owner_packages')->where('users_id',Auth::user() -> users_id)->get()->last()->packages_id == 1) AND (DB::table('tag_owner_packages')->where('users_id',Auth::user() -> users_id)->get()->last()->no_surveys > 20))
-      {
-      
-      echo '<script>alert("Number of Survey created have reach limit. Subscibe to Premium Package for unlimited usage!");</script>';
-      return view('surveyOwner.owner_Dashboard');
-      
-      }
+  
+    
+    $this->validate($request,[
+      'surveys_title' => 'required',
+      'surveys_description' => 'required',
+      'interests' =>'required',
+      'locations' => 'required',
+      'vouchers' =>  'required'
+    ]);
+    $surveys = new surveys;
+    $surveys ->users_id = Auth::user() -> users_id;
+    $surveys ->surveys_title = $request -> get('surveys_title');
+    $surveys ->surveys_description = $request -> get('surveys_description');
+    $surveys ->vouchers_id = $request -> get('vouchers'); 
+    $interests = $request ->input('interests');
+    $locations = $request -> input('locations');
+    
 
-    else
-      {
-      
+    
+     $surveys ->save();  
 
-      $this->validate($request,[
-        'surveys_title' => 'required',
-        'surveys_description' => 'required',
-        'interests' =>'required',
-        'locations' => 'required',
-        //'vouchers' =>'required',
-      ]);
+    
 
-      $surveys = new surveys;
-      $surveys ->surveys_title = $request -> get('surveys_title');
-      $surveys ->surveys_description = $request -> get('surveys_description');
-      $interests = $request ->input('interests');
-      $locations = $request -> input('locations');
-       // $vouchers = $request -> input('vouchers');
-
-       // //$surveys ->voucher=$request -> get('voucher');
-       $surveys ->save();  
-
-      // echo "<pre>";
-      // var_dump($Surveys);
-      // die();
-
-       $surveys::findOrFail($surveys->surveys_id)->interests()->attach($interests);
-       $surveys::findOrFail($surveys->surveys_id)->locations()->attach($locations);
-
-       $latestOwnerPackageID = DB::table('tag_owner_packages')->where('users_id',Auth::user() -> users_id)->get()->last()->owner_packages_id;
-
-       DB::table('tag_owner_packages')->where('owner_packages_id', $latestOwnerPackageID)->increment('no_surveys', 1);
-
-     //  $surveys::findOrFail($surveys->surveys_id)->vouchers()->attach($vouchers);
-       //return redirect()->route('createQuestion')->with('savedSurveyId','454');
-       return redirect()->route('createQuestion')->with( [ 'savedSurveyId' => $surveys->surveys_id ] );
-       //return Redirect::route('createQuestion')->with('savedSurveyId', $surveys->surveys_id);
+     $surveys::findOrFail($surveys->surveys_id)->interests()->attach($interests);
+     $surveys::findOrFail($surveys->surveys_id)->locations()->attach($locations);
+     
+     
+     
+     session()->put('savedSurveyId', $surveys->surveys_id);
+     return redirect()->route('createQuestion');
+     //return Redirect::route('createQuestion')->with('savedSurveyId', $surveys->surveys_id);
 
 
-      // echo "<pre>";
-      // var_dump($surveys);
-      // die("");
-    }
-
+    
   }
 
-  public function createQuestion()
+  public function createQuestion(Request $request)
   {
-     
-    $surveys = Session::get('savedSurveyId');
-    $surveys = surveys::all();
-    $options = Option::all();
-
-    $savedSurveyId = session()->get( 'savedSurveyId' );
-    // echo  "<pre>";
-    // var_dump($savedSurveyId);
-    // die();
-    
+  
+    $surveys = Session::get('savedSurveyId');     
     return view('surveyOwner.createQuestion');
     
   }
 
-  public function storeQuestion(Request $request, Question $questions)
-  {
-    $this -> validate($request,[
-      'questions_title' => 'required',
-      'savedSurveyId' => 'required',
+  public function storeQuestion(Request $request)
+    {
+      $this -> validate($request,[
+        'questions_title' => 'required',
         'content' =>'required'
-    ]);
+      ]);
 
-    $questions = new questions;
-    $questions ->questions_title = $request -> get('questions_title');
-    $savedSurveyId =  $request -> get('savedSurveyId');
-    $questions ->surveys_id = $savedSurveyId;
-     // $options ->content = $request ->get ('content');
+      $questionArr = $request->questions_title;
+      $optionsArr = $request->content;
+      $surveysID = $request->savedSurveyId;
 
-    $questions ->save()-> with( [ 'savedSurveyId' => $surveys->surveys_id ]);
+      var_dump($questionArr);
+      var_dump($optionsArr);
+      
 
-
-    $savedQuestionId = $questions->questions_id;
-    $options = new options;
-    $options ->content = $request -> get('content1');
-    $options ->questions_id = $savedQuestionId;
-    $options ->save();
-
-    $savedQuestionId = $questions->questions_id;
-    $options ->content = $request -> get('content2');
-    $options ->questions_id = $savedQuestionId;
-    $options ->save();
-
-    $savedQuestionId = $questions->questions_id;
-    $options ->content = $request -> get('content3');
-    $options ->questions_id = $savedQuestionId;
-    $options ->save();
-
-    $savedQuestionId = $questions->questions_id;
-    $options ->content = $request -> get('content4');
-    $options ->questions_id = $savedQuestionId;
-    $options ->save();
-
-     
-    //return redirect()->route('ownerSurvey');
-     
-    return redirect()->route('createQuestion')->with(['savedSurveyId' =>$surveys->surveys_id], ['savedQuestionId' => $questions->questions_id]);
-  }
+      for ($i = 0; $i < count($questionArr); $i++) {
+            
+            $quest = new Question;
+            $quest->questions_title = $questionArr[$i];
+            $quest->surveys_id = Session::get('savedSurveyId');
+            $quest->save();
+            
+            for($x = 0; $x < count($optionsArr[$i]); $x++){
+              if(!is_null($optionsArr[$i][$x])){
+                $option = new Option;
+                $option->questions_id = $quest->questions_id;
+                $option->choices_id = ($x + 1);
+                $option->content = $optionsArr[$i][$x];
+                $option->save();
+              }
+              
+            }
+      
+        }
+    
+    }
 
   public function mySurvey()
   {

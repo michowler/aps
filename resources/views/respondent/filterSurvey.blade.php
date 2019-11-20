@@ -2,7 +2,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 
-
+     
 .third-level-menu
 {
     position: absolute;
@@ -214,7 +214,7 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-   
+
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
@@ -242,22 +242,12 @@
     <li>
         <a href="#">Filter survey<span class="caret"></span></a>
         <ul class="second-level-menu">
-           <!--   <li>
-                <a>Brand</a>
-                <ul class="third-level-menu">
-                    	@foreach($locations as $location)
-                    <li><a href="/resFilter?id={{$locations->locations_id}}">
-                    	 {{$location->locations_name}}
-                    </a></li>
-                    @endforeach
-                </ul>
-            </li> -->
             <li>
                 <a>Location</a>
                 <ul class="third-level-menu">
-                		@foreach($locations as $location)
+                        @foreach($locations as $location)
                     <li><a href="/resFilter?locationId={{$location->locations_id}}">
-                    	 {{$location->locations_name}}
+                         {{$location->locations_name}}
                     </a></li>
                     @endforeach
                   </ul>
@@ -282,7 +272,7 @@
                                         <th>ID</th>
                                         <th>Survey Title</th>
                                         <th>Survey Description</th>
-                                        <th>Voucher's Brand</th>
+                                        <th>View</th>
                                         <th></th>
                                     </tr>
                                     @foreach ($surveys as $survey)
@@ -291,7 +281,7 @@
                                             <td>{{ $survey->surveys_id}}</td>
                                             <td>{{ $survey->surveys_title}}</td>
                                               <td>{{ $survey->surveys_description}}</td>
-                                            <td></td>
+                                          
                                             <td><a href="viewSurvey?id={{$survey->surveys_id}}" class="btn btn-primary">View</a></td>
                                             
                                         </tr>

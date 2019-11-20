@@ -39,6 +39,11 @@ class Voucher extends Model
         return $this->hasMany(surveys::class,'surveys_id');
     }
 
+    // public function surveys()
+    // {
+    //     return $this->belongsToMany(Voucher::class, 'surveys','interests_id', 'surveys_id');
+    // }
+
     public function users()
     {
       return $this->belongsTo(User::class, 'users_id');      

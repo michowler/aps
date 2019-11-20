@@ -25,7 +25,7 @@ class Question extends Model
 
      public function options()
     {
-        return $this->hasMany(Option::class,'options','options_id','questions_id');
+        return $this->hasMany(Option::class,'questions_id');
     }
 
     protected $table='questions';
