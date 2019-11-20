@@ -161,8 +161,8 @@ class SurveyController extends Controller
       $optionsArr = $request->content;
       $surveysID = $request->savedSurveyId;
 
-      var_dump($questionArr);
-      var_dump($optionsArr);
+      // var_dump($questionArr);
+      // var_dump($optionsArr);
       
 
       for ($i = 0; $i < count($questionArr); $i++) {
