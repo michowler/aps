@@ -12,10 +12,10 @@ class VoucherTableSeeder extends Seeder
     public function run()
     {
 
-      $voucher = [['vouchers_id' => '1', 'choice' => 'A'],['choices_id' => '2', 'choice' => 'B'],['choices_id' => '3', 'choice' => 'C'],['choices_id' => '4', 'choice' => 'D']];
+        $vouchers = [['vouchers_id' => '1', 'merchants_id' => '1', 'vouchers_types_id'=> '1','title'=>'Buy 1 Free 1 Drink' , 'terms' =>'Terms and conditions apply', 'expiry_date' => now(), 'max_redeem' =>'10', 'status'=> 'valid']];
 
 
-    \DB::table('choices') -> insert($choice);
+        \DB::table('vouchers') -> insert($vouchers);
     
     }
 }
