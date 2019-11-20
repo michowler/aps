@@ -13,16 +13,17 @@ class DatabaseSeeder extends Seeder
     {
         //https://github.com/fzaninotto/Faker#fakerproviderdatetime
         $this->call([            
-            // VoucherTypeTableSeeder::class,
-            // InterestTableSeeder::class, 
-            // PackageTableSeeder::class,
-            // RoleTableSeeder::class,
-            // UserTableSeeder::class,            
-            // MerchantTableSeeder::class,           
-            // StoreTableSeeder::class,
-            // tag_owner_packagesTableSeeder::class,
-            // // AdminTableSeeder::class,
-            // LocationTableSeeder::class
+            VoucherTypeTableSeeder::class,
+            InterestTableSeeder::class, 
+            PackageTableSeeder::class,
+            RoleTableSeeder::class,
+            UserTableSeeder::class,            
+            MerchantTableSeeder::class,           
+            StoreTableSeeder::class,
+            tag_owner_packagesTableSeeder::class,            
+            LocationTableSeeder::class,
+            VoucherTableSeeder::class,
+            // AdminTableSeeder::class,
             SurveyTableSeeder::class,
             QuestionTableSeeder::class,
             ChoiceTableSeeder::class,

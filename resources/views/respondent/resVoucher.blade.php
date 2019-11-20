@@ -31,7 +31,7 @@
                     @foreach($vouchers as $i => $voucher)
                    
                     <tr>
-                      <td>{{ $i+1 }}</td>
+                      <td>{{ $voucher->vouchers_id }}</td>
                       <td><a href="{{ route('showResVoucher',['surveys_id' => $voucher->surveys_id, 'vouchers_id' => $voucher->vouchers_id]) }}" style="color:black;">{{ $voucher->title }}</a></td>
                       <td>{{ Carbon\Carbon::parse($voucher->expiry_date)->format('Y-m-d') }}</td>                      
                       <td>{{ $voucher->voucher_redeem_status == 1 ? 'Yes':'No' }}</td>

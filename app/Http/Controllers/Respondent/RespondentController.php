@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers\Respondent;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use DB;
-
 use App\Interest;
 use App\locations;
 use App\surveys;
 use App\Question;
 use App\Choice;
 use App\User;
+use App\Voucher;
+use App\VouchersType;
+use App\Store;
+use DateTime;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+
 class RespondentController extends Controller
 {
 
@@ -59,15 +64,10 @@ class RespondentController extends Controller
         return view('respondent.update', ['user' => $user]); 
     }
 
-     public function resProfile() 
-     {
-    return view('respondent.resProfile');
-     }
-
-   public function resVoucher()
-   {
-    return view('respondent.resVoucher');
-   }
+    public function resProfile() 
+    {
+        return view('respondent.resProfile');
+    }
 
    public function viewSurvey(Request $request)
    {
@@ -99,7 +99,6 @@ class RespondentController extends Controller
 }
     public function saveAnswer(Request $request)
     {   
-       
             
         foreach( $request->answers as $answer ){
             DB::table('tag_respondents_options')->insert(['options_id'=> $answer, 'users_id'=> Auth::user()->users_id] );
@@ -147,8 +146,7 @@ class RespondentController extends Controller
 
     public function res_voucher_show(Request $request)
     {
-        $voucher = Voucher::find(request('vouchers_id'))->firstOrFail();
-        $vouchers = Voucher::with('stores')->get();
+        $voucher = Voucher::where('vouchers_id', $request->vouchers_id)->first();       
         $encryptedSid = Crypt::encryptString($request->surveys_id);
         $encryptedVC = Crypt::encryptString($request->vouchers_id);
         $vType = VouchersType::where('vouchers_types_id', '=', $voucher->vouchers_types_id)->first();
@@ -158,12 +156,12 @@ class RespondentController extends Controller
     public function res_voucher_index()
     {
         $res = User::find(Auth::user()->users_id)->firstOrFail();
-           $vouchers = \DB::table('tag_respondents_surveys')
-                ->join('surveys', 'tag_respondents_surveys.surveys_id', '=', 'surveys.surveys_id')
-                ->join('vouchers', 'vouchers.vouchers_id', '=', 'surveys.vouchers_id')
-                ->select('vouchers.vouchers_id', 'tag_respondents_surveys.voucher_redeem_status', 'vouchers.title', 'vouchers.status', 'vouchers.expiry_date', 'surveys.surveys_id')
-                ->where('tag_respondents_surveys.users_id', '=', \Auth::user()->users_id)             
-                ->paginate(10);
+        $vouchers = \DB::table('tag_respondents_surveys')
+            ->join('surveys', 'tag_respondents_surveys.surveys_id', '=', 'surveys.surveys_id')
+            ->join('vouchers', 'vouchers.vouchers_id', '=', 'surveys.vouchers_id')
+            ->select('vouchers.vouchers_id', 'tag_respondents_surveys.voucher_redeem_status', 'vouchers.title', 'vouchers.status', 'vouchers.expiry_date', 'surveys.surveys_id')
+            ->where('tag_respondents_surveys.users_id', '=', \Auth::user()->users_id)             
+            ->paginate(10);
                    
         $vouchers->withPath('/resVoucher');       
         return view('respondent.resVoucher', ['vouchers' => $vouchers]);

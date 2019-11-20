@@ -5,6 +5,7 @@ namespace App\Http\Controllers\owner;
 use Auth;
 use DB;
 use App\surveys;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Question;
@@ -77,8 +78,8 @@ class OwnerController extends Controller
 
         elseif (DB::table('tag_owner_packages')->where('users_id',\Auth::user()->users_id)->sum('no_surveys') == 1) 
         {
-
-        $lastestSurvey = DB::table('surveys')->where('users_id',\Auth::user()->users_id)->get()->first();
+        
+        $lastestSurvey = DB::table('surveys')->where('users_id',\Auth::user()->users_id)->orderBy('created_at','desc')->get()->first();
 
         $lastSurveys = $lastestSurvey->surveys_title;
         $lastSurveysDate = $lastestSurvey->created_at;
@@ -145,7 +146,8 @@ class OwnerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $owner = User::find(\Auth::user()->users_id);
+        return view('owner.edit', ['owner'=>$owner]);
     }
 
     /**
@@ -187,9 +189,6 @@ class OwnerController extends Controller
 
 
 
-    public function userProfile(){
-        return view('surveyOwner.userProfile');
-    }
 
     public function editUserProfile(){
         return view('surveyOwner.userProfile');

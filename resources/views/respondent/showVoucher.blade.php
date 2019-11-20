@@ -1,3 +1,4 @@
+
 @extends('layouts.res_layout')
 @section('navbar-brand', "Voucher {$voucher->vouchers_id}: {$voucher->title}" )
 @section('content')

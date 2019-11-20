@@ -55,11 +55,11 @@ Route::any( '/vouchers', function () {
 		$vouchers = Voucher::where ( 'title', 'LIKE', '%' . $q . '%' )->orWhere ( 'status', 'LIKE', $q  )->paginate (5)->setPath ( '/vouchers' );
 		$vCount = Voucher::where ( 'title', 'LIKE', '%' . $q . '%' )->orWhere ( 'status', 'LIKE', $q )->get()->count();
 		$pagination = $vouchers->appends ( array (
-		'q' => Request::input( 'q' ) 
+			'q' => Request::input( 'q' ) 
 		) 
 	);
-	if (count ( $vouchers ) > 0 || $vCount > 0)
-		return view ( 'voucher.index' , ['vouchers'=> $vouchers, 'vCount'=>$vCount])->withQuery ( $q );
+		if (count ( $vouchers ) > 0 || $vCount > 0)
+			return view ( 'voucher.index' , ['vouchers'=> $vouchers, 'vCount'=>$vCount])->withQuery ( $q );
 	}else{
 		return redirect()->route('myVouchers')->with('error','Sorry! No record found. Search again.');	
 	}
@@ -96,10 +96,10 @@ Route::post('resVoucher/redeem-accept/{vouchers_id}/{stores_id}/{surveys_id}', '
 
 //Auth
 Route::get('/', ['middleware' =>'guest', function(){
-  return view('auth.login');
+	return view('auth.login');
 }]);
 // Route::get('/', function () {
-    
+
 // })->middleware('verified');
 
 
@@ -108,7 +108,7 @@ Route::get('/upgrade', 'plan\planController@index')->name('packageSubscription')
 Route::get('/create','plan\planController@checkout')->name('checkout');
 Route::get('/chart','Survey\SurveyController@showChart');
 Route::post('storePayment','plan\planController@store');
-
+Route::get('/unSubPackage','plan\planController@unSub');
 
 
 
@@ -125,7 +125,6 @@ Route::get('/createSurvey','Survey\SurveyController@createSurvey')->name('create
 Route::resource('questions', 'Survey\SurveyController@storeQuestion');
 Route::post("storeQuestion", 'Survey\SurveyController@storeQuestion')->name('storeQuestion');
 Route::get('/createQuestion','Survey\SurveyController@createQuestion')->name('createQuestion');
-Route::get('/userProfile','Owner\OwnerController@userProfile')->name('owner.profile');
 Route::get('/mySurvey','Survey\SurveyController@mySurvey')->name('ownerSurvey');
 Route::get('/mySurvey/delete/{id}','Survey\SurveyController@destroy')->name('survey.destroy');
 //option

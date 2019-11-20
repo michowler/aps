@@ -248,7 +248,7 @@
                 </li>
 
                 <li >
-                    <a href="/userProfile">
+                    <a href="{{route('editOwner', ['name'=> \Auth::user()->name])}}">
                         <i class="pe-7s-user"></i>
                         <p>User Profile</p>
                     </a>

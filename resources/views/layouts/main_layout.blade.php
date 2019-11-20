@@ -48,13 +48,7 @@
           </div>
           <!-- Navbar items -->
 
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link nav-link-icon" href="packages.html">
-                <i class="ni ni-planet"></i>
-                <span class="nav-link-inner--text">Subscription Plan</span>
-              </a>
-            </li>
+          <ul class="navbar-nav ml-auto">           
 
             @guest
                 <li class="nav-item">

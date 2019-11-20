@@ -1,3 +1,4 @@
+@section('navbar-brand', 'My Surveys')
 @extends('layouts.res_layout')
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -104,11 +105,11 @@
                 <div class="card">
 
                     <div class="header">
-                        <h4 class="title">Survey Available</h4>
+                        <h4 class="title">Surveys Available</h4>
 
                         <ul class="top-level-menu">
                             <li>
-                                <a href="#">Filter survey<span class="caret"></span></a>
+                                <a href="#">Filter<span class="caret"></span></a>
                                 <ul class="second-level-menu">
                                     <li>
                                         <a>Location</a>
