@@ -17,17 +17,17 @@ class DatabaseSeeder extends Seeder
             InterestTableSeeder::class, 
             PackageTableSeeder::class,
             RoleTableSeeder::class,
-            UserTableSeeder::class,
-            // tag_owner_packagesTableSeeder::class,
+            UserTableSeeder::class,            
             MerchantTableSeeder::class,           
             StoreTableSeeder::class,
+            // tag_owner_packagesTableSeeder::class,
             // AdminTableSeeder::class,
-            LocationTableSeeder::class,
-            SurveyTableSeeder::class,
-            QuestionTableSeeder::class,
-            ChoiceTableSeeder::class,
-            OptionTableSeeder::class,
-            RespondentsOptionsTableSeeder::class                                   
+            // LocationTableSeeder::class,
+            // SurveyTableSeeder::class,
+            // QuestionTableSeeder::class,
+            // ChoiceTableSeeder::class,
+            // OptionTableSeeder::class,
+            // RespondentsOptionsTableSeeder::class                                   
         ]);
         
          // factory(App\User::class, 10)->create()->each(function ($user) {
