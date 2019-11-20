@@ -7,7 +7,8 @@ use DB;
 use App\surveys;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Question;
+use App\Option;
 
 // $servername = "127.0.0.1:8000";
 // $username = "root";
@@ -181,6 +182,7 @@ class OwnerController extends Controller
     }
 
 
+
     public function userProfile(){
         return view('surveyOwner.userProfile');
     }
@@ -193,12 +195,20 @@ class OwnerController extends Controller
         return view('surveyOwner.userProfile');
     }
 
+    public function ownerViewSurvey(Request $request)
+   {
+    $survey = surveys::find($request->id);
+    $question =  Question::where('surveys_id', $request->id)->get();
+
+    return view('surveyOwner.ownerViewSurvey', ['survey' => $survey, 'questions' => $question]);
+   }
+
     // public function createQuestion(){
-    //     return view('surveyOwner.createQuestion');
+    //     return view('owner.createQuestion');
     // }
 
     //  public function verification(){
-    //     return view('surveyOwner.createQuestion');
+    //     return view('owner.createQuestion');
     // }
 }
 

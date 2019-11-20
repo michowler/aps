@@ -96,16 +96,22 @@ Route::post('storePayment','plan\planController@store');
 //owner
 Route::get('/ownerRegister','Auth\RegisterController@ownerRegister')->name('owner.register');
 Route::get('/ownerDashboard', 'Owner\OwnerController@index')->name('ownerDashboard');
+//survey
 Route::resource('surveys', 'Survey\SurveyController');
-Route::post("store", 'Survey\SurveyController@store')->name('storeSurvey');
+Route::post('/store', 'Survey\SurveyController@store')->name('storeSurvey');
 Route::get('/createSurvey','Survey\SurveyController@createSurvey')->name('createSurvey');
+//question
 Route::resource('questions', 'Survey\SurveyController@storeQuestion');
 Route::post("storeQuestion", 'Survey\SurveyController@storeQuestion')->name('storeQuestion');
 Route::get('/createQuestion','Survey\SurveyController@createQuestion')->name('createQuestion');
 Route::get('/userProfile','Owner\OwnerController@userProfile')->name('owner.profile');
 Route::get('/mySurvey','Survey\SurveyController@mySurvey')->name('ownerSurvey');
 Route::get('/mySurvey/delete/{id}','Survey\SurveyController@destroy')->name('survey.destroy');
-
+//option
+Route::resource('options', 'Survey\SurveyController@storeOption');
+Route::post("storeOption", 'Survey\SurveyController@storeOption')->name('storeOption');
+Route::get('/createOption/{id}','Survey\SurveyController@createOption')->name('createOption');
+Route::get('/ownerViewSurvey','Owner\OwnerController@ownerViewSurvey')->name('ownerViewSurvey');
 
 //admin
 Route::get('/admin/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
@@ -115,70 +121,25 @@ Route::get('/adminProfile','AdminController@adminProfile')->name('admin.profile'
 Route::get('/merchantTable','AdminController@merchantTable')->name('merchantTable');
 Route::get('/ownerTable','AdminController@ownerTable')->name('ownerTable');
 Route::get('/respondentTable','AdminController@respondentTable')->name('respondentTable');
+Route::get('/merchantTable/delete/{id}','AdminController@destroy')->name('merchant.destroy');
+Route::get('/ownerTable/delete/{id}','AdminController@destroy')->name('owner.destroy');
+Route::get('/respondentTable/delete/{id}','AdminController@destroy')->name('respondent.destroy');
 
 //respondent
 Route::get('/resRegister','Auth\RegisterController@resRegister')->name('res.register');
-//Route::post('/resRegister','Auth\RegisterController@register')->name('register');
-Route::get('/res','Respondent\RespondentController@index')->name('res.dashboard');
-Route::get('/resVoucher','Respondent\RespondentController@res_voucher_index')->name('resVoucher');
+Route::get('/res','Respondent\RespondentController@surveyList')->name('res.dashboard');
+Route::get('/resFilter','Respondent\RespondentController@filterSurvey');
+Route::get('/resProfile','Respondent\RespondentController@resProfile')->name('res.profile');
+Route::get('/resVoucher','Respondent\RespondentController@resVoucher')->name('resVoucher');
+Route::resource('choices', 'Survey\SurveyController@storeChoice');
+Route::post("storeChoice", 'Survey\SurveyController@storeChoice')->name('storeChoice');
+Route::get('/viewSurvey','Respondent\RespondentController@viewSurvey')->name('viewSurvey');
+Route::get("saveAnswer", 'Respondent\RespondentController@saveAnswer')->name('saveAnswer');
+// Route::get('/answer','Respondent\RespondentController@saveAnswer')->name('saveAnswer');
 
 //merchant
 Route::get('/merchantRegister','Auth\RegisterController@merchantRegister')->name('res.register');
-//Route::get('/merchant','Auth\LoginController@merchant')->name('merchant.dashboard');
-
-//
-// Route::get('/userProfile', 'Owner\OwnerController@userProfile');
-
-// Route::get('/userProfile/editUserProfile', 'Owner\OwnerController@userProfile');
-
-// Route::get('/userProfile/saveUserProfile', 'Owner\OwnerController@userProfile');
-
-//survey
-
-//Route::get('/mySurvey','Survey\SurveyController@mySurvey');	//display survey list
-
-//Route::get('/chart','Survey\SurveyController@showChart');
-
-// Route::get('/createSurvey', 'Survey\SurveyController@create');
-
-// Route::post('/storeSurvey', 'Survey\SurveyController@store')->name('storeSurvey');
-
-// Route::resource('surveys', 'Owner\OwnerController');
-
-// Route::post('/insert','Owner\OwnerController@insert');
-
-// Route::get('/createSurvey/editSurvey', 'Owner\OwnerController@createSurvey');
-
-
-
-
-
-
-// Route::get('/registerAs','FrontController@registerAs');
-
-// Route::get('/resRegister','Auth\RegisterController@resRegister')->name('res.register');
-// Route::get('/ownerRegister','Auth\RegisterControllerr@ownerRegister')->name('owner.register');
-
-// Route::get('/verify','FrontController@verify');
-// Route::get('/forgetPassword','FrontController@forgetPassword');
-// Route::get('/passwordNotification', 'FrontController@passwordNotification');
-// Route::get('/subPlan','FrontController@subPlan');
-// Route::get('/createQuestion', 'Owner\OwnerController@createQuestion');
-// Route::get('/createQuestion/editQuestion', 'Owner\OwnerController@createQuestion');
-// Route::get('/adminProfile','AdminController@adminProfile');
-// Route::get('/adminProfile/editAdminProfile','AdminController@adminProfile');
-// Route::get('/dashboardAdmin','AdminController@dashboardAdmin');
-// Route::get('/merchantTable','AdminController@merchantTable');
-// Route::get('/merchantTable/editMerchant','AdminController@merchantTable');
-// Route::get('/respondentTable','AdminController@respondentTable');
-// Route::get('/respondentTable/editRespondent','AdminController@respondentTable');
-// Route::get('/ownerTable','AdminController@ownerTable');
-// Route::get('/ownerTable/editOwner','AdminController@ownerTable');
-
-
-
-
-
+Route::get('/merchantRegister','Auth\RegisterController@merchantRegister')->name('merchant.register');
 
 
 
