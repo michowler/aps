@@ -31,8 +31,7 @@
                               
                        </div>
                        <label for="image">                                
-                           <input id="logo" class="form-control" name="logo" type='file' onchange="readURL(this);" />
-                                             
+                           <input id="logo" class="form-control" name="logo" type='file' onchange="readURL(this);" />                                             
                        </label>
                        
                     </h4>
@@ -155,12 +154,14 @@
            </div>
        </div>
 
+      
+
      
 
 
 
     <!-- <button type="submit" class="btn btn-info btn-fill pull-right">Generate Voucher</button> -->
-    <a class="btn btn-info btn-fill pull-right"  style="margin: 0 0 0 10px" href="demoVoucher.html">Demo</a>
+  <!--   <a class="btn btn-info btn-fill pull-right" id="demoButton" style="margin: 0 0 0 10px" data-toggle="modal" data-target="#demoV" onclick="demoContainer()" >Demo</a> -->
     <button type="submit" class="btn btn-info btn-fill pull-right">{{ __('Submit') }}</button>
 
 
@@ -179,6 +180,8 @@
 @endsection
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
+
+
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();

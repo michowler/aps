@@ -1,6 +1,10 @@
 <?php
 
+
 use App\User;
+use App\Voucher;
+use Request;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +48,7 @@ Auth::routes(['reset' => true]);
 // Michelle 
 
 //Vouchers
+
 Route::get('/vouchers', 'Voucher\VoucherController@index')->name('myVouchers');
 Route::get('/voucher/create', 'Voucher\VoucherController@create')->name('generate');
 Route::post('/voucher/store', 'Voucher\VoucherController@store')->name('storeVoucher');
