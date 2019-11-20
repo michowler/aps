@@ -3,7 +3,7 @@
 
 use App\User;
 use App\Voucher;
-use Request;
+
 
 
 
