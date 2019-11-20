@@ -1,4 +1,3 @@
-@section('navbar-brand', 'Answer Survey')
 @extends('layouts.res_layout')
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -96,9 +95,10 @@
 }
 </style>
 
+   
 
-</head>
 @section('content')
+
 
 
 				<div class="content">
@@ -151,6 +151,8 @@
 		</div>
 </div>
 
+
+</body>
 @endsection
 <!-- 	modal fail -->
 <div class="modal fade" tabindex="-1" role="dialog"  id="failSubmit">
