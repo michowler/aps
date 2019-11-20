@@ -7,10 +7,10 @@
 <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Generate Survey</h4>
+                                <h4 class="title">Create your survey</h4>
                             </div>
                             <div class="content">
 
@@ -44,7 +44,7 @@
                                                         <tbody>
                                                     
                                                         @foreach($interests as $interests)
-                                                     <input class="form-check-input" type="checkbox" value="{{$interests->interests_id}}" name="interests[]" id="checkbox{$interests ->interests_id}">
+                                                     <input class="form-check-input " type="checkbox" value="{{$interests->interests_id}}" name="interests[]" id="checkbox{$interests ->interests_id}"><span style="margin-right=15px"></span>
                                                      <label class="form-check-label mr-3" for="checkbox{$interests ->interests_id}"></label>
                                                    <!--  <input class="checkbox" value="{{$interests->interests_id}}" name="interests[]" id="checkbox{$interests ->interests_id}" type="checkbox"> -->
                                                

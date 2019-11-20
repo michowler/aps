@@ -138,54 +138,52 @@ class SurveyController extends Controller
      return redirect()->route('createQuestion');
      //return Redirect::route('createQuestion')->with('savedSurveyId', $surveys->surveys_id);
 
-
-    
   }
 
-  public function createQuestion(Request $request)
-  {
-  
-    $surveys = Session::get('savedSurveyId');     
-    return view('surveyOwner.createQuestion');
-    
-  }
-
-  public function storeQuestion(Request $request)
+    public function createQuestion(Request $request)
     {
-      $this -> validate($request,[
-        'questions_title' => 'required',
-        'content' =>'required'
-      ]);
 
-      $questionArr = $request->questions_title;
-      $optionsArr = $request->content;
-      $surveysID = $request->savedSurveyId;
-
-      // var_dump($questionArr);
-      // var_dump($optionsArr);
+      $surveys = Session::get('savedSurveyId');     
+      return view('surveyOwner.createQuestion');
       
-
-      for ($i = 0; $i < count($questionArr); $i++) {
-            
-            $quest = new Question;
-            $quest->questions_title = $questionArr[$i];
-            $quest->surveys_id = Session::get('savedSurveyId');
-            $quest->save();
-            
-            for($x = 0; $x < count($optionsArr[$i]); $x++){
-              if(!is_null($optionsArr[$i][$x])){
-                $option = new Option;
-                $option->questions_id = $quest->questions_id;
-                $option->choices_id = ($x + 1);
-                $option->content = $optionsArr[$i][$x];
-                $option->save();
-              }
-              
-            }
-      
-        }
-    
     }
+
+    public function storeQuestion(Request $request)
+      {
+        $this -> validate($request,[
+          'questions_title' => 'required',
+          'content' =>'required'
+        ]);
+
+        $questionArr = $request->questions_title;
+        $optionsArr = $request->content;
+        $surveysID = $request->savedSurveyId;
+
+        // var_dump($questionArr);
+        // var_dump($optionsArr);
+        
+
+        for ($i = 0; $i < count($questionArr); $i++) {
+              
+              $quest = new Question;
+              $quest->questions_title = $questionArr[$i];
+              $quest->surveys_id = Session::get('savedSurveyId');
+              $quest->save();
+              
+              for($x = 0; $x < count($optionsArr[$i]); $x++){
+                if(!is_null($optionsArr[$i][$x])){
+                  $option = new Option;
+                  $option->questions_id = $quest->questions_id;
+                  $option->choices_id = ($x + 1);
+                  $option->content = $optionsArr[$i][$x];
+                  $option->save();
+                }
+                
+              }
+        
+          }
+      
+      }
 
   public function mySurvey()
   {

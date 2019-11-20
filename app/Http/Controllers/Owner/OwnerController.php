@@ -173,7 +173,6 @@ class OwnerController extends Controller
         //
     }
 
-
     public function insert(Request $req){
         $surveytitle = $req ->input('surveys_title');
         $surveydescription = $req -> input('surveys_description') ;
@@ -187,9 +186,6 @@ class OwnerController extends Controller
         echo "success";
     }
 
-
-
-
     public function editUserProfile(){
         return view('surveyOwner.userProfile');
     }
@@ -199,12 +195,12 @@ class OwnerController extends Controller
     }
 
     public function ownerViewSurvey(Request $request)
-   {
-    $survey = surveys::find($request->id);
-    $question =  Question::where('surveys_id', $request->id)->get();
+    {
+        $survey = surveys::find($request->id);
+        $question =  Question::where('surveys_id', $request->id)->get();
 
-    return view('surveyOwner.ownerViewSurvey', ['survey' => $survey, 'questions' => $question]);
-   }
+        return view('surveyOwner.ownerViewSurvey', ['survey' => $survey, 'questions' => $question]);
+    }
 
     // public function createQuestion(){
     //     return view('owner.createQuestion');

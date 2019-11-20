@@ -22,6 +22,11 @@
                                     	<th>Responses</th>
                                     	<th>Analyze</th>
                                         <th>Delete Survey</th>
+                                        <th>View</th>
+
+
+
+                                        
                                     </thead>
                                     <tbody>
                                         <tr>
@@ -31,6 +36,7 @@
                                         	<td>0</td>
                                         	<td><a href="/chart"><button class="btn"><i class="far fa-chart-bar"></i></a></td>
                                             <td><button class="btn"><i class="fa fa-trash"></i> Trash</button></td>
+                                            <td><a href="ownerViewSurvey?id={{$survey->surveys_id}}" class="btn btn-primary">View</a></td>
                                         </tr>
                                         <tr>
                                         	<td>2</td>

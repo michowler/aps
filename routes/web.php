@@ -121,7 +121,6 @@ Route::resource('surveys', 'Survey\SurveyController');
 Route::post('/store', 'Survey\SurveyController@store')->name('storeSurvey');
 Route::get('/createSurvey','Survey\SurveyController@createSurvey')->name('createSurvey');
 //question
-
 Route::resource('questions', 'Survey\SurveyController@storeQuestion');
 Route::post("storeQuestion", 'Survey\SurveyController@storeQuestion')->name('storeQuestion');
 Route::get('/createQuestion','Survey\SurveyController@createQuestion')->name('createQuestion');

@@ -3,69 +3,64 @@
 @section('navbar-brand', 'Generate Question')
 
 @section('content')
-
-        <!--div class="content"-->
-            <div class="content">
-                <div class="row justify-content-center">
-                    <div class="col-md-8">
-                        <div class="card">
-                
-                 
-<!-- <form id="quiz" action="" method="POST"> -->
-
-   <!--  <input type="button" value="Add question" onclick="javascript: addQuestion();"/> -->
-
-  <!--   <p>Question 1</p>
-    <input type="text" name="questions[]"/>
-    <p>Question 2</p>
-    <input type="text" name="questions[]"/>
-    <p>Question 3</p>
-    <input type="text" name="questions[]"/>
-    <p>Question 4</p>
-    <input type="text" name="questions[]"/>
-    <p></p> -->
- 
-
-                    <form id="questions" action="{{action('Survey\SurveyController@storeQuestion')}}" method="POST">
-                                      {{csrf_field()}}
-                                      <h2>Question <span id="questionNum">1</span></h2>
-                                  
- 
-                        <div class="content">
-                            <div class="row justify-content-center">
-                                 <div class="col-md-8">
-           <!--  <div class="card"> -->
-                
-                                 <div class="row">
-                                        
-                                            <div class="form-group">
-                                                
-                                                <!-- <input type="text" id="number" value="s1"/> -->
-                                                <input type="questions_title" class="form-control" placeholder="Question Title" name="questions_title" id="questions_title"><br>
-                                       
-                        <label>Please insert your answer:</label><br>
-                       
-                           <!--  <input type="hidden" name="savedSurveyId" value="{{ session()->get( 'savedSurveyId' ) }}"> -->
-                            <input id="content1" type="content" class="form-control" placeholder="Answer 1" name="content"/><br>
-                            <input id="content2" type="content" class="form-control" placeholder="Answer 2" name="content"/><br>
-                            <input id="content3" type="content" class="form-control" placeholder="Answer 3" name="content"/><br>
-                            <input id="content4" type="content" class="form-control" placeholder="Answer 4" name="content"/><br>
-                           </input>
-                                          
-                  <input type="button" style="margin:5px;" class="btn btn-info btn-fill pull-right" onclick="addQuestion()" value="Add Question" /></button>   
-                   <input type="submit" style="margin:5px;" class="btn btn-info btn-fill pull-right" onclick="finish()" value="Finish Create Survey" /></button>         
-                                      
-
-</div>
-</div>
-</div>
-</div>
-</div>
-</form>
+<div class="container-fluid">
     
+<div class="col-md-12">
+    <div class="card">
+       <div class="header">
+           <h4 class="title">Generate Questions</h4>
+       </div>
+       <div class="content">
+                   <form id="questions" action="{{action('Survey\SurveyController@storeQuestion')}}" method="POST">
+                                     {{csrf_field()}}
+                                     <h2>Question <span id="questionNum">1</span></h2>
+                                 
+       
+                       <div class="content">
+                           <div class="row justify-content-center">
+                                <div class="col-md-12">
+          <!--  <div class="card"> -->
+               
+                                <div class="row">
+                                       
+                                           <div class="form-group">
+                                               
+                                              
+                                              <input type="questions_title" class="form-control" placeholder="Question Title" name="questions_title" id="questions_title"><br>
+                                      
+                       <label>Please insert your answer:</label><br>
+                      
+                          <!--  <input type="hidden" name="savedSurveyId" value="{{ session()->get( 'savedSurveyId' ) }}"> -->
+                          <input id="content1" type="content" class="form-control" placeholder="Answer 1" name="content"/><br>
+                          <input id="content2" type="content" class="form-control" placeholder="Answer 2" name="content"/><br>
+                          <input id="content3" type="content" class="form-control" placeholder="Answer 3" name="content"/><br>
+                          <input id="content4" type="content" class="form-control" placeholder="Answer 4" name="content"/><br>
+                         </input>
+                                         
+                 <input type="button" style="margin:5px;" class="btn btn-info btn-fill pull-right" onclick="addQuestion()" value="Add Question" /></button>   
+                  <input type="submit" style="margin:5px;" class="btn btn-info btn-fill pull-right" onclick="finish()" value="Finish Create Survey" /></button>         
+                                     
+
+                   </div>
+                   </div>
+                   </div>
+                   </div>
+               </div>
+       </form>
+</div>
+</div>
 </div>
 
- <script>
+
+
+
+</div>
+</div>
+</div>
+  </div>
+</div>
+@endsection
+<script>
  // Max questions
 var count = 1; // There are 1 questions already
 var questions =[];
@@ -142,8 +137,7 @@ function addQuestion(questions_title, content){
 
 
 </script>
-    </div>
-</div>
+  
 
 
- @endsection
+ 
