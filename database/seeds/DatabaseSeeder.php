@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             RoleTableSeeder::class,
             UserTableSeeder::class,            
             MerchantTableSeeder::class,           
-            StoreTableSeeder::class,
+            StoreTableSeeder::class
             // tag_owner_packagesTableSeeder::class,
             // AdminTableSeeder::class,
             // LocationTableSeeder::class,
