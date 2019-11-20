@@ -6,6 +6,7 @@ use App\Voucher;
 use Request;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -48,7 +49,21 @@ Auth::routes(['reset' => true]);
 // Michelle 
 
 //Vouchers
-
+Route::any( '/vouchers', function () {
+	$q = Request::input( 'q' );
+	if($q != ""){
+		$vouchers = Voucher::where ( 'title', 'LIKE', '%' . $q . '%' )->orWhere ( 'status', 'LIKE', $q  )->paginate (5)->setPath ( '/vouchers' );
+		$vCount = Voucher::where ( 'title', 'LIKE', '%' . $q . '%' )->orWhere ( 'status', 'LIKE', $q )->get()->count();
+		$pagination = $vouchers->appends ( array (
+		'q' => Request::input( 'q' ) 
+		) 
+	);
+	if (count ( $vouchers ) > 0 || $vCount > 0)
+		return view ( 'voucher.index' , ['vouchers'=> $vouchers, 'vCount'=>$vCount])->withQuery ( $q );
+	}else{
+		return redirect()->route('myVouchers')->with('error','Sorry! No record found. Search again.');	
+	}
+} );
 Route::get('/vouchers', 'Voucher\VoucherController@index')->name('myVouchers');
 Route::get('/voucher/create', 'Voucher\VoucherController@create')->name('generate');
 Route::post('/voucher/store', 'Voucher\VoucherController@store')->name('storeVoucher');

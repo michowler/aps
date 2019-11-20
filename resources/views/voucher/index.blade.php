@@ -5,7 +5,17 @@
 @section('content')
 <div class="container-fluid">
   
-
+          <form action="/vouchers" method="POST" role="search">
+              {{ csrf_field() }}
+              <div class="input-group">
+                  <input type="text" class="form-control" name="q"
+                      placeholder="Search vouchers"> <span class="input-group-btn">
+                      <button type="submit" class="btn btn-default">
+                          <span class="glyphicon glyphicon-search"></span>
+                      </button>
+                  </span>
+              </div>
+          </form>
   
   <div class="row">
     <div class="col-md-12">
@@ -20,7 +30,7 @@
             <div class="row">
               <div class="col-md-12">    
 
-                <p class="title">No. of Vouchers created: {{$vCount}}</h4>                                  
+                <p class="title">No. of Vouchers: {{$vCount}}</h4>                                  
                 <table class="table table-borderless">
                   
                   <tbody>

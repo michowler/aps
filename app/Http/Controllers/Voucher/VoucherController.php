@@ -187,6 +187,7 @@ class VoucherController extends Controller
 	{			
 		$merchant = Merchant::where('users_id', '=', \Auth::user()->users_id)->firstOrFail();
 		$vouchers = Voucher::where('merchants_id', $merchant->merchants_id)->where('status', 'invalid')->where('max_redeem', '0')->paginate(10); //get only vouchers that are invalid	
+		//voucher_redeem_status
 		$vouchers->withPath('/vouchers/redeem'); 
 		return view('voucher.redeem_index', ['vouchers' => $vouchers]);  		
 	}
