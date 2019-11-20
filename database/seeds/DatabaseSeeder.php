@@ -13,21 +13,21 @@ class DatabaseSeeder extends Seeder
     {
         //https://github.com/fzaninotto/Faker#fakerproviderdatetime
         $this->call([            
-            VoucherTypeTableSeeder::class,
-            InterestTableSeeder::class, 
-            PackageTableSeeder::class,
-            RoleTableSeeder::class,
-            UserTableSeeder::class,            
-            MerchantTableSeeder::class,           
-            StoreTableSeeder::class
+            // VoucherTypeTableSeeder::class,
+            // InterestTableSeeder::class, 
+            // PackageTableSeeder::class,
+            // RoleTableSeeder::class,
+            // UserTableSeeder::class,            
+            // MerchantTableSeeder::class,           
+            // StoreTableSeeder::class,
             // tag_owner_packagesTableSeeder::class,
-            // AdminTableSeeder::class,
-            // LocationTableSeeder::class,
-            // SurveyTableSeeder::class,
-            // QuestionTableSeeder::class,
-            // ChoiceTableSeeder::class,
-            // OptionTableSeeder::class,
-            // RespondentsOptionsTableSeeder::class                                   
+            // // AdminTableSeeder::class,
+            // LocationTableSeeder::class
+            SurveyTableSeeder::class,
+            QuestionTableSeeder::class,
+            ChoiceTableSeeder::class,
+            OptionTableSeeder::class,
+            RespondentsOptionsTableSeeder::class                                   
         ]);
         
          // factory(App\User::class, 10)->create()->each(function ($user) {

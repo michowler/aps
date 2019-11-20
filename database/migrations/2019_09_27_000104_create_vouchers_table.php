@@ -23,7 +23,7 @@ class CreateVouchersTable extends Migration
             $table->date('expiry_date');
             $table->integer('max_redeem'); 
             $table->string('logo')->nullable();          
-            $table->longText('qr_code');
+            $table->longText('qr_code')->nullable();
             $table->timestamps();
             $table -> foreign('merchants_id') 
             -> references('merchants_id') 

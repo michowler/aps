@@ -19,4 +19,9 @@ class Interest extends Model
     {
     	return $this -> belongsToMany(Interest::class,'tag_intrerest_surveys','interests_id','surveys_id');
     }
+
+    public function users()
+    {
+      return $this->belongsTo(User::class, 'users_id');      
+    }
 }

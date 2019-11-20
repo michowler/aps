@@ -32,8 +32,11 @@ class RedirectIfAuthenticated
 
            switch ($auth->title) {
                case 'admin':
-                       return  redirect()->route('editUser');    
+                       return  redirect()->route('admin.dashboard');    
                    break;
+               case 'respondent':
+                       return  redirect()->route('res.dashboard');    
+                   break;                   
                case 'merchant':
                        return  redirect()->route('myVouchers'); 
                    break;

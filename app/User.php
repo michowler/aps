@@ -68,6 +68,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return null !==$this->roles() -> whereIn('title',$roles)->first();
     }
 
+    public function options()
+    {
+        return $this->hasMany('tag_respondents_options','options_id');
+    }
+
     // public function hasRole($roles)
     // {
     //     return null !== $this->roles() ->where('title',$roles)->first();
