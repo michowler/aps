@@ -50,11 +50,12 @@ class UserTableSeeder extends Seeder
         // $res->vouchers()->attach($voucher1);
         // $user[1]->roles()->sync([2,3]);        
 
-        
-        $user2->roles()->attach($role2);
+        $user->roles()->attach($role1);
+        $user2->roles()->attach($role1);
+        $user4->roles()->attach($role2);
+        $user5->roles()->attach($role2);
         $user3->roles()->attach($role3);
-        $user4->roles()->attach($role4);
-        $user5->roles()->attach($role5);
+
     }
 
 }
