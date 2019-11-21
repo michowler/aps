@@ -133,7 +133,6 @@ Route::get('/createOption/{id}','Survey\SurveyController@createOption')->name('c
 Route::get('/ownerViewSurvey','Owner\OwnerController@ownerViewSurvey')->name('ownerViewSurvey');
 
 //admin
-
 Route::get('/admin/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
 Route::post('/admin/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
 Route::get('/admin', 'AdminController@index')->name('admin.dashboard');
@@ -151,13 +150,12 @@ Route::get('/res','Respondent\RespondentController@surveyList')->name('res.dashb
 Route::get('/resFilter','Respondent\RespondentController@filterSurvey');
 Route::get('/resProfile','Respondent\RespondentController@resProfile')->name('res.profile');
 Route::get('/resVoucher','Respondent\RespondentController@res_voucher_index')->name('resVoucher');
-Route::resource('choices', 'Survey\SurveyController@storeChoice');
-Route::post("storeChoice", 'Survey\SurveyController@storeChoice')->name('storeChoice');
+// Route::resource('choices', 'Survey\SurveyController@storeChoice');
+// Route::post("/storeChoice", 'Survey\SurveyController@storeChoice')->name('storeChoice');
 Route::get('/viewSurvey','Respondent\RespondentController@viewSurvey')->name('viewSurvey');
-Route::get("saveAnswer", 'Respondent\RespondentController@saveAnswer')->name('saveAnswer');
+Route::get("/saveAnswer", 'Respondent\RespondentController@saveAnswer')->name('saveAnswer');
+Route::post("/saveAnswer", 'Respondent\RespondentController@savedAnswer')->name('savedAnswer');
 // Route::get('/answer','Respondent\RespondentController@saveAnswer')->name('saveAnswer');
-
-
 
 //merchant
 Route::get('/merchantRegister','Auth\RegisterController@merchantRegister')->name('res.register');

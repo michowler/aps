@@ -73,7 +73,6 @@ class RespondentController extends Controller
    {
     $survey = surveys::find($request->id);
     $question =  Question::where('surveys_id', $request->id)->get();
-
     return view('respondent.viewSurvey', ['survey' => $survey, 'questions' => $question]);
    }
 
@@ -98,14 +97,24 @@ class RespondentController extends Controller
    }
 }
     public function saveAnswer(Request $request)
-    {   
-            
+    {           
+        $startDate = date('Y-m-d H:i:s');
+        DB::table('tag_respondents_surveys')->insert(['surveys_id'=> $request->surveys_id, 'users_id'=> Auth::user()->users_id, 'voucher_redeem_status' => '0','stores_id' => '1', 'survey_completed_date'=> $startDate, 'voucher_redemption_date'=> $startDate] );
         foreach( $request->answers as $answer ){
-            DB::table('tag_respondents_options')->insert(['options_id'=> $answer, 'users_id'=> Auth::user()->users_id] );
+            DB::table('tag_respondents_options')->insert(['options_id'=> $answer, 'users_id'=> Auth::user()->users_id, 'surveys_id'=> $request->surveys_id] );
         }
-         return redirect()->route('resVoucher');
-        
+      
+         return redirect()->route('resVoucher')->with('success', 'Thank you for answering the survey!');        
     }
+
+    // public function savedAnswer(Request $request)
+    // {   
+    //     $survey = surveys::find($request->surveys_id);
+    //     $user = User::find(\Auth::user()->users_id);
+    //     DB::table('tag_respondents_options')->insert(['choices_id'=> $request->$question->questions_id, 'users_id'=> Auth::user()->users_id, 'surveys_id' => $request->surveys_id, 'questions_id' => $request->questions_id] );                        
+    //      return redirect()->route('resVoucher')->with('success', 'Thank you for answering the survey!');
+        
+    // }
 
     // public function edit()
     // {        

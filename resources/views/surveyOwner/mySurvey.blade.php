@@ -20,7 +20,10 @@
                                         <th>Survey Title</th>
                                         <th>Created at</th>
                                         <th>Analyze</th>
+                                        <th>View</th>
                                         <th>Delete</th>
+                                        
+
                                     </tr>
                                     @foreach ($surveys as $survey)
                                         <tr>
@@ -28,7 +31,9 @@
                                             <td>{{ $survey->surveys_title}}</td>
                                             <td>{{ $survey->created_at}}</td>
                                             <td><a href="/chart?id={{ $survey->surveys_id}}" class="btn" id="" ><i class="far fa-chart-bar"></i></a></td>
+                                            <td><a href="ownerViewSurvey?id={{$survey->surveys_id}}" class="btn btn-primary">View</a></td>
                                             <td><a href="{{route('survey.destroy',$survey->surveys_id)}}" type="submit"  class="btn" type="submit" method="post" name="_method" value="delete"><i class="fa fa-trash"></i> Trash</button></td></a>
+                                            
                                         </tr>
                                     @endforeach                  
                                 </table>

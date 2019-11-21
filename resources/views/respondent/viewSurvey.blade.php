@@ -1,3 +1,4 @@
+@section('navbar-brand', 'Answer Survey')
 @extends('layouts.res_layout')
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -117,7 +118,7 @@
 																<label> </label>
 																<label> </label>
 														
-														
+														<input type="hidden" value="{{$survey->surveys_id}}" name="surveys_id">								
 
 														@foreach ($questions as $question)
 															<div class="form-group">

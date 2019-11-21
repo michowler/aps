@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Survey;
 
 use Auth;
 use DB;
-
 use App\Interest;
 use App\locations;
 use App\Option;
@@ -106,8 +105,17 @@ class SurveyController extends Controller
   
    public function store(Request $request)
   {
+    if((DB::table('tag_owner_packages')->where('users_id',Auth::user() -> users_id)->get()->last()->packages_id == 1) AND (DB::table('tag_owner_packages')->where('users_id',Auth::user() -> users_id)->get()->last()->no_surveys > 20))
+      {
+      
+      echo '<script>alert("Number of Survey created have reach limit. Subscibe to Premium Package for unlimited usage!");</script>';
+      return view('surveyOwner.owner_Dashboard');
+      
+      }
+
+    else
+      {
   
-    
     $this->validate($request,[
       'surveys_title' => 'required',
       'surveys_description' => 'required',
@@ -122,22 +130,19 @@ class SurveyController extends Controller
     $surveys ->vouchers_id = $request -> get('vouchers'); 
     $interests = $request ->input('interests');
     $locations = $request -> input('locations');
-    
-
-    
      $surveys ->save();  
-
-    
-
      $surveys::findOrFail($surveys->surveys_id)->interests()->attach($interests);
      $surveys::findOrFail($surveys->surveys_id)->locations()->attach($locations);
-     
-     
-     
+    
+    $latestOwnerPackageID = DB::table('tag_owner_packages')->where('users_id',Auth::user() -> users_id)->get()->last()->owner_packages_id;
+
+       DB::table('tag_owner_packages')->where('owner_packages_id', $latestOwnerPackageID)->increment('no_surveys', 1);
+       
      session()->put('savedSurveyId', $surveys->surveys_id);
      return redirect()->route('createQuestion');
      //return Redirect::route('createQuestion')->with('savedSurveyId', $surveys->surveys_id);
 
+    }
   }
 
     public function createQuestion(Request $request)
@@ -183,11 +188,11 @@ class SurveyController extends Controller
         
           }
       
-      }
+  }
 
   public function mySurvey()
   {
-    $surveys = DB::select('select * from surveys');
+    $surveys = DB::table('surveys')->where('users_id',\Auth::user()->users_id)->get();
     return view('surveyOwner.mySurvey',['surveys'=>$surveys]);
   }
 

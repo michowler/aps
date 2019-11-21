@@ -16,9 +16,8 @@ class CreateTagRespondentsOptionsTable extends Migration
         Schema::create('tag_respondents_options', function (Blueprint $table) {
             $table->bigIncrements('respondents_options_id');
             $table->unsignedBigInteger('users_id');
-            $table->unsignedBigInteger('surveys_id');
-            $table->unsignedBigInteger('choices_id');
-            $table->unsignedBigInteger('questions_id');
+            $table->unsignedBigInteger('surveys_id');            
+            $table->unsignedBigInteger('options_id');            
             $table->timestamps();
             $table->foreign('users_id')
                   ->references('users_id')
@@ -26,12 +25,9 @@ class CreateTagRespondentsOptionsTable extends Migration
             $table->foreign('surveys_id')
                   ->references('surveys_id')
                   ->on('surveys')->onDelete('cascade');
-            $table->foreign('questions_id')
-                  ->references('questions_id')
-                  ->on('questions')->onDelete('cascade');
-            $table->foreign('choices_id')
-                  ->references('choices_id')
-                  ->on('choices')->onDelete('cascade');
+              $table->foreign('options_id')
+                    ->references('options_id')
+                    ->on('options')->onDelete('cascade');
         });
     }
 
