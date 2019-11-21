@@ -41,7 +41,7 @@ class OwnerController extends Controller
         if(DB::table('tag_owner_packages')->where('users_id',\Auth::user()->users_id)->sum('no_surveys') >= 3)
         {
         
-        $lastestSurvey = DB::table('surveys')->where('users_id',\Auth::user()->users_id)->get()->first();
+        $lastestSurvey = DB::table('surveys')->where('users_id',\Auth::user()->users_id)->orderBy('created_at','desc')->get()->first();
 
         $lastSurveys = $lastestSurvey->surveys_title;
         $lastSurveysDate = $lastestSurvey->created_at;

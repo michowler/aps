@@ -1,3 +1,4 @@
+@section('navbar-brand', 'View Survey')
 @extends('layouts.owner_layout')
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -99,143 +100,11 @@
 
 
 @section('content')
-<div class="wrapper">
-    <div class="sidebar" data-color="purple" data-image="{{ asset('FrontEnd') }}/img/sidebar-5.jpg">
-      
-        <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
-
-
-        <div class="sidebar-wrapper">
-            <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text">
-                    APSE
-                </a>
-            </div>
-
-            <ul class="nav">
-                
-               <li >
-                <a href="/home">
-                    <i class="pe-7s-graph"></i>
-                    <p>Dashboard</p>
-                </a>
-            </li>
-            <li >
-                <a href="/createSurvey">
-                    <i class="pe-7s-plus"></i>
-                    <p>Create Survey</p>
-                </a>
-            </li>
-            <li class="active">
-
-               <a href="/mySurvey">
-                <i class="pe-7s-note2"></i>
-                <p>My Survey</p>
-            </a>
-        </li>
-        <li>
-
-            <a href="/userProfile">
-                <i class="pe-7s-user"></i>
-                <p>User Profile</p>
-            </a>
-        </li>
-        <li class="active-pro">
-            <a href="upgrade.html">
-                <i class="pe-7s-rocket"></i>
-                <p>Upgrade to PRO</p>
-            </a>
-        </li>
-        
-    </ul>
-</div>
-</div>
-<div class="main-panel">
-    <nav class="navbar navbar-default navbar-fixed">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">{{$survey->surveys_title}}</a>
-            </div>
-            <div class="collapse navbar-collapse">
-             
-
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-globe"></i>
-                        <b class="caret hidden-sm hidden-xs"></b>
-                        <span class="notification hidden-sm hidden-xs">1</span>
-                        <p class="hidden-lg hidden-md">
-                            1 Notifications
-                            <b class="caret"></b>
-                        </p>
-                    </a>
-                    <ul class="dropdown-menu">
-                                <!-- <li> <a onclick="demo.showMessage('top','center', 
-                                  'Error: Please fill in all fields.')">Submit</a>
-                              </li> -->
-                              <li><a data-toggle="modal" data-target="#myModal">Voucher Redemption Approval</a></li>
-
-                              
-
-                              
-                          </ul>
-                      </li>
-                      <!-- Right Side Of Navbar -->
-                      <ul class="nav navbar-nav navbar-right">
-                        
-                         
-                        <!-- Authentication Links -->
-                        @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
-                        @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
-                        @endif
-                        @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </div>
-                    </li>
-                    @endguest
-                </ul>
-                <li class="separator hidden-lg hidden-md"></li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-
-
-
-<div class="content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                   <form action="{{route('storeChoice')}}" method="POST">
+                   <form action="{{route('savedAnswer')}}" method="POST">
                     <div class="header">
                         <h4 class="title">{{$survey->surveys_title}}</h4>
                         <label> </label>
@@ -244,21 +113,18 @@
                         
                         <label> </label>
                         <label> </label>
-                        
-                        
+                                                
 
                         @foreach ($questions as $question)
                         <div class="form-group">
 
-                            <label>{{$question->questions_title}}</label>
+                            <label>{{$question->questions_title}}</label>                            
                             
-                            
-
                             @foreach($question->options as $option)
                             <div class="radio">
                                 <label>
                                     
-                                   <input type="radio" value="{{$option->content}}" name="{{$question ->questions_id}}" id="radio{$option ->options_id}">                                                         
+                                   <input type="radio" value="{{$option->content}}" name="{{$question->questions_id}}" id="radio{$option->options_id}">                                                         
                                    {{$option->content}}
                                    
                                </label>
@@ -277,7 +143,7 @@
        </div>
 
    </div>
-</div>
+
 
 
 </body>

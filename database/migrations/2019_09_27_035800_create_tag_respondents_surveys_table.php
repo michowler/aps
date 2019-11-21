@@ -21,9 +21,6 @@ class CreateTagRespondentsSurveysTable extends Migration
             $table->unsignedBigInteger('stores_id'); 
             $table->smallInteger('voucher_redeem_status')->length(1)->default(0);
             $table->date('voucher_redemption_date');            
-            $table->string('vcode1');
-            $table->string('vcode2');
-            $table->string('vcode3');
             $table->timestamps();
             $table -> foreign('users_id') 
             -> unsigned() 
