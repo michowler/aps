@@ -185,7 +185,7 @@ class OwnerController extends Controller
         DB::table('surveys')->insert($data);
         echo "success";
     }
-
+    
     public function editUserProfile(){
         return view('surveyOwner.userProfile');
     }

@@ -12,6 +12,7 @@ use App\User;
 use App\Voucher;
 use App\VouchersType;
 use App\Store;
+use App\Option;
 use DateTime;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -97,11 +98,15 @@ class RespondentController extends Controller
    }
 }
     public function saveAnswer(Request $request)
+
     {           
         $startDate = date('Y-m-d H:i:s');
-        DB::table('tag_respondents_surveys')->insert(['surveys_id'=> $request->surveys_id, 'users_id'=> Auth::user()->users_id, 'voucher_redeem_status' => '0','stores_id' => '1', 'survey_completed_date'=> $startDate, 'voucher_redemption_date'=> $startDate] );
+        DB::table('tag_respondents_surveys')->insert(['surveys_id'=> $request->surveys_id, 'users_id'=> Auth::user()->users_id, 'voucher_redeem_status' => '0','stores_id' => '1', 'survey_completed_date'=> $startDate, 'voucher_redemption_date'=> $startDate] );       
+            
         foreach( $request->answers as $answer ){
-            DB::table('tag_respondents_options')->insert(['options_id'=> $answer, 'users_id'=> Auth::user()->users_id, 'surveys_id'=> $request->surveys_id] );
+            $optionDat = Option::where('options_id', $answer)->get();
+
+            DB::table('tag_respondents_options')->insert(['options_id'=> $answer, 'choices_id'=>$optionDat[0]->choices_id, 'questions_id'=>$optionDat[0]->questions_id, 'users_id'=> Auth::user()->users_id, 'surveys_id'=> $request->surveys_id] );
         }
       
          return redirect()->route('resVoucher')->with('success', 'Thank you for answering the survey!');        
@@ -155,7 +160,14 @@ class RespondentController extends Controller
 
     public function res_voucher_show(Request $request)
     {
+
         $voucher = Voucher::where('vouchers_id', $request->vouchers_id)->first();       
+
+        // var_dump($request->vouchers_id);
+        // var_dump($request->surveys_id);
+        $voucher = Voucher::find($request->vouchers_id)->firstOrFail();
+        $vouchers = Voucher::with('stores')->get();
+
         $encryptedSid = Crypt::encryptString($request->surveys_id);
         $encryptedVC = Crypt::encryptString($request->vouchers_id);
         $vType = VouchersType::where('vouchers_types_id', '=', $voucher->vouchers_types_id)->first();
