@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Voucher extends Model
 {    
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified']);
+    }
+    
     protected $primaryKey = 'vouchers_id';
     public $incrementing = true;
 

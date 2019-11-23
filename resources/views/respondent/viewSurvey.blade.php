@@ -4,7 +4,6 @@
 
 <style>
 
-
 .third-level-menu
 {
 		position: absolute;
@@ -96,8 +95,6 @@
 }
 </style>
 
-   
-
 @section('content')
 
 
@@ -152,8 +149,6 @@
 		</div>
 </div>
 
-
-</body>
 @endsection
 <!-- 	modal fail -->
 <div class="modal fade" tabindex="-1" role="dialog"  id="failSubmit">

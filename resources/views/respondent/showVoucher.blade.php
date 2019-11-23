@@ -23,7 +23,7 @@
 						 </div>
 					 </div>
 					 <div class="col-md-8">
-						<div class="form-group text-center" style="margin-top:80px;">
+						<div class="form-group text-center " style="margin-top:0px;">
 							<h2><b>{{ $voucher->title }}</b></h2>
 						</div>
 					</div>
