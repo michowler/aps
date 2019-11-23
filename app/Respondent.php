@@ -19,7 +19,7 @@ class Respondent extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'marital_status', 'working_level', 'gender', 'age', 'education_level'
     ];
 
     /**

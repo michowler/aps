@@ -22,10 +22,10 @@ use Illuminate\Support\Facades\Crypt;
 class RespondentController extends Controller
 {
 
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -37,37 +37,6 @@ class RespondentController extends Controller
         $location = locations::all();
         $surveys = DB::select('select * from surveys');
         return view('respondent.res',['surveys'=>$surveys, 'interests'=>$interest], ['locations' =>$location]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $user = Auth::user();
-        return view('respondent.edit', ['user' => $user]);  
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {        
-        $user = Auth::user();
-        $user->name = request('name');
-        return view('respondent.update', ['user' => $user]); 
-    }
-
-    public function resProfile() 
-    {
-        return view('respondent.resProfile');
     }
 
    public function viewSurvey(Request $request)
@@ -112,41 +81,32 @@ class RespondentController extends Controller
          return redirect()->route('resVoucher')->with('success', 'Thank you for answering the survey!');        
     }
 
-    // public function savedAnswer(Request $request)
-    // {   
-    //     $survey = surveys::find($request->surveys_id);
-    //     $user = User::find(\Auth::user()->users_id);
-    //     DB::table('tag_respondents_options')->insert(['choices_id'=> $request->$question->questions_id, 'users_id'=> Auth::user()->users_id, 'surveys_id' => $request->surveys_id, 'questions_id' => $request->questions_id] );                        
-    //      return redirect()->route('resVoucher')->with('success', 'Thank you for answering the survey!');
-        
-    // }
+    public function edit()
+    {        
+       $res = User::where('users_id', '=', \Auth::user()->users_id)->first();
+       return view('respondent.edit', ['res' => $res]);
+    }
 
-    // public function edit()
-    // {        
-    // $res = User::where('users_id', '=', \Auth::user()->users_id)->first();
-    //    return view('respondent.edit', ['res' => $res]);
-    // }
-
-    // public function update()
-    // {        
-    //    $res = User::where('users_id', '=', \Auth::user()->users_id)->first();
-    //    $res->email = request('email');
-    //    $res->name = request('name');
-    //    $res->age = request('age');
-    //    $res->birth_date = request('birth_date');
-    //    $res->occupation = request('occupation');
-    //    $res->gender = request('gender');
-    //    $res->working_level = request('working_level');
-    //    $res->education_level = request('education_level');
-    //    $res->marital_status = request('marital_status');
-    //    if ($res->save()){ 
-    //        alert()->success('Profile updated!');            
-    //        return redirect()->route('editUser', ['name' => \Auth::user()->name]); 
-    //    }else{            
-    //     alert()->error('Profile update unsuccessful!'); 
-    //        return redirect()->back();
-    //    }  
-    // }
+    public function update()
+    {        
+       $res = User::where('users_id', '=', \Auth::user()->users_id)->first();
+       $res->email = request('email');
+       $res->name = request('name');
+       $res->age = request('age');
+       // $res->birth_date = request('birth_date');
+       // $res->occupation = request('occupation');
+       $res->gender = request('gender');
+       $res->working_level = request('working_level');
+       $res->education_level = request('education_level');
+       $res->marital_status = request('marital_status');
+       if ($res->save()){ 
+           alert()->success('Profile updated!');            
+           return redirect()->route('editUser', ['name' => \Auth::user()->name]); 
+       }else{            
+        alert()->error('Profile update unsuccessful!'); 
+           return redirect()->back();
+       }  
+    }
 
     public function destroy()
     {       
@@ -160,14 +120,8 @@ class RespondentController extends Controller
 
     public function res_voucher_show(Request $request)
     {
-
         $voucher = Voucher::where('vouchers_id', $request->vouchers_id)->first();       
-
-        // var_dump($request->vouchers_id);
-        // var_dump($request->surveys_id);
-        $voucher = Voucher::find($request->vouchers_id)->firstOrFail();
         $vouchers = Voucher::with('stores')->get();
-
         $encryptedSid = Crypt::encryptString($request->surveys_id);
         $encryptedVC = Crypt::encryptString($request->vouchers_id);
         $vType = VouchersType::where('vouchers_types_id', '=', $voucher->vouchers_types_id)->first();
