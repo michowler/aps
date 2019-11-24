@@ -174,7 +174,7 @@
                       @yield('content') 
                     </div>
 
-
+                    
                   </body>
 
                   <!--   Core JS Files   -->
