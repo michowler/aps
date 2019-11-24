@@ -20,21 +20,10 @@ class SurveyController extends Controller
 
   public function __construct()
   {
-    //die("we are here");
-  $this->middleware(function($request, $next)
-  {
-    $this -> user = Auth::user();
-    return $next($request);
-  });
-   }
-   
-  // public function mySurvey(){
-  //     return view('survey.mySurvey');
-  // }
+      $this->middleware(['auth', 'verified']);
+  }
 
   public function showChart(Request $request){
-
-    
     $questionID = [];
     $surveyID = $request->id;
     $survey = surveys::find($surveyID);
@@ -124,7 +113,7 @@ class SurveyController extends Controller
       'vouchers' =>  'required'
     ]);
     $surveys = new surveys;
-    $surveys ->users_id = Auth::user() -> users_id;
+    $surveys ->users_id = Auth::user()->users_id;
     $surveys ->surveys_title = $request -> get('surveys_title');
     $surveys ->surveys_description = $request -> get('surveys_description');
     $surveys ->vouchers_id = $request -> get('vouchers'); 
