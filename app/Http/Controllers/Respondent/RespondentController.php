@@ -21,11 +21,10 @@ use Illuminate\Support\Facades\Crypt;
 
 class RespondentController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware(['auth', 'verified']);
-    }
+     public function __construct()
+     {
+         $this->middleware(['auth', 'verified']);
+     }
     /**
      * Display a listing of the resource.
      *
@@ -36,7 +35,7 @@ class RespondentController extends Controller
         $interest = Interest::all();
         $location = locations::all();
         $surveys = DB::select('select * from surveys');
-        return view('respondent.res',['surveys'=>$surveys, 'interests'=>$interest], ['locations' =>$location]);
+        return view('respondent.res',['surveys'=>$surveys, 'interests'=> $interest], ['locations' =>$location]);
     }
 
    public function viewSurvey(Request $request)

@@ -18,14 +18,12 @@ use App\Option;
 
 // $conn = new mysql_connect($servername, $username, $password, $dbname);
 
-
 class OwnerController extends Controller
 {
     public function __construct()
     {
         $this->middleware(['auth', 'verified']);
     }
-    
     /**
      * Display a listing of the resource.
      *
@@ -33,11 +31,11 @@ class OwnerController extends Controller
      */
     public function index()
     {
-        $lastestUserData = DB::table('tag_owner_packages')->where('users_id',\Auth::user()->users_id)->get();
+        $lastestUserData = DB::table('tag_owner_packages')->where('users_id',\Auth::user()->users_id)->get()->first();
 
-        $surveys = $lastestUserData->sum('no_surveys');
-        $res = $lastestUserData->sum('no_respondents');
-        $surveyLeft = 20 - ($lastestUserData[0]->no_surveys);
+        $surveys = $lastestUserData->no_surveys;
+        $res = $lastestUserData->no_respondents;
+        $surveyLeft = 20 - ($lastestUserData->no_surveys);
 
         if(DB::table('tag_owner_packages')->where('users_id',\Auth::user()->users_id)->sum('no_surveys') >= 3)
         {

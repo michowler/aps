@@ -1,6 +1,6 @@
 @extends('layouts.owner_layout')
 
-@section('navbar-brand', 'Welcome Back !')
+@section('navbar-brand', 'Dashboard')
 
 @section('content')
 

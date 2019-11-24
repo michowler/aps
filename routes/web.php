@@ -4,42 +4,6 @@
 use App\User;
 use App\Voucher;
 
-
-
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-//=====Example:
-// Route::get('/', function () {
-//     return view('welcome');
-// })->name('welcome');
-// Route::get('/about', 'PagesController@about')->name('about');
-// Now you can use it in any page to refer them. like in contact page
-
-// <html>
-// ..
-// ....
-// <a href="{{route('welcome')}}">Home</a>
-// <a href="{{route('about')}}">About</a>
-
-// Route::group(['middleware' => 'web'], function () {
-//     // Moving here will ensure that sessions, csrf, etc. is included in all these routes
-//     Route::group(['prefix'=>'guest',  'middleware' => 'guest'], function(){
-//         Route::post('/vouchers', 'Voucher\VoucherController@store')->name('storeVoucher');
-//     });
-// });
-
-
-
 // Michelle , Alice
 Auth::routes();
 Auth::routes(['verify' => true]);
@@ -47,47 +11,51 @@ Auth::routes(['reset' => true]);
 // Auth::routes(['register' => false]);
 
 // Michelle 
-
 //Vouchers
-Route::any( '/vouchers', function () {
-	$q = Request::input( 'q' );
-	if($q != ""){
-		$vouchers = Voucher::where ( 'title', 'LIKE', '%' . $q . '%' )->orWhere ( 'status', 'LIKE', $q  )->paginate (5)->setPath ( '/vouchers' );
-		$vCount = Voucher::where ( 'title', 'LIKE', '%' . $q . '%' )->orWhere ( 'status', 'LIKE', $q )->get()->count();
-		$pagination = $vouchers->appends ( array (
-			'q' => Request::input( 'q' ) 
-		) 
-	);
-		if (count ( $vouchers ) > 0 || $vCount > 0)
-			return view ( 'voucher.index' , ['vouchers'=> $vouchers, 'vCount'=>$vCount])->withQuery ( $q );
-	}else{
-		return redirect()->route('myVouchers')->with('error','Sorry! No record found. Search again.');	
-	}
-} );
-Route::get('/vouchers', 'Voucher\VoucherController@index')->name('myVouchers');
-Route::get('/voucher/create', 'Voucher\VoucherController@create')->name('generate');
-Route::post('/voucher/store', 'Voucher\VoucherController@store')->name('storeVoucher');
-Route::post('/voucher/show/{vouchers_id}', 'Voucher\VoucherController@destroy')->name('deleteVoucher');
-Route::get('/voucher/show/{vouchers_id}', 'Voucher\VoucherController@show')->name('showVoucher');
-Route::get('/voucher/demo', 'Voucher\VoucherController@demo')->name('demo');
-Route::get('/voucher/redeem/{vcode1}/{surveys_id}', 'Voucher\VoucherController@redeem')->name('redeemVoucher');
-Route::get('/voucher/redeem/qr-code/{vcode2}/{surveys_id}', 'Voucher\VoucherController@redeem_qr')->name('redeemQR');
-// Route::post('/voucher/redeem/qr-code/{vcode2}/{surveys_id}/success', 'Voucher\VoucherController@redeem_qr_s')->name('redeemQRS');
-Route::get('/voucher/redeem', 'Voucher\VoucherController@redeem_index')->name('redeem');
-Route::get('/voucher/edit/{vouchers_id}', 'Voucher\VoucherController@edit')->name('editVoucher');
-Route::post('/voucher/edit/{vouchers_id}/update', 'Voucher\VoucherController@update')->name('updateVoucher');
 
-//Edit Profiles (merchant, respondent, owner)
-Route::get('/merchant-profile/{name}/edit', 'Merchant\MerchantController@edit')->name('editMerchant');
-Route::post('/merchant-profile/{name}/edit', 'Merchant\MerchantController@update')->name('updateMerchant');
+    Route::any( '/vouchers', function () {
+    	$q = Request::input( 'q' );
+    	if($q != ""){
+    		$vouchers = Voucher::where ( 'title', 'LIKE', '%' . $q . '%' )->orWhere ( 'status', 'LIKE', $q  )->paginate (5)->setPath ( '/vouchers' );
+    		$vCount = Voucher::where ( 'title', 'LIKE', '%' . $q . '%' )->orWhere ( 'status', 'LIKE', $q )->get()->count();
+    		$pagination = $vouchers->appends ( array (
+    			'q' => Request::input( 'q' ) 
+    		) 
+    	);
+    		if (count ( $vouchers ) > 0 || $vCount > 0)
+    			return view ( 'voucher.index' , ['vouchers'=> $vouchers, 'vCount'=>$vCount])->withQuery ( $q );
+    	}else{
+    		return redirect()->route('myVouchers')->with('error','Sorry! No record found. Search again.');	
+    	}
+    } );
+    Route::get('/vouchers', 'Voucher\VoucherController@index')->name('myVouchers');
+    Route::get('/voucher/create', 'Voucher\VoucherController@create')->name('generate');
+    Route::post('/voucher/store', 'Voucher\VoucherController@store')->name('storeVoucher');
+    Route::post('/voucher/show/{vouchers_id}', 'Voucher\VoucherController@destroy')->name('deleteVoucher');
+    Route::get('/voucher/show/{vouchers_id}', 'Voucher\VoucherController@show')->name('showVoucher');
+    Route::get('/voucher/demo', 'Voucher\VoucherController@demo')->name('demo');
+    Route::get('/voucher/redeem/{vcode1}/{surveys_id}', 'Voucher\VoucherController@redeem')->name('redeemVoucher');
+    Route::get('/voucher/redeem/qr-code/{vcode2}/{surveys_id}', 'Voucher\VoucherController@redeem_qr')->name('redeemQR');
+    // Route::post('/voucher/redeem/qr-code/{vcode2}/{surveys_id}/success', 'Voucher\VoucherController@redeem_qr_s')->name('redeemQRS');
+    Route::get('/voucher/redeem', 'Voucher\VoucherController@redeem_index')->name('redeem');
+    Route::get('/voucher/edit/{vouchers_id}', 'Voucher\VoucherController@edit')->name('editVoucher');
+    Route::post('/voucher/edit/{vouchers_id}/update', 'Voucher\VoucherController@update')->name('updateVoucher');
+
+    //Edit Profiles (merchant, respondent, owner)
+    Route::get('/merchant-profile/{name}/edit', 'Merchant\MerchantController@edit')->name('editMerchant');
+    Route::post('/merchant-profile/{name}/edit', 'Merchant\MerchantController@update')->name('updateMerchant');
+    Route::post('/merchant-profile/{name}/delete', 'Merchant\MerchantController@destroy')->name('deleteMerchant');
+
+
+
 Route::get('/owner-profile/{name}/edit', 'Owner\OwnerController@edit')->name('editOwner');
 Route::post('/owner-profile/{name}/edit', 'Owner\OwnerController@update')->name('updateOwner');
+Route::post('/owner-profile/{name}/delete', 'Owner\OwnerController@destroy')->name('deleteOwner');
+
 Route::get('/user-profile/{name}/edit', 'Respondent\RespondentController@edit')->name('editUser');
 Route::post('/user-profile/{name}/edit', 'Respondent\RespondentController@update')->name('updateUser');
-//Delete account
-Route::post('/owner-profile/{name}/delete', 'Owner\OwnerController@destroy')->name('deleteOwner');
-Route::post('/merchant-profile/{name}/delete', 'Merchant\MerchantController@destroy')->name('deleteMerchant');
 Route::post('/user-profile/{name}/delete', 'Respondent\RespondentController@destroy')->name('deleteUser');
+
 
 //Respondents
 Route::get('/showVoucher/{surveys_id}/{vouchers_id}', 'Respondent\RespondentController@res_voucher_show')->name('showResVoucher');
@@ -98,9 +66,6 @@ Route::post('resVoucher/redeem-accept/{vouchers_id}/{stores_id}/{surveys_id}', '
 Route::get('/', ['middleware' =>'guest', function(){
 	return view('auth.login');
 }]);
-// Route::get('/', function () {
-
-// })->middleware('verified');
 
 
 // Ying Ying 
@@ -109,8 +74,6 @@ Route::get('/create','plan\planController@checkout')->name('checkout');
 Route::get('/chart','Survey\SurveyController@showChart');
 Route::post('storePayment','plan\planController@store');
 Route::get('/unSubPackage','plan\planController@unSub');
-
-
 
 // Alice
 //owner
