@@ -134,7 +134,7 @@
                            
 
                            @endforeach
-                           <input type="submit" style="margin:5px;" class="btn btn-info btn-fill pull-right"  value="Done" id="submit"/></button></a>    
+                          <!--  <input type="submit" style="margin:5px;" class="btn btn-info btn-fill pull-right"  value="Done" id="submit"/></button></a>     -->
                        </div>
                    </div>
                </div>
@@ -148,10 +148,5 @@
 
 </body>
 @endsection
-
-<script type="text/javascript">
-
-    
-</script>
 
 </html>
