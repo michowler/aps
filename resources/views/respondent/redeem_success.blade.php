@@ -1,6 +1,5 @@
 @extends('layouts.res_layout')
 @section('navbar-brand', "Redeem Voucher Accept?" )
-@include('partials.res_redeem_modal')
 @section('content')
 <div class="container-fluid">
 	<div class="col-md-12">
