@@ -13,38 +13,38 @@ Auth::routes(['reset' => true]);
 // Michelle 
 //Vouchers
 
-    Route::any( '/vouchers', function () {
-    	$q = Request::input( 'q' );
-    	if($q != ""){
-    		$vouchers = Voucher::where ( 'title', 'LIKE', '%' . $q . '%' )->orWhere ( 'status', 'LIKE', $q  )->paginate (5)->setPath ( '/vouchers' );
-    		$vCount = Voucher::where ( 'title', 'LIKE', '%' . $q . '%' )->orWhere ( 'status', 'LIKE', $q )->get()->count();
-    		$pagination = $vouchers->appends ( array (
-    			'q' => Request::input( 'q' ) 
-    		) 
-    	);
-    		if (count ( $vouchers ) > 0 || $vCount > 0)
-    			return view ( 'voucher.index' , ['vouchers'=> $vouchers, 'vCount'=>$vCount])->withQuery ( $q );
-    	}else{
-    		return redirect()->route('myVouchers')->with('error','Sorry! No record found. Search again.');	
-    	}
-    } );
-    Route::get('/vouchers', 'Voucher\VoucherController@index')->name('myVouchers');
-    Route::get('/voucher/create', 'Voucher\VoucherController@create')->name('generate');
-    Route::post('/voucher/store', 'Voucher\VoucherController@store')->name('storeVoucher');
-    Route::post('/voucher/show/{vouchers_id}', 'Voucher\VoucherController@destroy')->name('deleteVoucher');
-    Route::get('/voucher/show/{vouchers_id}', 'Voucher\VoucherController@show')->name('showVoucher');
-    Route::get('/voucher/demo', 'Voucher\VoucherController@demo')->name('demo');
-    Route::get('/voucher/redeem/{vcode1}/{surveys_id}', 'Voucher\VoucherController@redeem')->name('redeemVoucher');
-    Route::get('/voucher/redeem/qr-code/{vcode2}/{surveys_id}', 'Voucher\VoucherController@redeem_qr')->name('redeemQR');
-    // Route::post('/voucher/redeem/qr-code/{vcode2}/{surveys_id}/success', 'Voucher\VoucherController@redeem_qr_s')->name('redeemQRS');
-    Route::get('/voucher/redeem', 'Voucher\VoucherController@redeem_index')->name('redeem');
-    Route::get('/voucher/edit/{vouchers_id}', 'Voucher\VoucherController@edit')->name('editVoucher');
-    Route::post('/voucher/edit/{vouchers_id}/update', 'Voucher\VoucherController@update')->name('updateVoucher');
+Route::any( '/vouchers', function () {
+	$q = Request::input( 'q' );
+	if($q != ""){
+		$vouchers = Voucher::where ( 'title', 'LIKE', '%' . $q . '%' )->orWhere ( 'status', 'LIKE', $q  )->paginate (5)->setPath ( '/vouchers' );
+		$vCount = Voucher::where ( 'title', 'LIKE', '%' . $q . '%' )->orWhere ( 'status', 'LIKE', $q )->get()->count();
+		$pagination = $vouchers->appends ( array (
+			'q' => Request::input( 'q' ) 
+		) 
+	);
+		if (count ( $vouchers ) > 0 || $vCount > 0)
+			return view ( 'voucher.index' , ['vouchers'=> $vouchers, 'vCount'=>$vCount])->withQuery ( $q );
+	}else{
+		return redirect()->route('myVouchers')->with('error','Sorry! No record found. Search again.');	
+	}
+} );
+Route::get('/vouchers', 'Voucher\VoucherController@index')->name('myVouchers');
+Route::get('/voucher/create', 'Voucher\VoucherController@create')->name('generate');
+Route::post('/voucher/store', 'Voucher\VoucherController@store')->name('storeVoucher');
+Route::post('/voucher/show/{vouchers_id}', 'Voucher\VoucherController@destroy')->name('deleteVoucher');
+Route::get('/voucher/show/{vouchers_id}', 'Voucher\VoucherController@show')->name('showVoucher');
+Route::get('/voucher/demo', 'Voucher\VoucherController@demo')->name('demo');
+Route::get('/voucher/redeem/{vcode1}/{surveys_id}', 'Voucher\VoucherController@redeem')->name('redeemVoucher');
+Route::get('/voucher/redeem/qr-code/{vcode2}/{surveys_id}', 'Voucher\VoucherController@redeem_qr')->name('redeemQR');
+// Route::post('/voucher/redeem/qr-code/{vcode2}/{surveys_id}/success', 'Voucher\VoucherController@redeem_qr_s')->name('redeemQRS');
+Route::get('/voucher/redeem', 'Voucher\VoucherController@redeem_index')->name('redeem');
+Route::get('/voucher/edit/{vouchers_id}', 'Voucher\VoucherController@edit')->name('editVoucher');
+Route::post('/voucher/edit/{vouchers_id}/update', 'Voucher\VoucherController@update')->name('updateVoucher');
 
-    //Edit Profiles (merchant, respondent, owner)
-    Route::get('/merchant-profile/{name}/edit', 'Merchant\MerchantController@edit')->name('editMerchant');
-    Route::post('/merchant-profile/{name}/edit', 'Merchant\MerchantController@update')->name('updateMerchant');
-    Route::post('/merchant-profile/{name}/delete', 'Merchant\MerchantController@destroy')->name('deleteMerchant');
+//Edit Profiles (merchant, respondent, owner)
+Route::get('/merchant-profile/{name}/edit', 'Merchant\MerchantController@edit')->name('editMerchant');
+Route::post('/merchant-profile/{name}/edit', 'Merchant\MerchantController@update')->name('updateMerchant');
+Route::post('/merchant-profile/{name}/delete', 'Merchant\MerchantController@destroy')->name('deleteMerchant');
 
 
 
