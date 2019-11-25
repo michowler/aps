@@ -9,7 +9,7 @@
                  <p>Are you sure you, want to redeem?</p>		
              </div>		
              <form id="resRedeemForm" action="{{route(		
-             'redeemSuccess', ['$voucher->vouchers_id', '$store->stores_id'])}}" method="POST">		
+             'redeemVSuccess', ['$voucher->vouchers_id', '$store->stores_id'])}}" method="POST">		
                  @method('POST')		
                  @csrf		
                  		
