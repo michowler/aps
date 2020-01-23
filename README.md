@@ -14,3 +14,11 @@
 - Generate Voucher (Merchants)
 - Edit Profile (Users)
 - Delete Account (Users)
+
+Survey Owners
+- CRUD Survey
+- Analyse Survey (Data Visualization, Charts, Reports)
+- Payment Gateway (Subscription Plans)
+
+Users
+- CRUD Answers
