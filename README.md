@@ -19,6 +19,7 @@ Survey Owners
 - CRUD Survey
 - Analyse Survey (Data Visualization, Charts, Reports)
 - Payment Gateway (Subscription Plans)
+- 2FA for Redeem Voucher (QR Code)
 
 Users
 - CRUD Answers
